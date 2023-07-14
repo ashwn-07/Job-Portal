@@ -3,18 +3,28 @@ const jobSchema = mongoose.Schema({
 CompanyName:String,
 JobTitle:String,
 JObDesc:String,
+Experience:Number,
 Salary:Number,
 loctaion:String,
-responses:{
-    url:{
-
-    }
-},
+responses: {
+    type: [{
+      type: {
+        type: String,
+        enum: ['link', 'pdf'],
+        required: true,
+      },
+       value: {
+        type: String,
+        required: true,
+      },
+    }],
+    default: [],
+  },
 CreatedAt:{
     type: Date,
     default: new Date()
 },
-ExpiresAt:Date
+ExpiresAt: new Date(date)
 
 
 
