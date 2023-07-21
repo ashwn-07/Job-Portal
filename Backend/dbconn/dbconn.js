@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
 
-mongoose.connect('mongodb+srv://Lisha:finalproli@cluster0.hjfajgo.mongodb.net/Jobportal')
+mongoose.connect('mongodb+srv://Varsha:finalprova@cluster0.hjfajgo.mongodb.net/Jobportal')
 .then(()=>{
     console.log('Connected to MongoDb');
 })
