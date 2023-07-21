@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-const JobModel = require('../Models/JoblistingModel');
+const JobModel = require("../Models/JoblistingModel");
 
 //api to add responses to joblistings
 router.put("/apply", async (req, res) => {
@@ -25,7 +25,7 @@ router.put("/apply", async (req, res) => {
     } catch (err) {
         console.log(err);
 
-        res.status(200).json({
+        res.status(404).json({
             message: `Response not added, ERR ${err}`,
         });
     }
@@ -36,11 +36,11 @@ router.put("/apply", async (req, res) => {
 router.get("/getresponses", async (req, res) => {
     try {
         const data = await JobModel.find({}, { CompanyName: 1, JobTitle: 1, responses: 1 });
-        res.status(200).json({ message: "jOb data with responses", data: data });
+        res.status(200).json({ message: "job data with responses", data: data });
     } catch {
         console.log(err);
 
-        res.status(200).json({ message: `Cannot get the data, ERR ${err}` });
+        res.status(404).json({ message: `Cannot get the data, ERR ${err}` });
     }
 });
 
@@ -48,17 +48,50 @@ router.get("/getresponses", async (req, res) => {
 router.post("/viewresponses", async (req, res) => {
     try {
         jobid = req.body._id;
-        const data = await JobModel.find({ _id: jobid }, { responses: 1,  });
+        const data = await JobModel.find({ _id: jobid }, { responses: 1 });
         res.status(200).json({
-            message: `Responses for the job listing with id: ${jobid}`, data: data });
+            message: `Responses for the job listing with id: ${jobid}`,
+            data: data,
+        });
     } catch (error) {
         console.log(err);
 
-        res.status(200).json({ message: `Cannot get the responses, ERR ${err}` });
+        res.status(404).json({ message: `Cannot get the responses, ERR ${err}` });
     }
 });
 
-//api for employers to fetch verified responses, this is optional
-// router.get('/verifiedres', async(req, res)=>{})
+//api for employers to fetch verified responses,
+router.get("/verifiedres/:posterid", async (req, res) => {
+    try {
+        const jobposter = req.params.posterid;
+        await JobModel.aggregate([
+            {
+                $match: {
+                    posterid: jobposter,
+                    "responses.Verified": true,
+                },
+            },
+            {
+                $project: {
+                    responses: {
+                        $filter: {
+                            input: "$responses",
+                            as: "response",
+                            cond: { $eq: ["$$response.Verified", true] },
+                        },
+                    },
+                },
+            },
+        ])
+            .then((filteredData) => {
+                res.json({ message: "responses fetched successfully", data: filteredData });
+            })
+            .catch((err) => {
+                res.status(404).json({ message: "Cannot get the data", error: err });
+            });
+    } catch (err) {
+        res.status(404).json({ message: "Cannot get the data", error: err });
+    }
+});
 
 module.exports = router;

@@ -1,15 +1,21 @@
 const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema({
-    CompanyName: String,
-    JobTitle: String,
-    JObDesc: String,
-    Experience: Number,
-    Salary: Number,
+    posterid: String,
+    companyname: String,
+    jobtitle: String,
+    jobdesc: String,
+    jobrequirements: String,
+    experience: Number,
+    salary: Number,
     loctaion: String,
     responses: {
         type: [
             {
+                responderid: {
+                    type: String,
+                    required: false,
+                },
                 responsetype: {
                     type: String,
                     enum: ["link", "pdf"],
@@ -18,7 +24,7 @@ const JobSchema = new mongoose.Schema({
                 path: {
                     type: String,
                     required: false,
-                 },
+                },
                 Verified: {
                     type: Boolean,
                     default: false,
