@@ -32,11 +32,12 @@ router.put("/update/", async (req, res) => {
         const newData = req.body;
         const data = await JobModel.findByIdAndUpdate(id, {
             $set: {
-                CompanyName: newData.CompanyName,
-                JobTitle: newData.JobTitle,
-                JObDesc: newData.JObDesc,
-                Experience: newData.Experience,
-                Salary: newData.Salary,
+                companyname: newData.CompanyName,
+                jobrequirements: newData.jobrequirements,
+                jobtitle: newData.JobTitle,
+                jobdesc: newData.JObDesc,
+                experience: newData.Experience,
+                salary: newData.Salary,
                 loctaion: newData.loctaion,
             },
         });
