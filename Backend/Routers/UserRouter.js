@@ -35,28 +35,7 @@ router.post("/studendProfile", async(req,res)=>{
   
 })
 
-router.post("/studentlogin", async(req,res)=>{
-    try {
-        let username=req.body.username;
-        let password=req.body.password;
-        console.log(username)
-        let user= await UserModel.findOne({username:username});
-         if (!user) {
-            res.json({message:" not a user"})
-             } 
-        else {
-   
-            console.log("usernme");
-            if(user.password==password){
-                res.json({message:"login successful"})
-            }
-            else{
-                res.json({message:"un-authorised login"}) 
-            }
-        }
-    } catch (error) {
-        res.json(error);
-    }
-})
+
+        
 
 module.exports=router;
