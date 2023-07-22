@@ -1,12 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import{BrowserRouter, Route, Routes,  } from 'react-router-dom'
+import RegisterEmp from './Components/RegisterEmp';
+
 
 function App() {
 
   return (
     <div className="App">
-   <h1>ICTAK </h1>
+   <BrowserRouter>
+   <Routes>
+    <Route path="/empsignup" element={<RegisterEmp/>}/>
+   </Routes>
+   
+   </BrowserRouter>
     </div>
   );
 }
