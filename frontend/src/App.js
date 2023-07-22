@@ -6,9 +6,11 @@ function App() {
      
             <Routes>
                 <Route path='/' element={<Home/>} />
+                <Route path="/empsignup" element={<RegisterEmp/>}/>
             </Routes>
         
     );
+
 }
 
 export default App;

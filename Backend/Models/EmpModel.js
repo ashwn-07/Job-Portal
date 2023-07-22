@@ -3,11 +3,15 @@ const EmpSchema=mongoose.Schema({
     name:String,
     emailid:String,
     phone:String,
-    Designation:String,
-    CompanyName:String,
-    Location:String,
+    designation:String,
+    companyName:String,
+    location:String,
     username:String,
-    password:String
+    password:String,
+    verified:{
+        type: Boolean,
+        default: false,
+    }
 });
 const EmpData=mongoose.model('employerdetail',EmpSchema);
 module.exports=EmpData;

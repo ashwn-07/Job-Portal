@@ -3,8 +3,28 @@ const router=express.Router();
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
 const EmpModel=require('../Models/EmpModel');
-//post....EmpSignup api
-router.post("/EmpSignup",async(req,res)=>{
+//...post.../login api
+router.post('/emplogin',async(req,res)=>{
+    let username=req.body.username;
+    let password=req.body.password;
+    const user=await EmpModel.findOne({username:username});
+    if(!user){
+        res.json({message:"User not found"})
+    }
+    try{
+    if(user.password==password){
+        res.json({message:"Login Successfully"})
+    }
+    else{
+        res.json({message:"Login Failed"})
+    }
+}catch(error){
+    console.log(error)
+}
+})
+
+//post....empSignup api
+router.post("/empsignup",async(req,res)=>{
     try{
         const emp=req.body;
         newEmp= new EmpModel(emp);
