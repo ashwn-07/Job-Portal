@@ -1,14 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import { Route, Routes } from "react-router-dom";
+import Home from "./Components/Home";
 
 function App() {
-
-  return (
-    <div className="App">
-   <h1>ICTAK </h1>
-    </div>
-  );
+    return (
+     
+            <Routes>
+                <Route path='/' element={<Home/>} />
+            </Routes>
+        
+    );
 }
 
 export default App;
