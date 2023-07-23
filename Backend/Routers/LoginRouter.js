@@ -16,14 +16,18 @@ router.post('/login',async(req,res)=>{
         if (!user) {
             let emp= await EmpModel.findOne({username:username})
             if (!emp) {
-                let admin=await AdminModel.findOne({username:username})
+                 let admin=await AdminModel.findOne({username:username})
                 if (!admin) {
+                    
                     res.jsob({message:"un-authorised login"})
+
                 } else {
                     if(admin.password==password){
                         res.json({message:" Admin Login successful"})  
                     }
+
                     else{
+                        console.log("password");
                         res.jsob({message:"un-authorised login"})
                     }
                 }  
@@ -32,6 +36,7 @@ router.post('/login',async(req,res)=>{
                 if(emp.password==password){
                     res.json({message:" Employer Login successful"})  
                 }
+
                 else{
                     res.json({message:"un-authorised login"}) 
                 } 
@@ -42,12 +47,13 @@ router.post('/login',async(req,res)=>{
             if(user.password==password){
                 res.json({message:" User Login successful"})
             }
+            
             else{
                 res.json({message:"un-authorised login"}) 
             } 
         }
     } catch (error) {
-        res.json({message:"un-authorised login"});
+        res.json({message:"smtnhg went wrong"});
     }
     
 })
