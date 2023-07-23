@@ -18,8 +18,8 @@ const jobres = require('./Routers/ResponseRouter');
 const user =require('./Routers/UserRouter');
 const login=require('./Routers/LoginRouter');
 app.use('/api',empapi);
-app.use('/jobs', jobs);
-app.use('/jobs', jobres);
+app.use('/api', jobs);
+app.use('/api', jobres);
 app.use('/api',user);
 app.use('/api',login);
 

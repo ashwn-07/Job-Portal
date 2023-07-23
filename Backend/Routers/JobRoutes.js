@@ -13,13 +13,13 @@ router.post("/addjob", async (req, res) => {
         await JobModel(job).save();
         res.status(200).json({ message: "Job added sucessfully!!" });
     } catch (err) {
-        res.status(404).json({ message: `Cannot add job ERR:${err}` });
+        res.status(404).json({ message: `Cannot add job ERR`, error:err  });
     }
 });
 //api for getting all the jobs
 router.get("/viewjobs", async (req, res) => {
     try {
-        const data = await JobModel.find();
+        const data = await JobModel.find({}, {responses:0});
         res.status(200).send(data);
     } catch (err) {
         res.status(404).json({ mesaage: `Cannot get Jobs ${err}` });
@@ -36,12 +36,13 @@ router.put("/update/", async (req, res) => {
                 jobrequirements: newData.jobrequirements,
                 jobtitle: newData.jobtitle,
                 jobdesc: newData.jobdesc,
+                eligibility:newData.eligibility,
                 experience: newData.experience,
                 salary: newData.salary,
                 loctaion: newData.loctaion,
             },
         });
-        res.status(200).json({ message: "Job Details Updated Succesfully" });
+        res.status(200).json({ message: "Job Details Updated Successfully" });
     } catch (error) {
         res.status(404).json({ message: "Error!! Update not Successfull" });
         console.log(error);
