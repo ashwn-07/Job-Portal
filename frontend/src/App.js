@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import RegisterEmp from "./Components/RegisterEmp";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
-import RegisterEmp from "./Components/RegisterEmp";
+
 import RegisterUser from "./Components/RegisterUser";
 
 function App() {

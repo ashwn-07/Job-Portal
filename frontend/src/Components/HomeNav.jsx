@@ -117,7 +117,7 @@ const HomeNav = () => {
                                         Employer Sign Up
                                     </Button>
                                 </Homelinks>
-                                <Homelinks href="/" sx={{paddingRight:'0'}}>
+                                <Homelinks href="/usersignup" sx={{paddingRight:'0'}}>
                                     <Button
                                         sx={{
                                             backgroundColor: "#5FD68E",
