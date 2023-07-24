@@ -13,7 +13,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import ictaklogo from "../Img/LOGO_ICTAK-ENG-ALT-White-Text.png";
-import { Button, Link, Typography } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const HomeNav = () => {
@@ -31,7 +31,7 @@ const HomeNav = () => {
     }
 
     const drawerWidth = 240;
-    const navItems = ["Home", "About", "Contact", "Employee Sign up", "Alumini Sign up"];
+    const navItems = ["Home", "About", "Contact", "Employee Sign up", "Alumini Sign up"]; //empsignup //usersignup
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -55,11 +55,11 @@ const HomeNav = () => {
             <Divider />
             <List sx={{ color: "white" }}>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: "center" }}>
+                    <Link href="/usersignup"> <ListItem key={item} disablePadding>
+                       <ListItemButton sx={{ textAlign: "center" }}>
                             <ListItemText primary={item} />
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem></Link>
                 ))}
             </List>
         </Box>
@@ -131,10 +131,7 @@ const HomeNav = () => {
                                     </Button>
                                 </Homelinks>
 
-                                {/* <Link>About</Link>
-            <Link>Contact Us</Link>
-            <Link>Employer Sign Up</Link>
-            <Link> Sign Up</Link> */}
+                            
                             </Box>
                         </Toolbar>
                     </AppBar>
