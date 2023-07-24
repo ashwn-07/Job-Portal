@@ -4,6 +4,7 @@ import axios from 'axios';
 const Empview = () => {
     const[post,setPost]=useState([]);
     const [userID,setUserid]=useState(sessionStorage.getItem("LogId"))
+    const [adminmsg] = useState(sessionStorage.getItem("adminmessage"))
 
 
     const fetchPostdata=(posterid)=>{
@@ -16,6 +17,8 @@ const Empview = () => {
    
 
     useEffect(()=>{
+           console.log(adminmsg)
+        if(adminmsg)
         fetchPostdata(userID);
     },[])
    
