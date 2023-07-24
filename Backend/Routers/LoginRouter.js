@@ -11,6 +11,7 @@ const AdminModel=require('../Models/Adminmodel');
 router.post('/login',async(req,res)=>{
     let password=req.body.password;
     let username=req.body.username;
+    
     let user=await UserModel.findOne({username:username})
     try {
         if (!user) {
@@ -23,7 +24,7 @@ router.post('/login',async(req,res)=>{
 
                 } else {
                     if(admin.password==password){
-                        res.json({message:" Admin Login successful"})  
+                        res.json({message:" Admin Login successful",data:admin})  
                     }
 
                     else{
@@ -34,7 +35,7 @@ router.post('/login',async(req,res)=>{
             } else {
                 console.log("empname");
                 if(emp.password==password){
-                    res.json({message:" Employer Login successful"})  
+                    res.json({message:" Employer Login successful",data:emp})  
                 }
 
                 else{
@@ -45,7 +46,7 @@ router.post('/login',async(req,res)=>{
         } else {
             console.log("usernme");
             if(user.password==password){
-                res.json({message:" User Login successful"})
+                res.json({message:" User Login successful",data:user})
             }
             
             else{
