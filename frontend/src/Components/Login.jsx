@@ -15,6 +15,11 @@ const Login = () => {
     const shareData = (e) => {
         axios.post('http://localhost:7000/api/login', input)
             .then(response => {
+                
+                const LogId=response.data.data._id;
+                console.log(LogId);
+                sessionStorage.setItem("LogId",LogId);
+                
                 console.log(response);
                 if (response.data.message == (" User Login successful")) {
                     alert("user")
