@@ -17,4 +17,11 @@ router.post("/empsignup",async(req,res)=>{
         res.status(400).json("Cannot add")
     }
 })
+//...get../viewemp
+router.get('/viewemp',async(req,res)=>{
+try{
+    const data=await EmpModel.find();
+    res.json(data)
+}catch(error){res.json(error)}
+})
 module.exports=router;
