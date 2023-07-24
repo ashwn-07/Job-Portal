@@ -73,7 +73,12 @@ const Home = () => {
                         marginTop={{ xs: "80px", sm: "60px", md: "150px" }}
                     >
                         <ThemeProvider theme={theme}>
-                            <Button variant="contained">Log In</Button>
+                            <Button variant="contained">
+                                {" "}
+                                <Link href="/login" sx={{ color: "white", textDecoration: "none" }}>
+                                    Log In
+                                </Link>
+                            </Button>
                         </ThemeProvider>
                     </Box>
                 </Box>
@@ -148,7 +153,7 @@ const Home = () => {
                                         }}
                                     >
                                         <Link
-                                            href="/"
+                                            href="/login"
                                             sx={{ color: "white", textDecoration: "none" }}
                                         >
                                             Login to Apply
