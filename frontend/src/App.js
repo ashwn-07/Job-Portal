@@ -6,6 +6,7 @@ import Empview from "./Components/Empview";
 import Login from "./Components/Login";
 
 import RegisterUser from "./Components/RegisterUser";
+import Addposts from "./Components/Addposts";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/usersignup" element={<RegisterUser />} />
             <Route path="/empview" element={<Empview/>}/>
+            <Route path="/addpost" element={<Addposts/>}/>
         </Routes>
     );
 }

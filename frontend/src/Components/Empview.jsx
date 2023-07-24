@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import HeaderEmp from './HeaderEmp';
 
 const Empview = () => {
+   
     const[post,setPost]=useState([]);
     const [userID,setUserid]=useState(sessionStorage.getItem("LogId"))
+    console.log(userID)
 
 
     const fetchPostdata=(posterid)=>{
@@ -13,6 +16,19 @@ const Empview = () => {
             setPost(response.data)
         })
     }
+    
+    const deletePost=(id)=>{
+        axios.delete("http://localhost:7000/api/deletejob/"+id)
+        .then((response)=>{
+            if(response.data.message==="Job deleted Successfully"){
+                alert(response.data.message);
+                window.location.reload(false)
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    
    
 
     useEffect(()=>{
@@ -21,6 +37,7 @@ const Empview = () => {
    
   return (
    <div>
+     <HeaderEmp/>
       <div className="container">
     <div className="row">
         <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
@@ -38,7 +55,7 @@ const Empview = () => {
                                        <p class="card-text"><small class="text-body-secondary"><b> JobRequirements:{value.jobrequirements} </b></small></p>
                                        <p class="card-text"><small class="text-body-secondary"><b>Experience:{value.experience}, Salry:{value.salary},  Location:{value.location}  </b></small></p>
                                        <p class="card-text"><small class="text-body-secondary"><b>PostingDate:{value.CreatedAt},LastDate:{value.ExpiresAt}  </b></small></p>
-                                       <p class="card-text"><small class="text-body-secondary"><button className='btn btn-danger' >Delete</button></small> &nbsp;
+                                       <p class="card-text"><small class="text-body-secondary"><button className='btn btn-danger' onClick={()=>deletePost(value._id)}>Delete</button></small> &nbsp;
                                         <small class="text-body-secondary"><button className='btn btn-primary'>Update</button></small></p>
                                    </div>
                                </div>
