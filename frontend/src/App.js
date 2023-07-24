@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import RegisterEmp from "./Components/RegisterEmp";
 import Home from "./Components/Home";
-import RegisterEmp from "./Components/RegisterEmp";
+
 import Empview from "./Components/Empview";
 import Login from "./Components/Login";
 
