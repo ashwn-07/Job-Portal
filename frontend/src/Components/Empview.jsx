@@ -7,7 +7,7 @@ const Empview = () => {
 
 
     const fetchPostdata=(posterid)=>{
-        axios.get("http://localhost:7000/jobs/viewjobs/"+posterid)
+        axios.get("http://localhost:7000/api/viewjobs/"+posterid)
         .then((response)=>{
             console.log(response.data);
             setPost(response.data)
