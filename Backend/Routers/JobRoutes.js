@@ -25,6 +25,26 @@ router.get("/viewjobs", async (req, res) => {
         res.status(404).json({ mesaage: `Cannot get Jobs ${err}` });
     }
 });
+//api for getting all jobs posted by a particular employee
+router.get("/viewjobs/:id",async(req,res)=>{
+    try {
+        const posterid=req.params.id;
+        console.log("posterid"+posterid)
+        const data=await JobModel.find();
+        
+        const emposts=[]
+    data.forEach(element => {
+        if(element.posterid==posterid){
+            emposts.push(element)
+        }
+        
+     });
+    res.send(emposts);
+    } catch (err) {
+        console.log(err)
+    }
+    
+})
 //api for updating the jobs
 router.put("/update/", async (req, res) => {
     try {
