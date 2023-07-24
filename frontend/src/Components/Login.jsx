@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-
+import {useNavigate} from 'react-router-dom'
 const Login = () => {
-
+    const navigate= useNavigate()
     const [input, setInputs] = useState({});
     const [status, setStatus] = useState(true)
 
@@ -26,7 +26,9 @@ const Login = () => {
                 }
                 else {
                     if (response.data.message == (" Employer Login successful")) {
-                        alert("employer");
+                        // alert("employer");
+                        navigate('/empview');
+
                     } else {
                         if (response.data.message == (" Admin Login successful")) {
                             alert("admin")
