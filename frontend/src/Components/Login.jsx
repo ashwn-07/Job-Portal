@@ -22,7 +22,7 @@ const Login = () => {
                 
                 console.log(response);
                 if (response.data.message == (" User Login successful")) {
-                    alert("user")
+                    navigate('/alumniview');
                 }
                 else {
                     if (response.data.message == (" Employer Login successful")) {

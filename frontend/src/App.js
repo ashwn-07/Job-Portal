@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 
 import RegisterUser from "./Components/RegisterUser";
 import Addposts from "./Components/Addposts";
+import Alumniview from "./Components/Alumniview";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/usersignup" element={<RegisterUser />} />
             <Route path="/empview" element={<Empview/>}/>
             <Route path="/addpost" element={<Addposts/>}/>
+            <Route path="/alumniview" element={<Alumniview/>}/>
         </Routes>
     );
 }
