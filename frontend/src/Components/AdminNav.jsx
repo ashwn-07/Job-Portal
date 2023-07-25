@@ -13,15 +13,29 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { Link, styled } from "@mui/material";
 
 const AdminNav = () => {
     const drawerWidth = 240;
-    const navItems = ["Home", "About", "Contact"];
+    const navItems = ["Add post", "View responses", "verfiy employee"];
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
+
+    
+    const Homelinks = styled(Link)({
+        fontSize: "24px",
+        color: "white",
+        textDecoration: "none",
+        paddingRight: "20px",
+        transition: "transform 1.3s",
+        "&:hover": { color: "#C9DD8F", transform: "scale(1.8)" },
+        "&:active":{ color: "grey"}
+        
+    });
+
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
             <Typography variant="h6" sx={{ my: 2 }}>
@@ -32,7 +46,7 @@ const AdminNav = () => {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton sx={{ textAlign: "center" }}>
-                            <ListItemText primary={item} />
+                         <Homelinks><ListItemText primary={item} /></Homelinks> 
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -46,7 +60,7 @@ const AdminNav = () => {
         <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
-                <AppBar component="nav">
+                <AppBar component="nav" sx={{backgroundColor:"#131C2D"}}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -62,14 +76,12 @@ const AdminNav = () => {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
                         >
-                            MUI
+                            ICTAK Admin
                         </Typography>
                         <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                            {navItems.map((item) => (
-                                <Button key={item} sx={{ color: "#fff" }}>
-                                    {item}
-                                </Button>
-                            ))}
+                                <Homelinks href="/addpost">Add Job</Homelinks>
+                                <Homelinks href="/responsetab">Responses</Homelinks>
+                                <Homelinks href="/">Verify Employee</Homelinks>
                         </Box>
                     </Toolbar>
                 </AppBar>

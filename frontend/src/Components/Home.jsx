@@ -143,7 +143,7 @@ const Home = () => {
                                         fontWeight="500"
                                     >
                                         <LocationOnIcon />
-                                        {value.loctaion}
+                                        {value.location}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

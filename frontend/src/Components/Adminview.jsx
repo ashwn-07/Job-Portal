@@ -27,7 +27,7 @@ const Adminview = () => {
 
     return (
       <>
-      <AdminNav/>
+      {/* <AdminNav/> */}
       {/* <Grid container spacing={2} p={4}>
                     {jobs.map((value, index) => (
                         <Grid key={index} item lg={4} md={6} sm={6} xs={12}>
@@ -114,7 +114,7 @@ const Adminview = () => {
                     ))}
                 </Grid> */}
 
-                <Empview/>
+                <Empview/ >
                 
       </>
     );

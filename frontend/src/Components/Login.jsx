@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
 const Login = () => {
-
+    const navigate= useNavigate()
     const [input, setInputs] = useState({});
     const [status, setStatus] = useState(true)
-    const navigate = useNavigate();
+    
 
     const inputHolder = (e) => {
         setStatus(false);
@@ -28,15 +28,19 @@ const Login = () => {
                         const LogId=response.data.data._id;
                         console.log(LogId);
                         sessionStorage.setItem("LogId",LogId);
-                        alert("employer");
+                        // alert("employer");
+                        navigate('/empview');
+
                     } else {
                         if (response.data.message == (" Admin Login successful")) {
-                            const message = response.data.message;
-                            sessionStorage.setItem("adminmessage", message);
-                            console.log(message)
+                            const admid = response.data.data._id;
+                            sessionStorage.setItem("ad.id", admid);
+                            console.log(admid)
+                            console.log(response.data)
                             alert("admin")
                             navigate('/adminview')
-
+                            
+                          
 
                         } else {
                             alert("unoutherised login");
