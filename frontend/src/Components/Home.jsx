@@ -11,9 +11,14 @@ const Home = () => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:7000/api/viewjobs").then((response) => {
-            setJobs(response.data);
-        });
+        axios.get("http://localhost:7000/api/viewjobs")
+            .then((response) => {
+                setJobs(response.data);
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
 
     const theme = createTheme({
@@ -101,7 +106,7 @@ const Home = () => {
                                 sx={{
                                     minWidth: 40,
                                     minHeight: { sm: 400, md: 265, lg: 265 },
-                                    maxHeight: { sm: 400, md: 265, lg: 265 },
+                                    height: "100%",
                                     borderRadius: "15px",
                                 }}
                             >
@@ -122,6 +127,7 @@ const Home = () => {
                                         {value.companyname}
                                     </Typography>
                                     <Typography
+                                        overflow=""
                                         fontSize="15px"
                                         paddingTop={2}
                                         lineHeight={1.3}
@@ -129,6 +135,7 @@ const Home = () => {
                                     >
                                         {value.jobdesc}
                                     </Typography>
+
                                     <Typography
                                         paddingTop={1}
                                         color="#806666"
@@ -136,7 +143,7 @@ const Home = () => {
                                         fontWeight="500"
                                     >
                                         <LocationOnIcon />
-                                        {value.loctaion}
+                                        {value.location}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
