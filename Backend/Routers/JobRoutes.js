@@ -46,9 +46,10 @@ router.get("/viewjobs/:id",async(req,res)=>{
     
 })
 //api for updating the jobs
-router.put("/update/", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
     try {
-        const id = req.body._id;
+        let id=req.params.id;
+        
         const newData = req.body;
         const data = await JobModel.findByIdAndUpdate(id, {
             $set: {
@@ -60,6 +61,7 @@ router.put("/update/", async (req, res) => {
                 experience: newData.experience,
                 salary: newData.salary,
                 loctaion: newData.loctaion,
+                ExpiresAt: newData.ExpiresAt
             },
         });
         res.status(200).json({ message: "Job Details Updated Successfully" });
