@@ -9,7 +9,7 @@ const JobSchema = new mongoose.Schema({
     eligibility:String,
     experience: Number,
     salary: String,
-    loctaion: String,
+    location: String,
     responses: {
         type: [
             {
