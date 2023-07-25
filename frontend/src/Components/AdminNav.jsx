@@ -24,7 +24,6 @@ const AdminNav = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
-    
     const Homelinks = styled(Link)({
         fontSize: "24px",
         color: "white",
@@ -32,8 +31,7 @@ const AdminNav = () => {
         paddingRight: "20px",
         transition: "transform 1.3s",
         "&:hover": { color: "#C9DD8F", transform: "scale(1.8)" },
-        "&:active":{ color: "grey"}
-        
+        "&:active": { color: "grey" },
     });
 
     const drawer = (
@@ -46,7 +44,9 @@ const AdminNav = () => {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton sx={{ textAlign: "center" }}>
-                         <Homelinks><ListItemText primary={item} /></Homelinks> 
+                            <Homelinks>
+                                <ListItemText primary={item} />
+                            </Homelinks>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -54,34 +54,36 @@ const AdminNav = () => {
         </Box>
     );
 
-
-    
     return (
         <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
-                <AppBar component="nav" sx={{backgroundColor:"#131C2D"}}>
+                <AppBar component="nav" sx={{ backgroundColor: "#131C2D" }}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
                             onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: "none" } }}
+                            sx={{ mr: 2, display: { md: "none" } }}
                         >
                             <MenuIcon />
                         </IconButton>
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+                            sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
                         >
                             ICTAK Admin
                         </Typography>
-                        <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                                <Homelinks href="/addpost">Add Job</Homelinks>
-                                <Homelinks href="/responsetab">Responses</Homelinks>
-                                <Homelinks href="/">Verify Employee</Homelinks>
+                        <Box sx={{ display: { xs: "none", md: "block" } }}>
+                            <Homelinks href="/addpost">Add Job</Homelinks>
+                            <Homelinks href="/responsetab">Responses</Homelinks>
+                            <Homelinks href="">Verify Employee</Homelinks>
+                            <Homelinks href="/">
+                                
+                                <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}}>Log out</Button>
+                            </Homelinks>
                         </Box>
                     </Toolbar>
                 </AppBar>
@@ -104,7 +106,6 @@ const AdminNav = () => {
 
                 <Toolbar />
             </Box>
-            
         </>
     );
 };
