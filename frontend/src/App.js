@@ -11,7 +11,6 @@ import Addposts from "./Components/Addposts";
 import Main from "./Components/Main";
 import ResponseTable from "./Components/ResponseTable";
 import AdminMain from "./Components/AdminMain";
-
 function App() {
     return (
         <Routes>
