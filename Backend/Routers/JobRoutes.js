@@ -60,14 +60,14 @@ router.put("/update/:id", async (req, res) => {
                 eligibility:newData.eligibility,
                 experience: newData.experience,
                 salary: newData.salary,
-                loctaion: newData.loctaion,
+                location: newData.location,
                 ExpiresAt: newData.ExpiresAt
             },
         });
         res.status(200).json({ message: "Job Details Updated Successfully" });
     } catch (error) {
-        res.status(404).json({ message: "Error!! Update not Successfull" });
-        console.log(error);
+        res.status(404).json({ message: "Error!! Update not Successfull", err:error });
+        
     }
 });
 //api for deleting the jobs

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import HeaderEmp from './HeaderEmp';
 import Addposts from './Addposts';
+import AdminNav from './AdminNav';
+
 
 const Empview = () => {
    
@@ -9,8 +11,18 @@ const Empview = () => {
     const[update,setUpdate]=useState(false)
     const[singlevalue,setSingleValue]=useState([]);
     const [userID,setUserid]=useState(sessionStorage.getItem("LogId"))
+    const [adid] = useState(sessionStorage.getItem("ad.id"))
+    
+    const[adminview, setAdminview] = useState(false)
     console.log(userID)
 
+    const fetchAdminposts =()=>{
+        axios.get("http://localhost:7000/api/viewjobs")
+
+        .then((response) => setPost(response.data))
+
+        .catch((error) => console.log(error))
+    }
 
     const fetchPostdata=(posterid)=>{
         axios.get("http://localhost:7000/api/viewjobs/"+posterid)
@@ -39,7 +51,20 @@ const Empview = () => {
    
 
     useEffect(()=>{
-        fetchPostdata(userID);
+        console.log(post)
+          
+        if(adid){
+
+            setAdminview(true)
+            fetchAdminposts();
+            
+        }
+        else{
+
+            fetchPostdata(userID);
+        }
+            
+        
     },[])
    let finaljsx=<div className="container">
    <div className="row">
@@ -47,7 +72,7 @@ const Empview = () => {
            <div className="row g-3">
                {post.map((value,index)=>{
                  return <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                 <div class="card mb-3">
+                 <div class="card mb-3 h-100 mt-5">
                           <div class="row g-0">
                               
                               <div class="col-md-8">

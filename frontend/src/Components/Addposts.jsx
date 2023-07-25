@@ -97,7 +97,7 @@ if(props.method==="put"){
                     
                     <div className="col co-12 col-sm-12 col-md-12 col lg-12">
                     <label htmlFor="" className="form-label">LastDate</label>
-                    <input type="text" className="form-control" name='ExpiresAt' value={inputs.ExpiresAt} onChange={inputHandler}/>
+                    <input type="date" className="form-control" name='ExpiresAt' value={inputs.ExpiresAt} onChange={inputHandler}/>
                     </div>
                     <div className="col co-12 col-sm-12 col-md-12 col lg-12">
                        <button className="btn btn-success"onClick={submitHandler}>Submit</button> 

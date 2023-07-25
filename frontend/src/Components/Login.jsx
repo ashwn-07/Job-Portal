@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
 const Login = () => {
     const navigate= useNavigate()
     const [input, setInputs] = useState({});
     const [status, setStatus] = useState(true)
+    
 
     const inputHolder = (e) => {
         setStatus(false);
@@ -16,9 +17,7 @@ const Login = () => {
         axios.post('http://localhost:7000/api/login', input)
             .then(response => {
                 
-                const LogId=response.data.data._id;
-                console.log(LogId);
-                sessionStorage.setItem("LogId",LogId);
+               
                 
                 console.log(response);
                 if (response.data.message == (" User Login successful")) {
@@ -26,12 +25,23 @@ const Login = () => {
                 }
                 else {
                     if (response.data.message == (" Employer Login successful")) {
+                        const LogId=response.data.data._id;
+                        console.log(LogId);
+                        sessionStorage.setItem("LogId",LogId);
                         // alert("employer");
                         navigate('/empview');
 
                     } else {
                         if (response.data.message == (" Admin Login successful")) {
+                            const admid = response.data.data._id;
+                            sessionStorage.setItem("ad.id", admid);
+                            console.log(admid)
+                            console.log(response.data)
                             alert("admin")
+                            navigate('/adminview')
+                            
+                          
+
                         } else {
                             alert("unoutherised login");
                         }
