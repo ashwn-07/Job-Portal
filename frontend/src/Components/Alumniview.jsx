@@ -219,7 +219,7 @@ const Alumniview = () => {
                       <h6>Experience:</h6> {value. experience} year
                       </Card.Text>
                       <Card.Text>
-                      <h6>Salary:</h6> {value. salary}
+                      <h6>Salary:</h6>{value. salary}
                       </Card.Text>
                       <Card.Text>
                       <h6>Location:</h6> {value.location}
@@ -229,20 +229,12 @@ const Alumniview = () => {
 
                       </Card.Text>
 
-
-                      {/* <Dropdown >
-                        <Dropdown.Toggle variant="success" id="dropdown-basic"  >
-                          Apply
-                        </Dropdown.Toggle> */}
-
-                      {/* <Dropdown.Menu style={{ backgroundColor: "grey" }}> */}
-
-                      {/* <form onSubmit={handleSubmit}> */}
-                      {/* trying */}
-                      <form >
+          {/* apply form */}
+                      <form method='POST' action='http://localhost:7000/upload' encType='multipart/form-data'>
                               <div>
                                 <label> PDF:</label>
-                                <input type="file" name='resume' onChange={handleFileChange} accept=".pdf" />
+                                <input type='file' name="resume" onChange={handleFileChange}    />
+                                <input type="submit"/>
                               </div>
                               <div>
                                 <label>Link:</label>
