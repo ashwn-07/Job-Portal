@@ -17,13 +17,10 @@ const Alumniview = () => {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
   const [link, setLink] = useState('');
-  const[ji,setji]= useState(false)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const target = useRef(null);
-  const[userId,setuserId]=useState(sessionStorage.getItem("userId") );
-
-
+  const [userId, setuserId] = useState(sessionStorage.getItem("userId"));
   const inputholder = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
     console.log(data);
@@ -37,62 +34,59 @@ const Alumniview = () => {
     setLink(e.target.value);
     console.log(e);
   };
- 
+
   // responce handler
   const handleSubmit = (val) => {
-    let posterid=val.posterid;
-    let postid=val._id;
-
-    // console.log(val);
+    let posterid = val.posterid;
+    let postid = val._id;
     if (file) {
-      
-    let  respdata={
-      "_id":postid,
-        "responses":{
-          responsetype:"pdf",
-          path:link,
-          posterId:posterid,
-          responderid:userId
-      }
-    }
-    // console.log(respdata);
-    axios.put("http://localhost:7000/api/apply",respdata)
-      .then(response=>{
-        console.log(userId);
-        alert(response.data.message);
-        // window.location.reload(false);
-
-    })
-      
-     
-    } else if (link) {
-      let  respdata={ 
-        "_id":postid,
-        "responses":{
-          responsetype:"link",
-          path:link,
-          posterId:posterid,
-          responderid:userId
+       let respdata = {
+         "_id": postid,
+         "responses": {
+          responsetype: "pdf",
+          path: link,
+          posterId: posterid,
+          responderid: userId
+         }
         }
-       
-      }
-      console.log(respdata);
-      axios.put("http://localhost:7000/api/apply",respdata)
-      .then(response=>{
-        console.log(response);
-        alert(response.data.message);
-        // window.location.reload(false);
+      axios.put("http://localhost:7000/api/apply", respdata)
+        .then(response => {
+          console.log(userId);
+          alert(response.data.message);
+          // window.location.reload(false);
 
-    })
-      
-    } else {
+        })
+
+
+    }
+     else if (link) {
+        let respdata = {
+        "_id": postid,
+        "responses": {
+          responsetype: "link",
+          path: link,
+          posterId: posterid,
+          responderid: userId
+         }
+
+        }
+      console.log(respdata);
+      axios.put("http://localhost:7000/api/apply", respdata)
+        .then(response => {
+          console.log(response);
+          alert(response.data.message);
+          // window.location.reload(false);
+
+        })
+
+    }
+     else {
       console.log('Please select a file or enter a link.');
     }
   };
-   const apply=()=>{
-    console.log("chbde");
-    
-   }
+  
+
+  
 
 
   useEffect(() => {
@@ -213,14 +207,26 @@ const Alumniview = () => {
 
                       <Card.Title>  {value.jobtitle}</Card.Title>
                       <Card.Text>
-                        {value.jobdesc}
+                       <h6>Job Description:</h6> {value.jobdesc}
                       </Card.Text>
                       <Card.Text>
-                        {value.location}
+                      <h6>Requirements:</h6> {value.jobrequirements}
+                      </Card.Text>
+                      <Card.Text>
+                      <h6>Eligibility:</h6>{value.eligibility}
+                      </Card.Text>
+                      <Card.Text>
+                      <h6>Experience:</h6> {value. experience} year
+                      </Card.Text>
+                      <Card.Text>
+                      <h6>Salary:</h6> {value. salary}
+                      </Card.Text>
+                      <Card.Text>
+                      <h6>Location:</h6> {value.location}
                       </Card.Text>
                       <br />
                       <Card.Text> <h5>Apply Here</h5>
-                        
+
                       </Card.Text>
 
 
@@ -228,14 +234,15 @@ const Alumniview = () => {
                         <Dropdown.Toggle variant="success" id="dropdown-basic"  >
                           Apply
                         </Dropdown.Toggle> */}
-                      
-                        {/* <Dropdown.Menu style={{ backgroundColor: "grey" }}> */}
-                     
-                       {/* <form onSubmit={handleSubmit}> */}
-                        <form>
+
+                      {/* <Dropdown.Menu style={{ backgroundColor: "grey" }}> */}
+
+                      {/* <form onSubmit={handleSubmit}> */}
+                      {/* trying */}
+                      <form >
                               <div>
                                 <label> PDF:</label>
-                                <input type="file" onChange={handleFileChange} accept=".pdf" />
+                                <input type="file" name='resume' onChange={handleFileChange} accept=".pdf" />
                               </div>
                               <div>
                                 <label>Link:</label>
@@ -245,34 +252,35 @@ const Alumniview = () => {
                                   onChange={handleLinkChange}
                                   placeholder="Enter a link to a PDF"
                                 />
+                               
                               </div>
-                              {/* <button className='btn btn-dark btn-me-md-2' onClick={()=>handleSubmit(value._id)}>Submit</button> */}
-                            </form>
-                            <button className='btn btn-dark btn-me-md-2' onClick={()=>handleSubmit(value)}>Submit</button>
-                          {/* <Overlay target={target.current} placement="bottom"> */}
+
+                             </form> 
+
+                      
+                     
+
+                            <button className='btn btn-dark btn-me-md-2' onClick={() => handleSubmit(value)}>Submit</button>
                             
-                          {/* </Overlay> */}
 
-                        {/* </Dropdown.Menu>
-                      </Dropdown> */}
 
-                    </Card.Body>
-                  </Card>
-                </Col>
+                          </Card.Body>
+                        </Card>
+                      </Col>
 
-              </Row>
-            </div>
+                    </Row>
+                  </div>
           ))}
 
 
         </div>
 
-      </>
+              </>
 
 
-    </div>
-  )
+            </div>
+          )
 
 }
 
-export default Alumniview
+          export default Alumniview
