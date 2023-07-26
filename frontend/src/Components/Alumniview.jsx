@@ -21,7 +21,7 @@ const Alumniview = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const target = useRef(null);
-  const[LogId,setLogId]=useState(sessionStorage.getItem("LogId") );
+  const[userId,setuserId]=useState(sessionStorage.getItem("userId") );
 
 
   const inputholder = (e) => {
@@ -42,37 +42,39 @@ const Alumniview = () => {
   const handleSubmit = (val) => {
     let posterid=val.posterid;
     let postid=val._id;
-    console.log(val);
+
+    // console.log(val);
     if (file) {
       
     let  respdata={
-      responsetype:"pdf",
-        path:file.name,
-        posterId:posterid,
-        _id:postid,
-        responderid:LogId
+      "_id":postid,
+        "responses":{
+          responsetype:"pdf",
+          path:link,
+          posterId:posterid,
+          responderid:userId
       }
-
-    console.log(respdata);
+    }
+    // console.log(respdata);
     axios.put("http://localhost:7000/api/apply",respdata)
       .then(response=>{
-        console.log(response);
+        console.log(userId);
         alert(response.data.message);
-        window.location.reload(false);
+        // window.location.reload(false);
 
     })
       
      
     } else if (link) {
-
-
-   
-      let respdata={
-        responsetype:"link",
-        path:link,
-        posterId:posterid,
-        _id:postid,
-        responderid:LogId
+      let  respdata={ 
+        "_id":postid,
+        "responses":{
+          responsetype:"link",
+          path:link,
+          posterId:posterid,
+          responderid:userId
+        }
+       
       }
       console.log(respdata);
       axios.put("http://localhost:7000/api/apply",respdata)
