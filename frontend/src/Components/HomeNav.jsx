@@ -31,7 +31,7 @@ const HomeNav = () => {
     }
 
     const drawerWidth = 240;
-    const navItems = ["Home", "About", "Contact", "Employee Sign up", "Alumini Sign up"]; //empsignup //usersignup
+    const navItems = ["Home", "About", "Contact", "Employer Sign up", "Sign up"]; //empsignup //usersignup
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
 

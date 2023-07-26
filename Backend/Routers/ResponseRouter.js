@@ -35,9 +35,9 @@ router.put("/apply", async (req, res) => {
 
 router.get("/getresponses", async (req, res) => {
     try {
-        const data = await JobModel.find({}, { companyname: 1, jobtitle: 1, responses: 1 });
+        const data = await JobModel.find({}, { companyname: 1, jobtitle: 1});
         res.status(200).json({ message: "job data with responses", data: data });
-    } catch {
+    } catch (err){
         console.log(err);
 
         res.status(404).json({ message: `Cannot get the data, ERR ${err}` });
@@ -53,7 +53,7 @@ router.post("/viewresponses", async (req, res) => {
             message: `Responses for the job listing with id: ${jobid}`,
             data: data,
         });
-    } catch (error) {
+    } catch (err) {
         console.log(err);
 
         res.status(404).json({ message: `Cannot get the responses, ERR ${err}` });

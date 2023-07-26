@@ -14,12 +14,15 @@ const Home = () => {
         axios.get("http://localhost:7000/api/viewjobs")
             .then((response) => {
                 setJobs(response.data);
+              
             })
 
             .catch((error) => {
                 console.log(error);
             });
     }, []);
+
+  
 
     const theme = createTheme({
         components: {
