@@ -11,7 +11,7 @@ import Addposts from "./Components/Addposts";
 import Main from "./Components/Main";
 import ResponseTable from "./Components/ResponseTable";
 import AdminMain from "./Components/AdminMain";
-
+import Alumniview from "./Components/Alumniview";
 function App() {
     return (
         <Routes>
@@ -23,6 +23,7 @@ function App() {
             <Route path="/adminview" element={<AdminMain child={<Adminview/>}/>} />
             <Route path="/addpost" element={<Main child={<Addposts method="post" data={{companyname:"",jobtitle:"", jobdesc:"",jobrequirements:"",eligibility:"",experience:"",salary:"",location:"",ExpiresAt:""}}/>}/>}/>
             <Route path="/responsetab" element={<ResponseTable/>}/>
+            <Route path="/Alumniview" element={<Alumniview/>}/>
         </Routes>
     );
 }
