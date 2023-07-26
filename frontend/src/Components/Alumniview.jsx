@@ -211,7 +211,7 @@ const Alumniview = () => {
                         {value.jobdesc}
                       </Card.Text>
                       <Card.Text>
-                        {/* {value.location} */}
+                        {value.location}
                       </Card.Text>
                       <br />
                       <Card.Text> <h5>Apply Here</h5>
@@ -233,7 +233,7 @@ const Alumniview = () => {
                                 <input type="file" onChange={handleFileChange} accept=".pdf" />
                               </div>
                               <div>
-                                <label>Or enter a link:</label>
+                                <label>Link:</label>
                                 <input
                                   type="text"
                                   value={link}
