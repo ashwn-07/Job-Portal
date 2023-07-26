@@ -84,7 +84,7 @@ router.get("/verifiedres/:posterid", async (req, res) => {
             },
         ])
             .then((filteredData) => {
-                res.json({ message: "responses fetched successfully", data: filteredData });
+                res.json({ message: "responses fetched successfully", data: filteredData});
             })
             .catch((err) => {
                 res.status(404).json({ message: "Cannot get the data", error: err });

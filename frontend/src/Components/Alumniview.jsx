@@ -64,7 +64,10 @@ const Alumniview = () => {
       
      
     } else if (link) {
-      let  respdata={
+
+
+   
+      let respdata={
         responsetype:"link",
         path:link,
         posterId:posterid,
