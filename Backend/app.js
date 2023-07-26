@@ -1,5 +1,25 @@
 const express=require('express');
 const app=new express();
+const path =require('path')
+const multer=require("multer");
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
+const storage= multer.diskStorage({
+    destination: function (req, file, cb) {
+        return cb(null, "./uploads");
+      },
+      filename: function (req, file, cb) {
+        return cb(null, `${Date.now()}-${file.originalname}`);
+      }
+})
+const upload=multer({storage})
+
+app.post("/upload", upload.single('resume'), (req,res)=>{
+//    console.log(req.body);
+   console.log(req.file);
+    res.send("uploaded");
+})
 
 const mongoose=require('mongoose');
 const morgan=require('morgan');
@@ -11,6 +31,7 @@ require("./dbconn/dbconn")
 app.use(morgan('dev'));
 
 app.use(cors());
+
 
 const empapi=require('./Routers/EmpRouter');
 const jobs = require('./Routers/JobRoutes');
