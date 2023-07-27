@@ -62,6 +62,24 @@ router.post("/viewresponses", async (req, res) => {
     }
 });
 
+
+//api for admin to verify the  responses
+router.put("/verifyres/:resid", async (req,res)=>{
+    try {
+        resid= req.params.resid;
+     const  data =  await JobModel.findOneAndUpdate(
+        { "responses._id": resid },
+        { $set: { "responses.$.Verified": true }},
+        { new: true } // to return the updated document
+      );
+
+     res.status(200).json({message:'Verified'})    
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({ message: "Cannot Verify"});
+    }
+})
+
 //api for employers to fetch verified responses for the job,
 router.get("/verifiedres/:jobid", async (req, res) => {
     try {
