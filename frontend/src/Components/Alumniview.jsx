@@ -35,7 +35,33 @@ const Alumniview = () => {
     console.log(e);
   };
 
-  // responce handler
+  // response handler
+
+const handlefileSubmit = (e,jobid)=>{
+ e.preventDefault()
+  if (file && jobid) {
+    const formData = new FormData();
+    formData.append('resume', file);
+    formData.append('jobId', jobid);
+   
+  
+    axios.post("http://localhost:7000/upload", formData)
+    .then((response)=>{
+        alert(response.data.message)
+    })
+    .catch((error)=>{
+         console.log( "the error is" , error)
+        })
+
+  }
+
+}
+
+
+
+
+
+
   const handleSubmit = (val) => {
     let posterid = val.posterid;
     let postid = val._id;
@@ -59,7 +85,7 @@ const Alumniview = () => {
 
 
     }
-     else if (link) {
+      if (link) {
         let respdata = {
         "_id": postid,
         "responses": {
@@ -230,9 +256,12 @@ const Alumniview = () => {
                       </Card.Text>
 
           {/* apply form */}
-                      <form method='POST' action='http://localhost:7000/upload' encType='multipart/form-data'>
+          {/* 'http://localhost:7000/upload' */}
+          {/* method='POST' action={()=>handlepdfupload(value._id)} encType='multipart/form-data' */}
+
+                      <form onSubmit={(e)=>handlefileSubmit(e, value._id)} >
                               <div>
-                                <label> PDF:</label>
+                                <label>PDF:</label>
                                 <input type='file' name="resume" onChange={handleFileChange}    />
                                 <input type="submit"/>
                               </div>
