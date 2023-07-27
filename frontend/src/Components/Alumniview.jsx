@@ -35,19 +35,20 @@ const Alumniview = () => {
     console.log(e);
   };
 
-  // response handler
+  // response File handler
 
-const handlefileSubmit = (e,jobid)=>{
+const handlefileSubmit = (e,value)=>{
  e.preventDefault()
-  if (file && jobid) {
+  if (file && value) {
     const formData = new FormData();
     formData.append('resume', file);
-    formData.append('jobId', jobid);
-   
-  
+    formData.append('jobId', value._id);
+    formData.append('posterid',value.posterid);
+    formData.append('responderid',userId);
     axios.post("http://localhost:7000/upload", formData)
     .then((response)=>{
-        alert(response.data.message)
+        alert(response.data.message);
+        window.location.reload(false);
     })
     .catch((error)=>{
          console.log( "the error is" , error)
@@ -56,35 +57,11 @@ const handlefileSubmit = (e,jobid)=>{
   }
 
 }
+// response link handler
 
-
-
-
-
-
-  const handleSubmit = (val) => {
+const handleSubmit = (val) => {
     let posterid = val.posterid;
     let postid = val._id;
-    if (file) {
-       let respdata = {
-         "_id": postid,
-         "responses": {
-          responsetype: "pdf",
-          path: link,
-          posterId: posterid,
-          responderid: userId
-         }
-        }
-      axios.put("http://localhost:7000/api/apply", respdata)
-        .then(response => {
-          console.log(userId);
-          alert(response.data.message);
-          // window.location.reload(false);
-
-        })
-
-
-    }
       if (link) {
         let respdata = {
         "_id": postid,
@@ -99,15 +76,15 @@ const handlefileSubmit = (e,jobid)=>{
       console.log(respdata);
       axios.put("http://localhost:7000/api/apply", respdata)
         .then(response => {
-          console.log(response);
-          alert(response.data.message);
-          // window.location.reload(false);
+           console.log(response);
+           alert(response.data.message);
+           // window.location.reload(false);
 
         })
 
-    }
+      }
      else {
-      console.log('Please select a file or enter a link.');
+      console.log('Please select a link.');
     }
   };
   
@@ -259,7 +236,7 @@ const handlefileSubmit = (e,jobid)=>{
           {/* 'http://localhost:7000/upload' */}
           {/* method='POST' action={()=>handlepdfupload(value._id)} encType='multipart/form-data' */}
 
-                      <form onSubmit={(e)=>handlefileSubmit(e, value._id)} >
+                      <form onSubmit={(e)=>handlefileSubmit(e, value)} >
                               <div>
                                 <label>PDF:</label>
                                 <input type='file' name="resume" onChange={handleFileChange}    />
