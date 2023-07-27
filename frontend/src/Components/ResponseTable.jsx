@@ -26,7 +26,7 @@ const ResponseTable = () => {
     const [currid, setCurrid]= useState([]);
     const [getres, setGetres] = useState(false)
     const [adid] = useState(sessionStorage.getItem("ad.id"))
-    const [empID,setempid]=useState(sessionStorage.getItem("LogId"))
+    const [empID]=useState(sessionStorage.getItem("LogId"))
 
 
 
@@ -38,7 +38,7 @@ const ResponseTable = () => {
     };
 
  const getdetailsemp = ()=>{
-    axios.get("http://localhost:7000/api//viewjobs/64bb438c03227a9a79aa6eb9")
+    axios.get(`http://localhost:7000/api/viewjobs/${empID}`)
     .then((response)=>setData(response.data))
     .catch((error)=>console.log(error))
  }

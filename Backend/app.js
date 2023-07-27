@@ -43,9 +43,9 @@ const upload = multer({ storage });
 
 app.post("/upload", upload.single("resume"), async  (req, res) => {
     try {
-        // console.log(req.body);
+        console.log(req.file);
         const responderid=req.body.responderid;
-        const path=req.file.path;
+        const path=req.file.filename;
         const posterid=req.body.posterid
         const jobId=req.body.jobId;
         // console.log(req.body.posterid);
@@ -70,6 +70,20 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
         res.status(400).json({ message: "cannot upload" });
     }
 });
+
+
+//to download the file
+app.get("/download/:path",async (req, res)=>{
+    const filename = req.params.path
+
+    try {
+        res.download(`./uploads/${filename}`)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({message:'error'})
+    }
+    
+} )
 
 app.listen(PORT, () => {
     console.log(`Server is running at ${PORT}`);
