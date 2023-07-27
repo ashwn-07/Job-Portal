@@ -19,25 +19,45 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { Button, Container, TableHead } from "@mui/material";
 import ResponseView from "./ResponseView";
+import HeaderEmp from "./HeaderEmp";
 
 const ResponseTable = () => {
     const [Data, setData] = useState([]);
     const [currid, setCurrid]= useState([]);
     const [getres, setGetres] = useState(false)
+    const [adid] = useState(sessionStorage.getItem("ad.id"))
+    const [empID,setempid]=useState(sessionStorage.getItem("LogId"))
 
-    const getdetails = async () => {
+
+
+    const getdetails = () => {
         axios.get("http://localhost:7000/api/getresponses")
-            .then((response) => {
-                setData(response.data.data);
-            })
+            .then((response) =>setData(response.data.data))
+            .catch((err) =>console.log(err))
 
-            .catch((err) => {
-                console.log(err);
-            });
     };
 
+ const getdetailsemp = ()=>{
+    axios.get("http://localhost:7000/api//viewjobs/64bb438c03227a9a79aa6eb9")
+    .then((response)=>setData(response.data))
+    .catch((error)=>console.log(error))
+ }
+
+   
+
+
     useEffect(() => {
+
+        if(adid)
+        {
         getdetails();
+        }
+     else
+     {
+        getdetailsemp();
+     }
+
+
     }, []);
    
 
@@ -130,7 +150,7 @@ const ResponseTable = () => {
     //mui table functions end
 
    let finaljsx = (<>
-    <AdminNav />
+    {(adid)?<AdminNav />:<HeaderEmp/>}
 
   
         

@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose')
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 const JobModel = require("../Models/JoblistingModel");
+const { ObjectId } = require("bson");
 
 //api to add responses to joblistings
 router.put("/apply", async (req, res) => {
@@ -31,7 +33,7 @@ router.put("/apply", async (req, res) => {
     }
 });
 
-//api to fetch the nessecary job details and responses for admin
+//api to fetch the nessecary job details to get responses for admin
 
 router.get("/getresponses", async (req, res) => {
     try {
@@ -44,15 +46,15 @@ router.get("/getresponses", async (req, res) => {
     }
 });
 
-//we can use job id that is passed as props and get the responses of that particular job
+//we can use job id that is passed as props and view the responses of that particular job fpr admin
 router.post("/viewresponses", async (req, res) => {
+    console.log(req.body._id)
     try {
         jobid = req.body._id;
+        console.log(jobid)
         const data = await JobModel.find({ _id: jobid }, { responses: 1 });
-        res.status(200).json({
-            message: `Responses for the job listing with id: ${jobid}`,
-            data: data,
-        });
+        res.status(200).json({  message: `Responses for the job listing with id: ${jobid}`,
+            data: data });
     } catch (err) {
         console.log(err);
 
@@ -60,14 +62,17 @@ router.post("/viewresponses", async (req, res) => {
     }
 });
 
-//api for employers to fetch verified responses,
-router.get("/verifiedres/:posterid", async (req, res) => {
+//api for employers to fetch verified responses for the job,
+router.get("/verifiedres/:jobid", async (req, res) => {
     try {
-        const jobposter = req.params.posterid;
+        console.log(req.params.jobid)
+        const jobid = req.params.jobid;
+
+      
         await JobModel.aggregate([
             {
                 $match: {
-                    posterid: jobposter,
+                    _id: new mongoose.Types.ObjectId(jobid),
                     "responses.Verified": true,
                 },
             },
@@ -87,10 +92,12 @@ router.get("/verifiedres/:posterid", async (req, res) => {
                 res.json({ message: "responses fetched successfully", data: filteredData});
             })
             .catch((err) => {
-                res.status(404).json({ message: "Cannot get the data", error: err });
+                console.log(err)
+                res.status(404).json({ message: "Cannot get the data"});
             });
     } catch (err) {
-        res.status(404).json({ message: "Cannot get the data", error: err });
+        console.log(err)
+        res.status(404).json({ message: "Cannot get the data"});
     }
 });
 

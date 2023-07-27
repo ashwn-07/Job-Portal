@@ -13,7 +13,7 @@ const HeaderEmp = () => {
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">  Logout</a>
         <a class="nav-link" href="/addpost">  Addposts</a>
-        <a class="nav-link" href="">  ViewResponses</a>
+        <a class="nav-link" href="/empresview">  ViewResponses</a>
         
         
       </div>
