@@ -54,8 +54,36 @@ const handlefileSubmit = (e,value)=>{
          console.log( "the error is" , error)
         })
 
-  }
 
+  }
+  else if (link && value) {
+    let posterid = value.posterid;
+    let postid = value._id;
+      
+    let respdata = {
+        "_id": postid,
+        "responses": {
+          responsetype: "link",
+          path: link,
+          posterId: posterid,
+          responderid: userId
+         }
+
+      }
+    console.log(respdata);
+      axios.put("http://localhost:7000/api/apply", respdata)
+        .then(response => {
+           console.log(response);
+           alert(response.data.message);
+           // window.location.reload(false);
+
+        })
+
+      
+    
+  } else {
+    
+  }
 }
 // response link handler
 
@@ -240,25 +268,16 @@ const handleSubmit = (val) => {
                               <div>
                                 <label>PDF:</label>
                                 <input type='file' name="resume" onChange={handleFileChange}    />
-                                <input type="submit"/>
+                                {/* <input type="submit"/> */}
                               </div>
                               <div>
                                 <label>Link:</label>
                                 <input
-                                  type="text"
-                                  value={link}
-                                  onChange={handleLinkChange}
-                                  placeholder="Enter a link to a PDF"
-                                />
-                               
-                              </div>
-
-                             </form> 
-
-                      
-                     
-
-                            <button className='btn btn-dark btn-me-md-2' onClick={() => handleSubmit(value)}>Submit</button>
+                                  type="text" value={link} onChange={handleLinkChange} placeholder="Enter a link to a PDF" />
+                               </div>
+                               <button className='btn btn-dark btn-me-md-2' >Submit</button>
+                       </form> 
+                            {/* <button className='btn btn-dark btn-me-md-2' onClick={() => handleSubmit(value)}>Submit</button> */}
                             
 
 
