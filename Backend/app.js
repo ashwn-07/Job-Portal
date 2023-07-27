@@ -12,6 +12,8 @@ const cors = require("cors");
 require("dotenv").config();
 require("./dbconn/dbconn");
 
+const JobModel = require("./Models/JoblistingModel");
+
 app.use(morgan("dev"));
 
 app.use(cors());
@@ -41,8 +43,27 @@ const upload = multer({ storage });
 
 app.post("/upload", upload.single("resume"), async  (req, res) => {
     try {
-        console.log(req.body);
-        console.log(req.file);
+        // console.log(req.body);
+        const responderid=req.body.responderid;
+        const path=req.file.path;
+        const posterid=req.body.posterid
+        const jobId=req.body.jobId;
+        // console.log(req.body.posterid);
+        const response = {
+           
+                     responsetype: "pdf",
+                     path: path,
+                     responderid: responderid
+          
+           }
+           console.log(response);
+           const data = await JobModel.findByIdAndUpdate(jobId, {
+           $push: {
+              responses: response, // {responsetype:type , path:fpath}
+              
+          },
+        
+        })
         res.status(200).json({ message: "File Uploaded" });
     } catch (error) {
         console.log(error);
