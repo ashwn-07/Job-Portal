@@ -11,7 +11,7 @@ useEffect(()=>{
   {
     setAdmin(true)
   }
-},[])
+},[adid])
   
   return (
     <div>

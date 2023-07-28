@@ -47,10 +47,10 @@ router.get("/getresponses", async (req, res) => {
 });
 
 //we can use job id that is passed as props and view the responses of that particular job fpr admin
-router.post("/viewresponses", async (req, res) => {
-    console.log(req.body._id)
+router.get("/viewresponses/:jobid", async (req, res) => {
+    console.log(req.params.jobid)
     try {
-        jobid = req.body._id;
+        jobid = req.params.jobid;
         console.log(jobid)
         const data = await JobModel.find({ _id: jobid }, { responses: 1 });
         res.status(200).json({  message: `Responses for the job listing with id: ${jobid}`,

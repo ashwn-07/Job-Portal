@@ -19,23 +19,40 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { Button, Container, TableHead } from "@mui/material";
+import DownloadButton from "./DownloadButton";
+import LinkViewButton from "./LinkViewButton";
 
 const ResponseView = (props) => {
     const [responses, setResponses] = useState([]);
     const [adid] = useState(sessionStorage.getItem("ad.id"));
     const [verify, setVerify] = useState(false);
-
+    const [display, setDisplay]= useState("")
 
              //fetching the responses 
             const fetchresponse = () => {
-                const id = { _id: props.jobid };
 
-                axios.post("http://localhost:7000/api/viewresponses", id)
+
+                if(adid){
+                //gets all the added responses
+                const id =  props.jobid;
+
+                axios.get(`http://localhost:7000/api/viewresponses/${id}`)
                     .then((response) => {
                         console.log(response.data.data[0].responses);
                         setResponses(response.data.data[0].responses);
                     })
                     .catch((err) => console.log(err));
+                }
+
+                else{
+                    //gets only the verified responses
+                    setDisplay("none")
+                    axios.get(`http://localhost:7000/api/verifiedres/${props.jobid}`)
+
+                    .then((response)=>setResponses(response.data.data[0].responses))
+                    
+                    .catch(error=>console.log(error))
+                }
             };
 
     useEffect(() => {
@@ -155,7 +172,7 @@ const ResponseView = (props) => {
                                 <TableCell sx={{ color: "white" }} align="center">
                                     Action
                                 </TableCell>
-                                <TableCell sx={{ color: "white" }} align="center">
+                                <TableCell sx={{ color: "white", display:{display} }} align="center">
                                     Status
                                 </TableCell>
                             </TableRow>
@@ -176,16 +193,11 @@ const ResponseView = (props) => {
                                         {row.responsetype}
                                     </TableCell>
                                     <TableCell align="center">
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            sx={{ width: "100px" }}
-                                            onClick={""}
-                                        >
-                                            view
-                                        </Button>
+                                        
+                                           {(row.responsetype==="pdf")?<DownloadButton  path={row.path} resid={row._id}/>:<LinkViewButton path={row.path}/>}
+                                        
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="center" sx={{display:{display}}}>
                                         <Button
                                             variant="contained"
                                             sx={{
