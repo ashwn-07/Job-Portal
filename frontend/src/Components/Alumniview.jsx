@@ -11,120 +11,32 @@ import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Overlay from 'react-bootstrap/Overlay';
 import { alignPropType } from 'react-bootstrap/esm/types';
+import JobApply from './JobApply';
 const Alumniview = () => {
   const [jobs, setJobs] = useState([]);
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
-  const [file, setFile] = useState(null);
-  const [link, setLink] = useState('');
+  
+  const [currentDate, setDate]   = useState(new Date())
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const target = useRef(null);
-  const [userId, setuserId] = useState(sessionStorage.getItem("userId"));
+
   const inputholder = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
     console.log(data);
   }
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-  };
-
-  const handleLinkChange = (e) => {
-    setLink(e.target.value);
-    console.log(e);
-  };
-
-  // response File handler
-
-const handlefileSubmit = (e,value)=>{
- e.preventDefault()
-  if (file && value) {
-    const formData = new FormData();
-    formData.append('resume', file);
-    formData.append('jobId', value._id);
-    formData.append('posterid',value.posterid);
-    formData.append('responderid',userId);
-    axios.post("http://localhost:7000/upload", formData)
-    .then((response)=>{
-        alert(response.data.message);
-        window.location.reload(false);
-    })
-    .catch((error)=>{
-         console.log( "the error is" , error)
-        })
-
-
-  }
-  else if (link && value) {
-    let posterid = value.posterid;
-    let postid = value._id;
-      
-    let respdata = {
-        "_id": postid,
-        "responses": {
-          responsetype: "link",
-          path: link,
-          posterId: posterid,
-          responderid: userId
-         }
-
-      }
-    console.log(respdata);
-      axios.put("http://localhost:7000/api/apply", respdata)
-        .then(response => {
-           console.log(response);
-           alert(response.data.message);
-           // window.location.reload(false);
-
-        })
-
-      
-    
-  } else {
-    
-  }
-}
-// response link handler
-
-const handleSubmit = (val) => {
-    let posterid = val.posterid;
-    let postid = val._id;
-      if (link) {
-        let respdata = {
-        "_id": postid,
-        "responses": {
-          responsetype: "link",
-          path: link,
-          posterId: posterid,
-          responderid: userId
-         }
-
-        }
-      console.log(respdata);
-      axios.put("http://localhost:7000/api/apply", respdata)
-        .then(response => {
-           console.log(response);
-           alert(response.data.message);
-           // window.location.reload(false);
-
-        })
-
-      }
-     else {
-      console.log('Please select a link.');
-    }
-  };
   
 
-  
-
-
-  useEffect(() => {
-    axios.get("http://localhost:7000/api/viewjobs").then((response) => {
+  //getting the jobs 
+  useEffect( () => {
+     axios.get("http://localhost:7000/api/viewjobs").then((response) => {
+      setDate(new Date())
       setJobs(response.data);
-    });
+       
+    })
+    .catch((error)=>console.log(error))
   }, []);
+
 
 
   const shareData = () => {
@@ -256,30 +168,12 @@ const handleSubmit = (val) => {
                       <h6>Location:</h6> {value.location}
                       </Card.Text>
                       <br />
-                      <Card.Text> <h5>Apply Here</h5>
+                       <Card.Text> <h5>Apply Here</h5>
 
                       </Card.Text>
-
-          {/* apply form */}
-          {/* 'http://localhost:7000/upload' */}
-          {/* method='POST' action={()=>handlepdfupload(value._id)} encType='multipart/form-data' */}
-
-                      <form onSubmit={(e)=>handlefileSubmit(e, value)} >
-                              <div>
-                                <label>PDF:</label>
-                                <input type='file' name="resume" onChange={handleFileChange}    />
-                                {/* <input type="submit"/> */}
-                              </div>
-                              <div>
-                                <label>Link:</label>
-                                <input
-                                  type="text" value={link} onChange={handleLinkChange} placeholder="Enter a link to a PDF" />
-                               </div>
-                               <button className='btn btn-dark btn-me-md-2' >Submit</button>
-                       </form> 
-                            {/* <button className='btn btn-dark btn-me-md-2' onClick={() => handleSubmit(value)}>Submit</button> */}
-                            
-
+                              
+                           {currentDate<new Date(value.ExpiresAt)?<JobApply val= {value}/>:<Button variant="secondary" disabled>Job Expired</Button>}
+                     
 
                           </Card.Body>
                         </Card>
