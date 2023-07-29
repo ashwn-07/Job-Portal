@@ -56,10 +56,7 @@ router.post("/studendProfile", async(req,res)=>{
   
 })
 
-<<<<<<< Updated upstream
 
         
 
-=======
->>>>>>> Stashed changes
 module.exports=router;
