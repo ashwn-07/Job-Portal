@@ -23,7 +23,9 @@ const Login = () => {
                 console.log(response);
                 if (response.data.message == (" User Login successful")) {
                     const userId=response.data.data._id;
+                    const userName=response.data.data.name;
                     sessionStorage.setItem("userId",userId);
+                    sessionStorage.setItem("userName",userName);
                     if(jobid)
                     navigate(`/alumniview/#${jobid}`)
                     else
