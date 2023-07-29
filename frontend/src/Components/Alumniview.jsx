@@ -163,7 +163,7 @@ useEffect(()=>{
         <div className='m-3 pr-3'>
 
           {jobs.map((value, index) => (
-            <div className=''id={value._id} >
+            <div className='' id={value._id} >
               <br />
               <Row xs={1} md={1} lg={1} className="g-4  mr-5" >
 
