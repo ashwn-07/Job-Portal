@@ -7,8 +7,10 @@ import CardContent from "@mui/material/CardContent";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
 
+
 const Home = () => {
     const [jobs, setJobs] = useState([]);
+    
 
     useEffect(() => {
         axios.get("http://localhost:7000/api/viewjobs")
@@ -30,11 +32,11 @@ const Home = () => {
                 styleOverrides: {
                     root: {
                         fontSize: "22px",
-                        backgroundColor: "rgba(139, 158, 179, 0.50)",
+                        backgroundColor: "green",           //"rgba(139, 158, 179, 0.50)",
                         textTransform: "none",
-
-                        width: "140px",
-
+                        borderRadius:"15px",
+                        width: "145px",
+                        height:"43px",
                         padding: "0px",
                         boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.25)",
                         "&:hover": { backgroundColor: "rgba(0, 140, 0, 0.7)" },
@@ -81,7 +83,7 @@ const Home = () => {
                         marginTop={{ xs: "80px", sm: "60px", md: "150px" }}
                     >
                         <ThemeProvider theme={theme}>
-                            <Button variant="contained">
+                            <Button variant="contained" onClick={()=>sessionStorage.removeItem('JobID')} >
                                 {" "}
                                 <Link href="/login" sx={{ color: "white", textDecoration: "none" }}>
                                     Log In
@@ -160,13 +162,15 @@ const Home = () => {
                                             backgroundColor: "#2A8E6D",
                                             borderRadius: "12px",
                                             boxShadow: "0px 2px 17px 2px rgba(0, 0, 0, 0.25)",
+
                                         }}
+                                        onClick={()=>sessionStorage.setItem('JobID', value._id)}
                                     >
                                         <Link
                                             href="/login"
                                             sx={{ color: "white", textDecoration: "none" }}
                                         >
-                                            Login to Apply
+                                            Log in to Apply
                                         </Link>
                                     </Button>
                                 </CardActions>

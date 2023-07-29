@@ -13,6 +13,7 @@ import ResponseTable from "./Components/ResponseTable";
 import AdminMain from "./Components/AdminMain";
 import Alumniview from "./Components/Alumniview";
 import EmpViewresponse from "./Components/EmpViewresponse";
+
 function App() {
     return (
         <Routes>
@@ -26,6 +27,8 @@ function App() {
             <Route path="/responsetab" element={<ResponseTable/>}/>
             <Route path="/Alumniview" element={<Alumniview/>}/>
             <Route path="/empresview" element={<EmpViewresponse/>}/>
+            
+
         </Routes>
     );
 }

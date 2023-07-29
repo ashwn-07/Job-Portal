@@ -12,15 +12,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Overlay from 'react-bootstrap/Overlay';
 import { alignPropType } from 'react-bootstrap/esm/types';
 import JobApply from './JobApply';
+import { useLocation } from "react-router-dom";
+
 const Alumniview = () => {
   const [jobs, setJobs] = useState([]);
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
-  
   const [currentDate, setDate]   = useState(new Date())
+  const [load, setLoad] = useState(false)
+  const location = useLocation();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const inputholder = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
     console.log(data);
@@ -32,12 +35,34 @@ const Alumniview = () => {
      axios.get("http://localhost:7000/api/viewjobs").then((response) => {
       setDate(new Date())
       setJobs(response.data);
+      setLoad(true)
+
+
        
     })
     .catch((error)=>console.log(error))
   }, []);
 
+//navigate to the job that was clicked
+useEffect(()=>{
 
+
+  if(location.hash)
+
+  {
+    const cardId = location.hash.slice(1);
+
+   
+    const targetCard = document.getElementById(cardId);
+
+   
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
+
+},[load])
 
   const shareData = () => {
     axios.post('http://localhost:7000/api/studendProfile', data)
@@ -138,12 +163,12 @@ const Alumniview = () => {
         <div className='m-3 pr-3'>
 
           {jobs.map((value, index) => (
-            <div className=''>
+            <div className=''id={value._id} >
               <br />
               <Row xs={1} md={1} lg={1} className="g-4  mr-5" >
 
                 <Col key={index} className='m-5'>
-                  <Card style={{ backgroundColor: "lightgrey", marginRight: "5rem" }}>
+                  <Card style={{ backgroundColor: "lightgrey", marginRight: "5rem" }} >
 
                     <Card.Header> <h5> {value.companyname} </h5></Card.Header>
                     <Card.Body>
@@ -187,7 +212,7 @@ const Alumniview = () => {
                   </div>
           ))}
 
-
+           
         </div>
 
               </>
