@@ -25,10 +25,15 @@ const JobApply = (props) => {
            formData.append('responderid',userId);
            axios.post("http://localhost:7000/upload", formData)
            .then((response)=>{
+            if(response.data.message==="File Uploaded")
             //  console.log(currentDate)
             //  console.log(new Date(jobs[0].ExpiresAt))
-               alert(response.data.message);
+              { alert(response.data.message);
                window.location.reload(false);
+              }
+              else{
+                alert(response.data.message)
+              }
            })
            .catch((error)=>{
                 console.log( "the error is" , error)

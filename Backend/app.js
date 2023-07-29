@@ -57,7 +57,9 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
           
            }
            console.log(response);
-           const data = await JobModel.findByIdAndUpdate(jobId, {
+           let user= await JobModel.findOne({_id:jobId,'responses.responderid':responderid})
+           if(!user)
+           {const data = await JobModel.findByIdAndUpdate(jobId, {
            $push: {
               responses: response, // {responsetype:type , path:fpath}
               
@@ -65,6 +67,9 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
         
         })
         res.status(200).json({ message: "File Uploaded" });
+    }else{
+        res.status(200).json({ message: `alredy applied` });
+    }
     } catch (error) {
         console.log(error);
         res.status(400).json({ message: "cannot upload" });
