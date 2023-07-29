@@ -31,7 +31,7 @@ const HomeNav = () => {
     }
 
     const drawerWidth = 240;
-    const navItems = ["Home", "About", "Contact", "Employer Sign up", "Sign up"]; //empsignup //usersignup
+    const navItems = ["Home", "About", "Contact", "Employer Sign up", "Alumni Sign up"]; //empsignup //usersignup
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -123,11 +123,11 @@ const HomeNav = () => {
                                             backgroundColor: "#5FD68E",
                                             color: "white",
                                             borderRadius: "2rem",
-                                            width:"100px",
                                             textTransform:'none'
                                         }}
+                                            
                                     >
-                                         Sign Up
+                                        Alumni Sign Up
                                     </Button>
                                 </Homelinks>
 
