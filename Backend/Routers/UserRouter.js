@@ -36,6 +36,15 @@ router.post("/studendProfile", async(req,res)=>{
 })
 
 
-        
+//api for finding one particular student    
+router.post('/findalumni/:id',async(req,res)=>{
+    let id=req.params.id
+    let user=await UserModel.findOne({_id:id})
+    if(user){
+        res.status(200).json({message:"user exists"})
+   
+    }
+
+})    
 
 module.exports=router;

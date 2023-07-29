@@ -11,12 +11,20 @@ const { ObjectId } = require("bson");
 //api to add responses to joblistings
 router.put("/apply", async (req, res) => {
     try {
+       // let id=req.params.id
+      
         const jobid = req.body._id;
         const response = req.body.responses;
+        const userid =response.responderid
         // const type = response.responsetype;
         // const fpath = response.path
-        const data = await JobModel.findByIdAndUpdate(jobid, {
-            $push: {
+        
+        let user= await JobModel.findOne({_id:jobid,'responses.responderid':userid})
+        
+        if(!user){
+           
+       const data = await JobModel.findByIdAndUpdate(jobid, {
+          $push: {
                 responses: response, // {responsetype:type , path:fpath}
             },
         });
@@ -24,13 +32,17 @@ router.put("/apply", async (req, res) => {
         //console.log(data);
 
         res.status(200).json({ message: `Response Submitted Successfully!` });
-    } catch (err) {
+    }else{
+        res.status(200).json({ message: `alredy applied` });
+    } }
+  catch (err) {
         console.log(err);
 
         res.status(404).json({
             message: `Response not added, ERR ${err}`,
         });
     }
+
 });
 
 //api to fetch the nessecary job details to get responses for admin

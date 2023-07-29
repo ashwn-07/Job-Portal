@@ -167,12 +167,16 @@ const Alumniview = () => {
                       <Card.Text>
                       <h6>Location:</h6> {value.location}
                       </Card.Text>
+                      <Card.Text>
+                      <h6>LastDate:</h6> {value. ExpiresAt}
+                      </Card.Text>
                       <br />
                        <Card.Text> <h5>Apply Here</h5>
 
                       </Card.Text>
                               
                            {currentDate<new Date(value.ExpiresAt)?<JobApply val= {value}/>:<Button variant="secondary" disabled>Job Expired</Button>}
+                           
                      
 
                           </Card.Body>
