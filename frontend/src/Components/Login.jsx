@@ -5,6 +5,7 @@ const Login = () => {
     const navigate= useNavigate()
     const [input, setInputs] = useState({});
     const [status, setStatus] = useState(true)
+    const [jobid]= useState(sessionStorage.getItem('JobID'))
     
 
     const inputHolder = (e) => {
@@ -23,7 +24,10 @@ const Login = () => {
                 if (response.data.message == (" User Login successful")) {
                     const userId=response.data.data._id;
                     sessionStorage.setItem("userId",userId);
-                    navigate('/alumniview');
+                    if(jobid)
+                    navigate(`/alumniview/#${jobid}`)
+                    else
+                    navigate('/alumniview')
                 }
                 else {
                     if (response.data.message == (" Employer Login successful")) {

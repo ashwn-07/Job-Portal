@@ -72,7 +72,7 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
     }
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: "cannot upload" });
+        res.status(404).json({ message: "cannot upload" });
     }
 });
 

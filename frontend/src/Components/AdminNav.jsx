@@ -79,7 +79,7 @@ const AdminNav = () => {
                         <Box sx={{ display: { xs: "none", md: "block" } }}>
                             <Homelinks href="/addpost">Add Job</Homelinks>
                             <Homelinks href="/responsetab">Responses</Homelinks>
-                            <Homelinks href="">Verify Employee</Homelinks>
+                          
                             <Homelinks href="/">
                                 
                                 <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}} onClick={()=>{sessionStorage.removeItem ("ad.id")}}>Logout</Button>
