@@ -53,10 +53,12 @@ const JobApply = (props) => {
            console.log(respdata);
              axios.put("http://localhost:7000/api/apply", respdata)
                .then(response => {
-                  console.log(response);
+                if(response.data.message==="Response Submitted Successfully!")
+                 {console.log(response);
                   alert(response.data.message);
                   // window.location.reload(false);
-       
+                } 
+                else{alert(response.data.message)}
                })
        
              
