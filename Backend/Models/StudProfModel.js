@@ -1,14 +1,18 @@
 const mongoose=require('mongoose')
 const ProfileSchema= mongoose.Schema({
-    name:String,
-    stdId:String,
-    emailid:String,
-    phone:Number,
-    Qualification:String,
-    course:String,
-    batch:String,
-    placement:String,
-    company:String
+    alumniId:String,
+    prof:{
+        name:String,
+        stdId:String,
+        emailid:String,
+        phone:Number,
+        Qualification:String,
+        course:String,
+        batch:String,
+        placement:String,
+        company:String
+    }
+    
    
 })
 const ProfileData= mongoose.model("profData",ProfileSchema);
