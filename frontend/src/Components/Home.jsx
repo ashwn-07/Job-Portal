@@ -32,7 +32,7 @@ const Home = () => {
                 styleOverrides: {
                     root: {
                         fontSize: "22px",
-                        backgroundColor: "green",           //"rgba(139, 158, 179, 0.50)",
+                        backgroundColor:"rgba(139, 158, 179, 0.50)",
                         textTransform: "none",
                         borderRadius:"15px",
                         width: "145px",
