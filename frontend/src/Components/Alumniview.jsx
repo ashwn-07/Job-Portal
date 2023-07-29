@@ -16,6 +16,8 @@ const Alumniview = () => {
   const [jobs, setJobs] = useState([]);
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
+
+  const [userId] = useState(sessionStorage.getItem("userId"));
   
   const [currentDate, setDate]   = useState(new Date())
   const handleClose = () => setShow(false);
@@ -23,8 +25,12 @@ const Alumniview = () => {
 
   const inputholder = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
+   
     console.log(data);
+   
+    
   }
+  
   
 
   //getting the jobs 
@@ -40,8 +46,17 @@ const Alumniview = () => {
 
 
   const shareData = () => {
-    axios.post('http://localhost:7000/api/studendProfile', data)
+    
+    let newdata={
+      "data":data,
+      "alumniId":userId
+    }
+    console.log(newdata);
+    
+    axios.post('http://localhost:7000/api/studendProfile', newdata )
+    
       .then(response => {
+        
         alert(response.data.message);
         window.location.reload(false);
       })
@@ -61,7 +76,7 @@ const Alumniview = () => {
 
           <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title  >Create Your Profile</Offcanvas.Title>
+              <Offcanvas.Title  >Create Your Profile  </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <>
