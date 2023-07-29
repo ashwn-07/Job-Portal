@@ -22,13 +22,34 @@ router.post('/userSignUp', async(req,res)=>{
    
 })
 
-// student profile creation
+// student profile creation and updation
 router.post("/studendProfile", async(req,res)=>{
     try {
-        let prof=req.body;
-        let profdata= await StudProfModel(prof).save();
-        res.json({message:"profile saved successfully"});
-        console.log("profile saved successfully")
+        let prof=req.body.data;
+        let alid=req.body.alumniId;
+        let newdata={
+            "alumniId":alid,
+            prof,  
+        }
+
+        //  updation of profile
+        let alreadyProf= await StudProfModel.findOne({alumniId:alid});
+        if (alreadyProf) {
+            let updata = await StudProfModel.findOneAndUpdate(
+                { "alumniId": alid },
+                { $set: { "prof": prof }},
+            );
+            updata.save()
+        res.json({message:"Profile successfully updated"})
+
+        // creation of profile
+        } else {
+            console.log(newdata);
+            let profdata= await StudProfModel(newdata).save();
+            res.json({message:"profile saved successfully"});
+            console.log("profile saved successfully")
+        }
+        
     } catch (error) {
         res.json({message:"failed to saved "});
     }  
