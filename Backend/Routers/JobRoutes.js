@@ -83,5 +83,15 @@ router.delete("/deletejob/:id", async (req, res) => {
         console.log(error);
     }
 });
+//api for finding one particular student  in joblisting  
+router.post('/findinresponse/:id',async(req,res)=>{
+    let id=req.params.id
+    let user=await UserModel.findOne({_id:id})
+    if(user){
+        res.status(200).json({message:"user exists"})
+   
+    }
+
+})    
 
 module.exports = router;
