@@ -12,12 +12,13 @@ const Empview = () => {
     const[singlevalue,setSingleValue]=useState([]);
     const [userID,setUserid]=useState(sessionStorage.getItem("LogId"))
     const [adid] = useState(sessionStorage.getItem("ad.id"))
+    const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
     
     const[adminview, setAdminview] = useState(false)
     console.log(userID)
 
     const fetchAdminposts =()=>{
-        axios.get("http://localhost:7000/api/viewjobs")
+        axios.get("http://localhost:7000/api/viewjobs/"+token)
 
         .then((response) => setPost(response.data))
 
@@ -25,7 +26,7 @@ const Empview = () => {
     }
 
     const fetchPostdata=(posterid)=>{
-        axios.get("http://localhost:7000/api/viewjobs/"+posterid)
+        axios.get("http://localhost:7000/api/viewjobs/"+posterid+"/"+token)
         .then((response)=>{
             console.log(response.data);
             setPost(response.data)

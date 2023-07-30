@@ -22,7 +22,7 @@ router.post('/login',async(req,res)=>{
                  let admin=await AdminModel.findOne({username:username})
                 if (!admin) {
                     
-                    res.jsob({message:"No such Admin"})
+                    res.jsob({message:"No such User"})
 
                 } else {
                     if(admin.password==password){
