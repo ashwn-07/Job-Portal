@@ -8,6 +8,8 @@ const UserModel=require('../Models/UserModel');
 const EmpModel=require('../Models/EmpModel');
 const AdminModel=require('../Models/Adminmodel');
 
+const jwt=require("jsonwebtoken")
+
 router.post('/login',async(req,res)=>{
     let password=req.body.password;
     let username=req.body.username;
@@ -20,37 +22,58 @@ router.post('/login',async(req,res)=>{
                  let admin=await AdminModel.findOne({username:username})
                 if (!admin) {
                     
-                    res.jsob({message:"un-authorised login"})
+                    res.jsob({message:"No such Admin"})
 
                 } else {
                     if(admin.password==password){
-                        res.json({message:" Admin Login successful",data:admin})  
+                        jwt.sign({email:username,id:admin._id},"ictjp",{expiresIn:'1d'},
+            (error,token)=>{
+                if (error) {
+                    res.json({message:"Token not generated"})
+                } else {
+                    res.json({message:"Admin Login suceesfull",token:token,data:admin})
+                }
+            })
                     }
 
                     else{
                         console.log("password");
-                        res.jsob({message:"un-authorised login"})
+                        res.jsob({message:"LoginFailed"})
                     }
                 }  
             } else {
                 console.log("empname");
                 if(emp.password==password){
-                    res.json({message:" Employer Login successful",data:emp})  
+                    jwt.sign({email:username,id:emp._id},"ictjp",{expiresIn:'1d'},
+                    (error,token)=>{
+                        if (error) {
+                            res.json({message:"Token not generated"})
+                        } else {
+                            res.json({message:"Employer Login successful",token:token,data:emp})
+                        }
+                    })
                 }
 
                 else{
-                    res.json({message:"un-authorised login"}) 
+                    res.json({message:"Login Failed"}) 
                 } 
             }
             
         } else {
             console.log("usernme");
             if(user.password==password){
-                res.json({message:" User Login successful",data:user})
+                jwt.sign({email:username,id:user._id},"ictjp",{expiresIn:'1d'},
+                (error,token)=>{
+                    if (error) {
+                        res.json({message:"Token not generated"})
+                    } else {
+                        res.json({message:" Alumni Login suceesfull",token:token,data:user})
+                    }
+                })
             }
             
             else{
-                res.json({message:"un-authorised login"}) 
+                res.json({message:"LoginFailed"}) 
             } 
         }
     } catch (error) {

@@ -6,6 +6,7 @@ const EmpModel=require('../Models/EmpModel');
 
 
 
+
 //post....empSignup api
 router.post("/empsignup",async(req,res)=>{
     try{

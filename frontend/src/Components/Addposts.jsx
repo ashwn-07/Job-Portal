@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Addposts = (props) => {
   const[inputs,setInputs]=useState(props.data);
   const navigate=useNavigate();
+  const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
   const [userID,setUserid]=useState(sessionStorage.getItem("LogId"))
   const inputHandler=(e)=>{
     console.log("onchange");
@@ -18,6 +19,7 @@ const Addposts = (props) => {
 
   const submitHandler = () =>{
     let data={
+        token:token,
         posterid:userID,
         companyname:inputs.companyname,
         jobtitle:inputs.jobtitle,
@@ -39,6 +41,9 @@ const Addposts = (props) => {
       if(response.data.message==="Job added sucessfully!!"){
         alert(response.data.message)
         navigate('/empview')
+      }
+      else{
+        alert(response.data.message)
       }
     })
     .catch(err=>console.log(err));

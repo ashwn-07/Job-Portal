@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt=require("jsonwebtoken")
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -10,8 +11,15 @@ const JobModel = require("../Models/JoblistingModel");
 router.post("/addjob", async (req, res) => {
     try {
         const job = req.body;
-        await JobModel(job).save();
-        res.status(200).json({ message: "Job added sucessfully!!" });
+        jwt.verify(req.body.token,"ictjp",(error,decoded)=>{
+            if (decoded && decoded.email) {
+                JobModel(job).save();
+        res.json({message:"Job added sucessfully!!"})  
+            } else {
+                res.status(200).json({ message: "unauthorised user" })
+            }
+        })
+        
     } catch (err) {
         res.status(404).json({ message: `Cannot add job ERR`, error:err  });
     }

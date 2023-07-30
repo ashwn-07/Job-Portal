@@ -21,9 +21,13 @@ const Login = () => {
                
                 
                 console.log(response);
-                if (response.data.message == (" User Login successful")) {
+                if (response.data.message == ("Alumni Login suceesfull")) {
                     const userId=response.data.data._id;
                     const userName=response.data.data.name;
+
+                    const token=response.data.token;
+                    sessionStorage.setItem("usertoken",token);
+        
                     sessionStorage.setItem("userId",userId);
                     sessionStorage.setItem("userName",userName);
                     if(jobid)
@@ -32,17 +36,25 @@ const Login = () => {
                     navigate('/alumniview')
                 }
                 else {
-                    if (response.data.message == (" Employer Login successful")) {
+                    if (response.data.message == ("Employer Login successful")) {
                         const LogId=response.data.data._id;
+
+                        const token=response.data.token;
+                        sessionStorage.setItem("usertoken",token);
+
                         console.log(LogId);
                         sessionStorage.setItem("LogId",LogId);
                         // alert("employer");
                         navigate('/empview');
 
                     } else {
-                        if (response.data.message == (" Admin Login successful")) {
+                        if (response.data.message == ("Admin Login suceesfull")) {
                             const admid = response.data.data._id;
                             sessionStorage.setItem("ad.id", admid);
+
+                            const token=response.data.token;
+                            sessionStorage.setItem("usertoken",token);
+                            
                             console.log(admid)
                             console.log(response.data)
                             alert("admin")
