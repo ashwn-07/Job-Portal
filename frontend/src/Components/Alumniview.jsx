@@ -13,6 +13,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import { alignPropType } from 'react-bootstrap/esm/types';
 import JobApply from './JobApply';
 import { useLocation } from "react-router-dom";
+import HeaderAlumni from './HeaderAlumni';
 
 const Alumniview = () => {
   const [jobs, setJobs] = useState([]);
@@ -20,6 +21,7 @@ const Alumniview = () => {
   const [show, setShow] = useState(false);
 
   const [userId] = useState(sessionStorage.getItem("userId"));
+  const [userName]= useState(sessionStorage.getItem("userName"));
   
   const [currentDate, setDate]   = useState(new Date())
   const [load, setLoad] = useState(false)
@@ -95,7 +97,7 @@ useEffect(()=>{
     <div style={{ backgroundColor: "#214144" }} >
       <>
         <div >
-          <HomeNav />
+          <HeaderAlumni/>
           <Button variant="outline-info" onClick={handleShow} className=' mt-5' >
             Create  Profile
           </Button>
