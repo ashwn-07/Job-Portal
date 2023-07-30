@@ -6,15 +6,30 @@ router.use(express.json());
 
 const UserModel=require('../Models/UserModel');
 const StudProfModel=require('../Models/StudProfModel');
-
+const AlumniregModel=require('../Models/AlumniregModel');
 // User Sign Up
 router.post('/userSignUp', async(req,res)=>{
     try {
         let user= req.body;
-        let newUser= await UserModel(user);
-        newUser.save();
-        res.json({message:"user saved successfully"});
-        console.log("saved");
+        let regnum=req.body.regnum;
+        let alumni = await AlumniregModel.findOne({regnum:regnum});
+        if (alumni) {
+            let alrdyReg = await UserModel.findOne({regnum:regnum});
+            if (alrdyReg) {
+                console.log("you are alredy registerd")
+                res.json({message:"Already registered"});
+            } else {
+                let newUser= await UserModel(user);
+                newUser.save();
+                res.json({message:"user saved successfully"});
+                console.log("saved");
+            }
+      //THEN NOT AN ALUMNI  
+        } else {
+            console.log("not an alumni");
+            res.json({message:"Sorry!!! Not a Student of ICTAK, Kerala"});
+        }
+        
     } catch (error) {
         res.json(error);
         console.log(error);

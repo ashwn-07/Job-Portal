@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const RegisterUser = () => {
+    const navigate= useNavigate();
 
     const[inputs,setInputs]=useState({});
 
@@ -18,10 +20,20 @@ const RegisterUser = () => {
         .then((response)=>{
             console.log(response)
             if(response.data.message==="user saved successfully"){
-                alert(response.data.message)
+                alert(response.data.message);
+                navigate('/');
             }
+            else if(response.data.message==="Already registered") {
+                alert(response.data.message);
+                navigate('/login');
+            } 
+            else {
+                alert(response.data.message);
+                window.location.reload(false);
+            }
+
         })
-        .catch(error=>console.log(error))
+        
     }
   return (
     <div>
@@ -32,6 +44,10 @@ const RegisterUser = () => {
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                             <label htmlFor="" className="form-label">Name</label>
                             <input type="text" className="form-control"name="name" onChange={inputHandler}/>
+                        </div>
+                        <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
+                            <label htmlFor="" className="form-label">Register Number</label>
+                            <input type="text" className="form-control"name="regnum" onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                         <label htmlFor="" className="form-label">EmailId</label>
