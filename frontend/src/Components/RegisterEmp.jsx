@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterEmp = () => {
     const[inputs,setInputs]=useState({});
+    const navigate = useNavigate()
 
     const inputHandler=(e)=>{
         console.log("onchange");
@@ -16,9 +18,20 @@ const RegisterEmp = () => {
         axios.post("http://localhost:7000/api/empsignup",inputs)
         .then((response)=>{
             console.log(response)
-            if(response.data.message==="Added Emp details Sucessfully"){
+            if(response.data.message==="Added Emp details Successfully"){
+                alert(response.data.message)
+                navigate('/login')
+            }
+            else if(response.data.message==="Employer Already registered!"){
+                alert(response.data.message)
+                window.location.reload(false)
+            }
+            else
+            {
                 alert(response.data.message)
             }
+           
+
         })
         .catch(error=>console.log(error))
     }
@@ -37,17 +50,22 @@ const RegisterEmp = () => {
                             <input type="text" className="form-control" name="emailid" onChange={inputHandler} />
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
+                        <label htmlFor="" className="form-label">EmployerCode</label>
+                            <input type="text" className="form-control" name="empregnum" onChange={inputHandler} />
+                        </div>
+                        <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                         <label htmlFor="" className="form-label">Phone</label>
                             <input type="text" className="form-control" name="phone" onChange={inputHandler} />
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">Designation</label>
-                            <input type="text" className="form-control" name="designation" onChange={inputHandler}/>
+                        <label htmlFor="" className="form-label">CompanyName</label>
+                            <input type="text" className="form-control" name="CompanyName" onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">CompanyName</label>
-                            <input type="text" className="form-control" name="companyName" onChange={inputHandler} />
+                        <label htmlFor="" className="form-label">Designation</label>
+                            <input type="text" className="form-control" name="designation" onChange={inputHandler} />
                         </div>
+                      
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                         <label htmlFor="" className="form-label">Location</label>
                             <input type="text" className="form-control" name="location" onChange={inputHandler} />
