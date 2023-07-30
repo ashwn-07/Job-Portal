@@ -1,8 +1,7 @@
 const mongoose=require('mongoose')
 const AlumniregSchema=mongoose.Schema({
-    regnum:String,
-    emailid:String
-    
+    regnum:String
+ 
 })
-const AlumniregData=mongoose.model('alumniregdetail',);
+const AlumniregData=mongoose.model('alumniregdetail', AlumniregSchema);
 module.exports=AlumniregData;
