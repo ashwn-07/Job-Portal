@@ -21,7 +21,7 @@ const Login = () => {
                
                 
                 console.log(response);
-                if (response.data.message == ("Alumni Login suceesfull")) {
+                if (response.data.message == (" Alumni Login suceesfull")) {
                     const userId=response.data.data._id;
                     const userName=response.data.data.name;
 
