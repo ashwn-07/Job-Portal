@@ -16,12 +16,15 @@ const Login = () => {
 
     const shareData = (e) => {
         axios.post('http://localhost:7000/api/login', input)
-            .then(response => {
+            .then((response) => {
                 
                
                 
                 console.log(response);
-                if (response.data.message == (" Alumni Login suceesfull")) {
+                console.log(response.data.message)
+                if (response.data.message ==="Alumni Login suceesfull") {
+
+                    
                     const userId=response.data.data._id;
                     const userName=response.data.data.name;
 
