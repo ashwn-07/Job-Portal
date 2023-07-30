@@ -62,12 +62,13 @@ router.post('/login',async(req,res)=>{
         } else {
             console.log("usernme");
             if(user.password==password){
-                jwt.sign({email:username,id:user._id},"ictjp",{expiresIn:'1d'},
+                jwt.sign({email:username,id:user._id},"ictuser",{expiresIn:'1d'},
                 (error,token)=>{
+                    
                     if (error) {
                         res.json({message:"Token not generated"})
                     } else {
-                        res.json({message:" Alumni Login suceesfull",token:token,data:user})
+                        res.json({message:"Alumni Login suceesfull",token:token,data:user})
                     }
                 })
             }
