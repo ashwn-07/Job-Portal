@@ -24,6 +24,7 @@ const Alumniview = () => {
   const [userName]= useState(sessionStorage.getItem("userName"));
   const [emailId]= useState(sessionStorage.getItem("emailId"));
   
+  
   const [currentDate, setDate]   = useState(new Date())
   const [load, setLoad] = useState(false)
   const location = useLocation();
@@ -79,7 +80,8 @@ useEffect(()=>{
     let newdata={
       "data":data,
       "alumniId":userId,
-      "emailId":emailId
+      "emailId":emailId,
+      "userName":userName
     }
     console.log(newdata);
     
