@@ -79,6 +79,7 @@ const ResponseView = (props) => {
 
             .catch((error) => console.log(error));
     };
+
     //tablefunctions
     function TablePaginationActions(props) {
         const theme = useTheme();
@@ -197,6 +198,7 @@ const ResponseView = (props) => {
                                            {(row.responsetype==="pdf")?<DownloadButton  path={row.path} resid={row._id}/>:<LinkViewButton path={row.path}/>}
                                         
                                     </TableCell>
+                                    {/* verifictaion table cell */}
                                     <TableCell align="center" sx={{display:{display}}}>
                                         <Button
                                             variant="contained"

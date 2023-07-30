@@ -74,7 +74,7 @@ const AdminNav = () => {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
                         >
-                            ICTAK Admin
+                            ICTAK Alumni Job Portal
                         </Typography>
                         <Box sx={{ display: { xs: "none", md: "block" } }}>
                             <Homelinks href="/addpost">Add Job</Homelinks>
