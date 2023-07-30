@@ -22,6 +22,8 @@ const Alumniview = () => {
 
   const [userId] = useState(sessionStorage.getItem("userId"));
   const [userName]= useState(sessionStorage.getItem("userName"));
+  const [emailId]= useState(sessionStorage.getItem("emailId"));
+  
   
   const [currentDate, setDate]   = useState(new Date())
   const [load, setLoad] = useState(false)
@@ -77,7 +79,9 @@ useEffect(()=>{
     
     let newdata={
       "data":data,
-      "alumniId":userId
+      "alumniId":userId,
+      "emailId":emailId,
+      "userName":userName
     }
     console.log(newdata);
     

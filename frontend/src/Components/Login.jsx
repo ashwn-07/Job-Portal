@@ -28,8 +28,10 @@ const Login = () => {
                     const token=response.data.token;
                     sessionStorage.setItem("usertoken",token);
         
+                    const emailId=response.data.data.emailid;
                     sessionStorage.setItem("userId",userId);
                     sessionStorage.setItem("userName",userName);
+                    sessionStorage.setItem("emailId",emailId);
                     if(jobid)
                     navigate(`/alumniview/#${jobid}`)
                     else
@@ -54,7 +56,7 @@ const Login = () => {
 
                             const token=response.data.token;
                             sessionStorage.setItem("usertoken",token);
-                            
+
                             console.log(admid)
                             console.log(response.data)
                             alert("admin")
