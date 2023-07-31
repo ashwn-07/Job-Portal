@@ -49,7 +49,7 @@ const Addposts = (props) => {
     .catch(err=>console.log(err));
   }
 if(props.method==="put"){
-    axios.put("http://localhost:7000/api/update/"+inputs._id,inputs)
+    axios.put("http://localhost:7000/api/update/"+inputs._id+"/"+token,inputs)
     .then((response)=>{
         if(response.data.message==="Job Details Updated Successfully"){
             alert(response.data.message)

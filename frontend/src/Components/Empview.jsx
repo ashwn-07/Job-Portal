@@ -34,7 +34,7 @@ const Empview = () => {
     }
     
     const deletePost=(id)=>{
-        axios.delete("http://localhost:7000/api/deletejob/"+id)
+        axios.delete("http://localhost:7000/api/deletejob/"+id+"/"+token)
         .then((response)=>{
             if(response.data.message==="Job deleted Successfully"){
                 alert(response.data.message);
