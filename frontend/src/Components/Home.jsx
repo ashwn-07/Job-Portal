@@ -7,16 +7,14 @@ import CardContent from "@mui/material/CardContent";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
 
-
 const Home = () => {
     const [jobs, setJobs] = useState([]);
-    
 
     useEffect(() => {
-        axios.get("http://localhost:7000/api/viewjobs")
+        axios
+            .get("http://localhost:7000/api/viewjobs")
             .then((response) => {
                 setJobs(response.data);
-              
             })
 
             .catch((error) => {
@@ -24,22 +22,20 @@ const Home = () => {
             });
     }, []);
 
-  
-
     const theme = createTheme({
         components: {
             MuiButton: {
                 styleOverrides: {
                     root: {
                         fontSize: "22px",
-                        backgroundColor:"rgba(139, 158, 179, 0.50)",
+                        backgroundColor: "rgba(139, 158, 179, 0.50)",
                         textTransform: "none",
-                        borderRadius:"15px",
+                        borderRadius: "15px",
                         width: "145px",
-                        height:"43px",
+                        height: "43px",
                         padding: "0px",
-                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.25)",
-                        "&:hover": { backgroundColor: "rgba(0, 140, 0, 0.7)" },
+                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0)",
+                        "&:hover": { backgroundColor: "rgba(0, 140, 0, 0.8)",boxShadow:"0px 8px 16px rgba(0, 0, 0, 0)" },
                     },
                 },
             },
@@ -83,12 +79,17 @@ const Home = () => {
                         marginTop={{ xs: "80px", sm: "60px", md: "150px" }}
                     >
                         <ThemeProvider theme={theme}>
-                            <Button variant="contained" onClick={()=>sessionStorage.removeItem('JobID')} >
+                          
                                 {" "}
                                 <Link href="/login" sx={{ color: "white", textDecoration: "none" }}>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => sessionStorage.removeItem("JobID")}
+                                >  
                                     Log In
+                                   
+                                </Button>
                                 </Link>
-                            </Button>
                         </ThemeProvider>
                     </Box>
                 </Box>
@@ -161,14 +162,14 @@ const Home = () => {
                                             marginRight: "20px",
                                             backgroundColor: "#2A8E6D",
                                             borderRadius: "12px",
-                                            boxShadow: "0px 2px 17px 2px rgba(0, 0, 0, 0.25)",
-
+                                            boxShadow:   "0px 2px 17px 2px rgba(0, 0, 0, 0.1)",
+                                            "&:hover": { backgroundColor: "rgba(61,180,140, 1)", boxShadow:"none"}
                                         }}
-                                        onClick={()=>sessionStorage.setItem('JobID', value._id)}
+                                        onClick={() => sessionStorage.setItem("JobID", value._id)}
                                     >
                                         <Link
                                             href="/login"
-                                            sx={{ color: "white", textDecoration: "none" }}
+                                            sx={{ color: "white", textDecoration: "none",   }}
                                         >
                                             Log in to Apply
                                         </Link>

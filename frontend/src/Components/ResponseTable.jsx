@@ -31,6 +31,7 @@ const ResponseTable = () => {
 
 
     const getdetails = () => {
+        //api to get all the nessecary job details to get its responses
         axios.get("http://localhost:7000/api/getresponses")
             .then((response) =>setData(response.data.data))
             .catch((err) =>console.log(err))
@@ -38,6 +39,7 @@ const ResponseTable = () => {
     };
 
  const getdetailsemp = ()=>{
+   // api to get all the nessecary job details posted by an emp, to get its VERIFIED responses
     axios.get(`http://localhost:7000/api/viewjobs/${empID}`)
     .then((response)=>setData(response.data))
     .catch((error)=>console.log(error))

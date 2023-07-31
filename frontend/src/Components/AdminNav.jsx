@@ -58,7 +58,7 @@ const AdminNav = () => {
         <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
-                <AppBar component="nav" sx={{ backgroundColor: "#131C2D" }}>
+                <AppBar component="nav" sx={{ backgroundColor: "#214154" }}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -82,7 +82,7 @@ const AdminNav = () => {
                           
                             <Homelinks href="/">
                                 
-                                <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}} onClick={()=>{sessionStorage.removeItem ("ad.id")}}>Logout</Button>
+                                <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}} onClick={()=>{sessionStorage.removeItem ("ad.id")}}>Log out</Button>
                             </Homelinks>
                         </Box>
                     </Toolbar>
