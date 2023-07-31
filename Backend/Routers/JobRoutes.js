@@ -25,29 +25,47 @@ router.post("/addjob", async (req, res) => {
     }
 });
 //api for getting all the jobs
-router.get("/viewjobs", async (req, res) => {
+router.get("/viewjobs/:token", async (req, res) => {
+    const data = await JobModel.find({}, {responses:0});
+    
     try {
-        const data = await JobModel.find({}, {responses:0});
-        res.status(200).send(data);
+        jwt.verify(req.params.token,"ictjp",(error,decoded)=>{
+            if(decoded && decoded.email){
+
+                res.json(data)
+            }
+            else{
+                res.json({message:"Unauthorised user"},decoded,decoded.email)
+            }
+        })
+        
     } catch (err) {
         res.status(404).json({ mesaage: `Cannot get Jobs ${err}` });
     }
 });
 //api for getting all jobs posted by a particular employee
-router.get("/viewjobs/:id",async(req,res)=>{
+router.get("/viewjobs/:id/:token",async(req,res)=>{
+    const posterid=req.params.id;
+    console.log("posterid"+posterid)
+    const data=await JobModel.find();
     try {
-        const posterid=req.params.id;
-        console.log("posterid"+posterid)
-        const data=await JobModel.find();
-        
-        const emposts=[]
-    data.forEach(element => {
+        jwt.verify(req.params.token,"ictjp",(error,decoded)=>{
+            if(decoded && decoded.email){
+                const emposts=[]
+        data.forEach(element => {
         if(element.posterid==posterid){
             emposts.push(element)
         }
-        
+       
      });
     res.send(emposts);
+          
+            }
+            else{
+                res.json({message:"Unauthorised user"})
+            }
+        })
+      
     } catch (err) {
         console.log(err)
     }
