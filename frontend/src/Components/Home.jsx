@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
+import Footer from "./Footer";
 
 const Home = () => {
     const [jobs, setJobs] = useState([]);
@@ -180,6 +181,7 @@ const Home = () => {
                     ))}
                 </Grid>
             </Box>
+            <Footer/>
         </Box>
     );
 };
