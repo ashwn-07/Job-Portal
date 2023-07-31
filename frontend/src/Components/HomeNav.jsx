@@ -15,7 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ictaklogo from "../Img/LOGO_ICTAK-ENG-ALT-White-Text.png";
 import { Button, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 const HomeNav = () => {
     function ElevationScroll(props) {
         const { children } = props;
@@ -103,7 +102,7 @@ const HomeNav = () => {
                             </Box>
                             <Box columnGap="2px" sx={{ display: { xs: "none", md: "block" } }}>
                                 <Homelinks href="/">Home</Homelinks>
-                                <Homelinks href="/aboutus">About</Homelinks>
+                                <Homelinks href="/about-us">About Us</Homelinks>
                                 <Homelinks href="/">Contact Us</Homelinks>
                                 <Homelinks href="/empsignup">
                                     <Button
