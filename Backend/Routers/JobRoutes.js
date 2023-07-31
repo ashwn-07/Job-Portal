@@ -24,6 +24,16 @@ router.post("/addjob", async (req, res) => {
         res.status(404).json({ message: `Cannot add job ERR`, error:err  });
     }
 });
+//api for getting alljobs at homepage
+router.get("/viewjobs",async(req,res)=>{
+    try {
+        const data = await JobModel.find({}, {responses:0});
+        res.json(data)
+    } catch (error) {
+       res.json({Message:"error",error}) 
+    }
+})
+
 //api for getting all the jobs
 router.get("/viewjobs/:token", async (req, res) => {
     const data = await JobModel.find({}, {responses:0});
@@ -72,25 +82,35 @@ router.get("/viewjobs/:id/:token",async(req,res)=>{
     
 })
 //api for updating the jobs
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id/:token", (req, res) => {
+    let id=req.params.id;
+    let token=req.params.token
+    const newData = req.body;
     try {
-        let id=req.params.id;
+        jwt.verify(token,"ictjp",(error,decoded)=>{
+            if (decoded && decoded.email) {
+                const data =  JobModel.findByIdAndUpdate(id, {
+                    $set: {
+                        companyname: newData.companyname,
+                        jobrequirements: newData.jobrequirements,
+                        jobtitle: newData.jobtitle,
+                        jobdesc: newData.jobdesc,
+                        eligibility:newData.eligibility,
+                        experience: newData.experience,
+                        salary: newData.salary,
+                        location: newData.location,
+                        ExpiresAt: newData.ExpiresAt
+                    },
+                }).exec();
+                res.status(200).json({ message: "Job Details Updated Successfully" });
+
+            }
+            else {
+                res.json({message:"unauthorised user"})
+            }
+        })      
+      
         
-        const newData = req.body;
-        const data = await JobModel.findByIdAndUpdate(id, {
-            $set: {
-                companyname: newData.companyname,
-                jobrequirements: newData.jobrequirements,
-                jobtitle: newData.jobtitle,
-                jobdesc: newData.jobdesc,
-                eligibility:newData.eligibility,
-                experience: newData.experience,
-                salary: newData.salary,
-                location: newData.location,
-                ExpiresAt: newData.ExpiresAt
-            },
-        });
-        res.status(200).json({ message: "Job Details Updated Successfully" });
     } catch (error) {
         res.status(404).json({ message: "Error!! Update not Successfull", err:error });
         
@@ -98,12 +118,18 @@ router.put("/update/:id", async (req, res) => {
 });
 //api for deleting the jobs
 
-router.delete("/deletejob/:id", async (req, res) => {
+router.delete("/deletejob/:id/:token",  (req, res) => {
     try {
-        jobid = req.params.id;
+       let jobid = req.params.id;
+       let token=req.params.token
         // console.log(pos)
-        const data = await JobModel.findOneAndDelete({ _id: jobid });
+        jwt.verify(token,"ictjp",(error,decoded)=>{
+            if (decoded && decoded.email) {
+        const data =  JobModel.findOneAndDelete({ _id: jobid }).exec();
         res.status(200).send({ message: "Job deleted Successfully" });
+            }
+            else{res.json({messagfe:"Unauthorised user"})}
+        })
     } catch (error) {
         res.status(404).json({ message: "Error!! Deletion not completed" });
         console.log(error);
