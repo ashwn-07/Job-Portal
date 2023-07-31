@@ -103,7 +103,7 @@ const HomeNav = () => {
                             </Box>
                             <Box columnGap="2px" sx={{ display: { xs: "none", md: "block" } }}>
                                 <Homelinks href="/">Home</Homelinks>
-                                <Homelinks href="/">About</Homelinks>
+                                <Homelinks href="/aboutus">About</Homelinks>
                                 <Homelinks href="/">Contact Us</Homelinks>
                                 <Homelinks href="/empsignup">
                                     <Button
