@@ -33,7 +33,7 @@ router.put("/apply", async (req, res) => {
 
         res.status(200).json({ message: `Response Submitted Successfully!` });
     }else{
-        res.status(200).json({ message: `alredy applied` });
+        res.status(200).json({ message: `already applied` });
     } }
   catch (err) {
         console.log(err);

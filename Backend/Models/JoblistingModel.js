@@ -17,6 +17,16 @@ const JobSchema = new mongoose.Schema({
                     type: String,
                     required: false,
                 },
+
+                username:{
+                    type:String,
+                    required: false
+                },
+                emailid:{
+                    type:String,
+                    required: false
+                },
+
                 responsetype: {
                     type: String,
                     enum: ["link", "pdf"],

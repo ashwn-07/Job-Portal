@@ -168,8 +168,10 @@ const ResponseView = (props) => {
                     <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#4F709C" }}>
-                                <TableCell sx={{ color: "white" }}>Name</TableCell>
+                                <TableCell sx={{ color: "white" }}>Applicant Name</TableCell>
+                                <TableCell sx={{ color: "white" }}>Email ID</TableCell>
                                 <TableCell sx={{ color: "white" }}>Response Type</TableCell>
+                                
                                 <TableCell sx={{ color: "white" }} align="center">
                                     Action
                                 </TableCell>
@@ -187,8 +189,11 @@ const ResponseView = (props) => {
                                 : responses
                             ).map((row, index) => (
                                 <TableRow key={index}>
+                                    <TableCell sx={{ fontWeight: "500", textTransform:"uppercase" }} scope="">
+                                        {row.username}
+                                    </TableCell>
                                     <TableCell sx={{ fontWeight: "500" }} scope="">
-                                        {row.responderid}
+                                        {row.emailid}
                                     </TableCell>
                                     <TableCell sx={{ fontWeight: "500" }} align="left">
                                         {row.responsetype}

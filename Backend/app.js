@@ -46,6 +46,8 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
         console.log(req.file);
         const responderid=req.body.responderid;
         const path=req.file.filename;
+        const username= req.body.username;
+        const emailid= req.body.emailid;
         const posterid=req.body.posterid
         const jobId=req.body.jobId;
         // console.log(req.body.posterid);
@@ -53,7 +55,9 @@ app.post("/upload", upload.single("resume"), async  (req, res) => {
            
                      responsetype: "pdf",
                      path: path,
-                     responderid: responderid
+                     responderid: responderid,
+                     username:username,
+                     emailid:emailid
           
            }
            console.log(response);
