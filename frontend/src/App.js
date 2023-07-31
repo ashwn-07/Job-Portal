@@ -8,6 +8,7 @@ import Addposts from "./Components/Addposts";
 import Main from "./Components/Main";
 import ResponseTable from "./Components/ResponseTable";
 import Alumniview from "./Components/Alumniview";
+import Aboutus from "./Components/Aboutus";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
             <Route path="/responsetab" element={<ResponseTable/>}/>
             <Route path="/Alumniview" element={<Alumniview/>}/>
             <Route path="/empresview" element={<ResponseTable/>}/>
-            
+            <Route path="/aboutus" element={<Aboutus/>}/>
 
         </Routes>
     );
