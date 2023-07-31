@@ -27,10 +27,11 @@ const ResponseTable = () => {
     const [getres, setGetres] = useState(false)
     const [adid] = useState(sessionStorage.getItem("ad.id"))
     const [empID]=useState(sessionStorage.getItem("LogId"))
-
+    const [token]= useState(sessionStorage.getItem('usertoken'))
 
 
     const getdetails = () => {
+        //api to get all the nessecary job details to get its responses
         axios.get("http://localhost:7000/api/getresponses")
             .then((response) =>setData(response.data.data))
             .catch((err) =>console.log(err))
@@ -38,7 +39,8 @@ const ResponseTable = () => {
     };
 
  const getdetailsemp = ()=>{
-    axios.get(`http://localhost:7000/api/viewjobs/${empID}`)
+   // api to get all the nessecary job details posted by an emp, to get its VERIFIED responses
+    axios.get(`http://localhost:7000/api/viewjobs/${empID}/${token}`)
     .then((response)=>setData(response.data))
     .catch((error)=>console.log(error))
  }

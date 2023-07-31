@@ -25,7 +25,7 @@ const Alumniview = () => {
   const [emailId]= useState(sessionStorage.getItem("emailId"));
   
   
-  const [currentDate, setDate]   = useState(new Date())
+  const [currentDate, setCurrentDate]   = useState(new Date())
   const [load, setLoad] = useState(false)
   const location = useLocation();
 
@@ -44,7 +44,7 @@ const Alumniview = () => {
   //getting the jobs 
   useEffect( () => {
      axios.get("http://localhost:7000/api/viewjobs").then((response) => {
-      setDate(new Date())
+      setCurrentDate(new Date())
       setJobs(response.data);
       setLoad(true)
 
@@ -215,7 +215,7 @@ useEffect(()=>{
                       <h6>Location:</h6> {value.location}
                       </Card.Text>
                       <Card.Text>
-                      <h6>LastDate:</h6> {value. ExpiresAt}
+                      <h6>LastDate:</h6> {value.ExpiresAt}
                       </Card.Text>
                       <br />
                        <Card.Text> <h5>Apply Here</h5>

@@ -4,6 +4,8 @@ const JobApply = (props) => {
     const [file, setFile] = useState(null);
     const [link, setLink] = useState('');
     const [userId] = useState(sessionStorage.getItem("userId"));
+    const [userName]= useState(sessionStorage.getItem("userName"));
+    const [emailId]= useState(sessionStorage.getItem("emailId"));
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -21,8 +23,10 @@ const JobApply = (props) => {
            const formData = new FormData();
            formData.append('resume', file);
            formData.append('jobId', value._id);
-           formData.append('posterid',value.posterid);
            formData.append('responderid',userId);
+           formData.append('username', userName);
+           formData.append('emailid', emailId);
+           
            axios.post("http://localhost:7000/upload", formData)
            .then((response)=>{
             if(response.data.message==="File Uploaded")
@@ -42,7 +46,7 @@ const JobApply = (props) => {
        
          }
          else if (link && value) {
-           let posterid = value.posterid;
+           
            let postid = value._id;
              
            let respdata = {
@@ -50,9 +54,10 @@ const JobApply = (props) => {
                "responses": {
                  responsetype: "link",
                  path: link,
-                 posterId: posterid,
-                 responderid: userId
-                }
+                 responderid: userId,
+                 username:userName,
+                 emailid:emailId
+                 }
        
              }
            console.log(respdata);
