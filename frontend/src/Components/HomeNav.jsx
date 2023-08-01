@@ -105,32 +105,22 @@ const HomeNav = () => {
                                 <Homelinks href="/">Home</Homelinks>
                                 <Homelinks href="/about-us">About Us</Homelinks>
                                 <Homelinks href="/">Contact Us</Homelinks>
-                                <Homelinks href="/empsignup">
+                                <Homelinks href="/signup">
                                     <Button
                                         sx={{
-                                            backgroundColor: "#5FD68E",
+                                            backgroundColor:"rgba(51, 212, 96, .8)",
                                             color: "white",
-                                            borderRadius: "2rem",
-                                            textTransform:'none'
+                                            borderRadius: "1.5rem",
+                                            textTransform:'none',
+                                            fontSize:"22px",
+                                            width:"150px",
+                                            height:"42px"
                                         }}
                                     >
-                                        Employer Sign Up
+                                     Sign Up
                                     </Button>
                                 </Homelinks>
-                                <Homelinks href="/usersignup" sx={{paddingRight:'0'}}>
-                                    <Button
-                                        sx={{
-                                            backgroundColor: "#5FD68E",
-                                            color: "white",
-                                            borderRadius: "2rem",
-                                            textTransform:'none'
-                                        }}
-                                            
-                                    >
-                                        Alumni Sign Up
-                                    </Button>
-                                </Homelinks>
-
+                               
                             
                             </Box>
                         </Toolbar>

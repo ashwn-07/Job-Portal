@@ -45,7 +45,7 @@ router.get("/viewjobs/:token", async (req, res) => {
                 res.json(data)
             }
             else{
-                res.json({message:"Unauthorised user"},decoded,decoded.email)
+                res.status(400).json({message:"Unauthorised user"},decoded,decoded.email)
             }
         })
         
@@ -72,7 +72,7 @@ router.get("/viewjobs/:id/:token",async(req,res)=>{
           
             }
             else{
-                res.json({message:"Unauthorised user"})
+                res.status(400).json({message:"Unauthorised user"})
             }
         })
       

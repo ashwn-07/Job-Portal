@@ -2,6 +2,8 @@ const express = require("express");
 const app = new express();
 const path = require("path");
 const multer = require("multer");
+const fs = require('fs').promises;
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -42,9 +44,12 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+
+
 app.post("/upload/:token", upload.single("resume"), async  (req, res) => {
     try {
         console.log(req.file);
+        const filename = req.file.filename;
         const responderid=req.body.responderid;
         const path=req.file.filename;
         const username= req.body.username;
@@ -54,15 +59,15 @@ app.post("/upload/:token", upload.single("resume"), async  (req, res) => {
         const token=req.params.token
         // console.log(req.body.posterid);
         const response = {
-           
+
                      responsetype: "pdf",
                      path: path,
                      responderid: responderid,
                      username:username,
                      emailid:emailid
-          
+
            }
-           console.log(response);
+          // console.log(response);
            let user= await JobModel.findOne({_id:jobId,'responses.responderid':responderid})
            jwt.verify(token,"ictuser",(error,decoded)=>{
             if (decoded && decoded.email) {
@@ -70,12 +75,14 @@ app.post("/upload/:token", upload.single("resume"), async  (req, res) => {
            {const data =  JobModel.findByIdAndUpdate(jobId, {
            $push: {
               responses: response, // {responsetype:type , path:fpath}
-              
+
           },
         
         }).exec()
         res.status(200).json({ message: "File Uploaded" });
     }else{
+
+        await fs.unlink(`./uploads/${filename}`)
         res.status(200).json({ message: `alredy applied` });
     }
             }
@@ -88,19 +95,17 @@ app.post("/upload/:token", upload.single("resume"), async  (req, res) => {
     }
 });
 
-
 //to download the file
-app.get("/download/:path",async (req, res)=>{
-    const filename = req.params.path
+app.get("/download/:path", async (req, res) => {
+    const filename = req.params.path;
 
     try {
-        res.download(`./uploads/${filename}`)
+        res.download(`./uploads/${filename}`);
     } catch (error) {
-        console.log(error)
-        res.status(404).json({message:'error'})
+        console.log(error);
+        res.status(404).json({ message: "error" });
     }
-    
-} )
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running at ${PORT}`);
