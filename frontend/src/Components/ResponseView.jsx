@@ -27,6 +27,7 @@ const ResponseView = (props) => {
     const [adid] = useState(sessionStorage.getItem("ad.id"));
     const [verify, setVerify] = useState(false);
     const [display, setDisplay]= useState("")
+    const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
 
              //fetching the responses 
             const fetchresponse = () => {
@@ -36,7 +37,7 @@ const ResponseView = (props) => {
                 //gets all the added responses
                 const id =  props.jobid;
 
-                axios.get(`http://localhost:7000/api/viewresponses/${id}`)
+                axios.get(`http://localhost:7000/api/viewresponses/${id}/${token}`)
                     .then((response) => {
                         console.log(response.data.data[0].responses);
                         setResponses(response.data.data[0].responses);
@@ -47,7 +48,7 @@ const ResponseView = (props) => {
                 else{
                     //gets only the verified responses
                     setDisplay("none")
-                    axios.get(`http://localhost:7000/api/verifiedres/${props.jobid}`)
+                    axios.get(`http://localhost:7000/api/verifiedres/${props.jobid}/${token}`)
 
                     .then((response)=>setResponses(response.data.data[0].responses))
                     
@@ -71,7 +72,7 @@ const ResponseView = (props) => {
     //fucntion to verify the response
     const HandleVerify = (resid) => {
         console.log(resid);
-        axios.put(`http://localhost:7000/api/verifyres/${resid}`)
+        axios.put(`http://localhost:7000/api/verifyres/${resid}/${token}`)
             .then((response) => {
                 
                 setVerify(true);
