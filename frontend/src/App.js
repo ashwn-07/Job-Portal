@@ -24,7 +24,7 @@ function App() {
             <Route path="/responsetab" element={<ResponseTable/>}/>
             <Route path="/Alumniview" element={<Alumniview/>}/>
             <Route path="/empresview" element={<ResponseTable/>}/>
-            <Route path="/aboutus" element={<Aboutus/>}/>
+            <Route path="/about-us" element={<Aboutus/>}/>
 
         </Routes>
     );
