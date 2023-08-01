@@ -2,7 +2,7 @@ const express = require("express");
 const app = new express();
 const path = require("path");
 const multer = require("multer");
-const fs = require('fs').promises;
+const fs = require("fs").promises;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -10,7 +10,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
-const jwt=require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 require("./dbconn/dbconn");
@@ -44,51 +44,44 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-
-
-app.post("/upload/:token", upload.single("resume"), async  (req, res) => {
+app.post("/upload/:token", upload.single("resume"), async (req, res) => {
     try {
         console.log(req.file);
         const filename = req.file.filename;
-        const responderid=req.body.responderid;
-        const path=req.file.filename;
-        const username= req.body.username;
-        const emailid= req.body.emailid;
-        const posterid=req.body.posterid
-        const jobId=req.body.jobId;
-        const token=req.params.token
+        const responderid = req.body.responderid;
+        const path = req.file.filename;
+        const username = req.body.username;
+        const emailid = req.body.emailid;
+        const posterid = req.body.posterid;
+        const jobId = req.body.jobId;
+        const token = req.params.token;
         // console.log(req.body.posterid);
         const response = {
-
-                     responsetype: "pdf",
-                     path: path,
-                     responderid: responderid,
-                     username:username,
-                     emailid:emailid
-
-           }
-          // console.log(response);
-           let user= await JobModel.findOne({_id:jobId,'responses.responderid':responderid})
-           jwt.verify(token,"ictuser",(error,decoded)=>{
+            responsetype: "pdf",
+            path: path,
+            responderid: responderid,
+            username: username,
+            emailid: emailid,
+        };
+        // console.log(response);
+        let user = await JobModel.findOne({ _id: jobId, "responses.responderid": responderid });
+        jwt.verify(token, "ictuser", async (error, decoded) => {
             if (decoded && decoded.email) {
-                if(!user)
-           {const data =  JobModel.findByIdAndUpdate(jobId, {
-           $push: {
-              responses: response, // {responsetype:type , path:fpath}
-
-          },
-        
-        }).exec()
-        res.status(200).json({ message: "File Uploaded" });
-    }else{
-
-        await fs.unlink(`./uploads/${filename}`)
-        res.status(200).json({ message: `alredy applied` });
-    }
+                if (!user) {
+                    const data = JobModel.findByIdAndUpdate(jobId, {
+                        $push: {
+                            responses: response, // {responsetype:type , path:fpath}
+                        },
+                    }).exec();
+                    res.status(200).json({ message: "File Uploaded" });
+                } else {
+                   await fs.unlink(`./uploads/${filename}`);
+                    res.status(200).json({ message: `alredy applied` });
+                }
+            } else {
+                res.json({ message: "Unauthorised User" });
             }
-            else{res.json({message:"Unauthorised User"})}
-           })
-           
+        });
     } catch (error) {
         console.log(error);
         res.status(404).json({ message: "cannot upload" });
