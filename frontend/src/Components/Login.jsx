@@ -7,7 +7,7 @@ const Login = () => {
     const [status, setStatus] = useState(true)
     const [jobid]= useState(sessionStorage.getItem('JobID'))
     const [message, setMessage] = useState('');
-    const [usermessage, setuserMessage] = useState('');
+    
 
     const inputHolder = (e) => {
         setStatus(false);
@@ -19,7 +19,7 @@ const Login = () => {
     const shareData = (e) => {
         if (input.username==null || input.password==null) {
             setTimeout(() => {
-            const messageFromBackend = 'Fields cannot be empty!';
+            const messageFromBackend = 'Please fill in all the fields.';
             setMessage(messageFromBackend);
             }, 500);
             setTimeout(() => {
