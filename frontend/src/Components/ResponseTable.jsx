@@ -27,12 +27,12 @@ const ResponseTable = () => {
     const [getres, setGetres] = useState(false)
     const [adid] = useState(sessionStorage.getItem("ad.id"))
     const [empID]=useState(sessionStorage.getItem("LogId"))
-    const [token]= useState(sessionStorage.getItem('usertoken'))
+     const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
 
 
     const getdetails = () => {
         //api to get all the nessecary job details to get its responses
-        axios.get("http://localhost:7000/api/getresponses")
+        axios.get("http://localhost:7000/api/getresponses/"+token)
             .then((response) =>setData(response.data.data))
             .catch((err) =>console.log(err))
 

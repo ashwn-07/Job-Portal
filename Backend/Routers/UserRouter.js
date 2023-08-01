@@ -1,5 +1,6 @@
 const express= require ('express');
 const router= express.Router();
+const jwt=require("jsonwebtoken")
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -40,6 +41,7 @@ router.post('/userSignUp', async(req,res)=>{
 // student profile creation and updation
 router.post("/studendProfile", async(req,res)=>{
     try {
+        let token=req.params.token
         let prof=req.body.data;
         let alid=req.body.alumniId;
         let newdata={
@@ -49,13 +51,19 @@ router.post("/studendProfile", async(req,res)=>{
 
         //  updation of profile
         let alreadyProf= await StudProfModel.findOne({alumniId:alid});
+        
         if (alreadyProf) {
+<<<<<<< Updated upstream
             let updata = await StudProfModel.findOneAndUpdate(
                 { "alumniId": alid },
                 { $set: {"prof":prof}},
             );
             // updata.save()
         res.json({message:"Profile successfully updated"})
+=======
+            
+        res.json({message:"Profile already created"})
+>>>>>>> Stashed changes
 
         // creation of profile
         } else {
@@ -70,6 +78,7 @@ router.post("/studendProfile", async(req,res)=>{
     }  
   
 })
+
 
 
 //api for finding one particular student    
