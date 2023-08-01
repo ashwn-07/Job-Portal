@@ -27,7 +27,7 @@ const RegisterUser = () => {
     const submitHandler=()=>{
         // Front End Form Validation
         console.log("clicked",inputs)
-        if(inputs.name||inputs.regnum||inputs.designation||inputs.Qualification||inputs.username||inputs.password==null){
+        if(inputs.name==null ||inputs.regnum==null || inputs.Qualification==null || inputs.username==null || inputs.password==null){
             setTimeout(() => {
                 const messageFromBackend = 'Please fill in all the fields.';
                 setMessage(messageFromBackend);
