@@ -31,6 +31,7 @@ const Empview = () => {
             console.log(response.data);
             setPost(response.data)
         })
+        .catch(error=>console.log(error))
     }
     
     const deletePost=(id)=>{
@@ -67,7 +68,7 @@ const Empview = () => {
             
         
     },[])
-   let finaljsx=<div className="container">
+   let finaljsx=<div className="container" style={{minHeight:"76vh"}}>
    <div className="row">
        <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
            <div className="row g-3">
