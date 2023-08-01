@@ -53,17 +53,8 @@ router.post("/studendProfile", async(req,res)=>{
         let alreadyProf= await StudProfModel.findOne({alumniId:alid});
         
         if (alreadyProf) {
-<<<<<<< Updated upstream
-            let updata = await StudProfModel.findOneAndUpdate(
-                { "alumniId": alid },
-                { $set: {"prof":prof}},
-            );
-            // updata.save()
-        res.json({message:"Profile successfully updated"})
-=======
             
         res.json({message:"Profile already created"})
->>>>>>> Stashed changes
 
         // creation of profile
         } else {
