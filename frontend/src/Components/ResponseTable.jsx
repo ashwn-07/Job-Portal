@@ -227,7 +227,8 @@ const ResponseTable = () => {
 </>)
 if(getres) finaljsx = <ResponseView jobid={currid}/>
     return (
-      finaljsx
+        <Box sx={{minHeight:"100vh"}}>{finaljsx}</Box>
+     
     );
 };
 

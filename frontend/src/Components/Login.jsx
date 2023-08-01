@@ -78,7 +78,7 @@ const Login = () => {
 
 
     return (
-        <div className='App-login'> <div className="container App-login">
+        <div className='App-login' style={{minHeight:"83vh"}}> <div className="container App-login">
 
             <div className="container ">
 

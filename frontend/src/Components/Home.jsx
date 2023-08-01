@@ -12,8 +12,7 @@ const Home = () => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        axios
-            .get("http://localhost:7000/api/viewjobs")
+        axios.get("http://localhost:7000/api/viewjobs")
             .then((response) => {
                 setJobs(response.data);
             })
@@ -44,7 +43,7 @@ const Home = () => {
     });
 
     return (
-        <Box>
+        <Box component="div">
             <HomeNav />
 
             <Box
@@ -181,7 +180,7 @@ const Home = () => {
                     ))}
                 </Grid>
             </Box>
-            <Footer/>
+            {/* <Footer/> */}
         </Box>
     );
 };
