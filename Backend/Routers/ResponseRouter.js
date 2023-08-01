@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose')
+const jwt=require("jsonwebtoken")
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -9,32 +10,34 @@ const JobModel = require("../Models/JoblistingModel");
 const { ObjectId } = require("bson");
 
 //api to add responses to joblistings
-router.put("/apply", async (req, res) => {
+router.put("/apply/:token", async (req, res) => {
     try {
        // let id=req.params.id
-      
+        const token=req.params.token
         const jobid = req.body._id;
         const response = req.body.responses;
         const userid =response.responderid
         // const type = response.responsetype;
         // const fpath = response.path
-        
         let user= await JobModel.findOne({_id:jobid,'responses.responderid':userid})
         
-        if(!user){
-           
-       const data = await JobModel.findByIdAndUpdate(jobid, {
-          $push: {
-                responses: response, // {responsetype:type , path:fpath}
-            },
-        });
-
-        //console.log(data);
-
-        res.status(200).json({ message: `Response Submitted Successfully!` });
-    }else{
-        res.status(200).json({ message: `already applied` });
-    } }
+        jwt.verify(token,"ictuser",(error,decoded)=>{
+            if (decoded && decoded.email) {
+                if(!user){         
+                    const data =  JobModel.findByIdAndUpdate(jobid, {
+                       $push: {
+                             responses: response, // {responsetype:type , path:fpath}
+                         },
+                     }).exec();
+                     //console.log(data);
+                     res.status(200).json({ message: `Response Submitted Successfully!` });
+                 }else{
+                     res.status(200).json({ message: `already applied` });
+                 } 
+            }
+            else{res.json({message:"Unauthorised User"})}
+        })
+       }
   catch (err) {
         console.log(err);
 
