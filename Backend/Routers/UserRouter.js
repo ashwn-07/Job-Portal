@@ -52,9 +52,9 @@ router.post("/studendProfile", async(req,res)=>{
         if (alreadyProf) {
             let updata = await StudProfModel.findOneAndUpdate(
                 { "alumniId": alid },
-                { $set: { "prof": prof }},
+                { $set: {"prof":prof}},
             );
-            updata.save()
+            // updata.save()
         res.json({message:"Profile successfully updated"})
 
         // creation of profile

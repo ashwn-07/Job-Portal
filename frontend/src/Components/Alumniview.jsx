@@ -90,7 +90,7 @@ useEffect(()=>{
       .then(response => {
         
         alert(response.data.message);
-        window.location.reload(false);
+        // window.location.reload(false);
       })
 
   }
