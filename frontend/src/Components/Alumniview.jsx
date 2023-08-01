@@ -23,6 +23,8 @@ const Alumniview = () => {
   const [userId] = useState(sessionStorage.getItem("userId"));
   const [userName]= useState(sessionStorage.getItem("userName"));
   const [emailId]= useState(sessionStorage.getItem("emailId"));
+  const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
+
   
   
   const [currentDate, setCurrentDate]   = useState(new Date())
@@ -37,10 +39,7 @@ const Alumniview = () => {
     console.log(data);
    
     
-  }
-  
-  
-
+  }   
   //getting the jobs 
   useEffect( () => {
      axios.get("http://localhost:7000/api/viewjobs").then((response) => {
@@ -90,7 +89,7 @@ useEffect(()=>{
       .then(response => {
         
         alert(response.data.message);
-        window.location.reload(false);
+        // window.location.reload(false);
       })
 
   }

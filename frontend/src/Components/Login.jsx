@@ -6,15 +6,29 @@ const Login = () => {
     const [input, setInputs] = useState({});
     const [status, setStatus] = useState(true)
     const [jobid]= useState(sessionStorage.getItem('JobID'))
+    const [message, setMessage] = useState('');
     
 
     const inputHolder = (e) => {
         setStatus(false);
         setInputs({ ...input, [e.target.name]: e.target.value });
         console.log(input);
+
     }
 
     const shareData = (e) => {
+        if (input.username==null || input.password==null) {
+            setTimeout(() => {
+            const messageFromBackend = 'Please fill in all the fields.';
+            setMessage(messageFromBackend);
+            }, 500);
+            setTimeout(() => {
+            window.location.reload(false);
+            }, 5000);
+        } else {
+            
+        
+    
         axios.post('http://localhost:7000/api/login', input)
             .then((response) => {
                 
@@ -62,18 +76,28 @@ const Login = () => {
 
                             console.log(admid)
                             console.log(response.data)
-                            alert("admin")
+                            setTimeout(() => {
+                                const messageFromBackend = response.data.message;
+                                setMessage(messageFromBackend);
+                              }, 10000);
                             navigate('/adminview')
                             
                           
 
                         } else {
-                            alert("unoutherised login");
+                            setTimeout(() => {
+                                const messageFromBackend = response.data.message;
+                                setMessage(messageFromBackend);
+                              }, 500);
+                              setTimeout(() => {
+                                window.location.reload(false);
+                              }, 5000);
+                           
                         }
                     }
                 }
             })
-
+        }
     }
 
 
@@ -100,11 +124,14 @@ const Login = () => {
 
                                     <label htmlFor="" className="form-label">  Username </label>
                                     <input type="text" className="form-control" name="username" onChange={inputHolder} />
+                                    
                                     <br />
                                     {/* </div>
             <div className="col-8"> */}
                                     <label htmlFor="" className="form-label">  Password </label>
                                     <input type="password" name="password" id="" className="form-control" onChange={inputHolder} />
+                                    <br />
+                                    <div style={{color:'red'}}>{message}</div>
                                     {/* </div>
             <div className="col-8"> */}
                                     <br /> <br />

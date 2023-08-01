@@ -78,7 +78,7 @@ router.post('/login',async(req,res)=>{
             } 
         }
     } catch (error) {
-        res.json({message:"smtnhg went wrong"});
+        res.json({message:"Un-authorised Login"});
     }
     
 })

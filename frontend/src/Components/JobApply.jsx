@@ -6,6 +6,7 @@ const JobApply = (props) => {
     const [userId] = useState(sessionStorage.getItem("userId"));
     const [userName]= useState(sessionStorage.getItem("userName"));
     const [emailId]= useState(sessionStorage.getItem("emailId"));
+    const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -27,7 +28,7 @@ const JobApply = (props) => {
            formData.append('username', userName);
            formData.append('emailid', emailId);
            
-           axios.post("http://localhost:7000/upload", formData)
+           axios.post("http://localhost:7000/upload/"+token, formData)
            .then((response)=>{
             if(response.data.message==="File Uploaded")
             //  console.log(currentDate)
@@ -62,7 +63,7 @@ const JobApply = (props) => {
        
              }
            console.log(respdata);
-             axios.put("http://localhost:7000/api/apply", respdata)
+             axios.put("http://localhost:7000/api/apply/"+token, respdata)
                .then(response => {
                 if(response.data.message==="Response Submitted Successfully!")
                  {console.log(response);
