@@ -149,7 +149,7 @@ const RegisterEmp = () => {
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                         <label htmlFor="" className="form-label">Password</label>
-                            <input type="text" className="form-control" name="password" onChange={inputHandler}/>
+                            <input type="password" className="form-control" name="password" onChange={inputHandler}/>
                             <div style={{color:'red'}}>{passwordError}</div>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
