@@ -8,8 +8,7 @@ const SignUP = () => {
 const [Selected, setSelected] = useState("alum");
 
 const Handlechange = (e)=>{
-    console.log(e)
-console.log(e.target.value)
+ 
 setSelected(e.target.value)
 }
 

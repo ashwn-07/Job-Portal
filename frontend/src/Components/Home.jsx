@@ -99,6 +99,7 @@ const Home = () => {
                 component="div"
                 display="flex"
                 marginTop="15px"
+                marginBottom="15px"
                 bgcolor="#E7E7E7"
                 padding="20px"
                 width={{ md: "100%" }}
@@ -180,6 +181,7 @@ const Home = () => {
                     ))}
                 </Grid>
             </Box>
+           
             {/* <Footer/> */}
         </Box>
     );

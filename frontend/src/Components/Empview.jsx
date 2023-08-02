@@ -3,6 +3,8 @@ import axios from 'axios';
 import HeaderEmp from './HeaderEmp';
 import Addposts from './Addposts';
 import AdminNav from './AdminNav';
+import AccessDenied from './AccessDenied';
+import Forbidden from './Forbidden';
 
 
 const Empview = () => {
@@ -101,7 +103,7 @@ const Empview = () => {
 if(update) finaljsx =<Addposts method='put' data={singlevalue}/>
   return (
    <div>
-    {finaljsx} 
+      {(!token)?<AccessDenied/>:((adid||userID)?finaljsx:<Forbidden/>)}
       
    </div>
   )

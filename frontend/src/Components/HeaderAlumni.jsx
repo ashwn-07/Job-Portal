@@ -2,6 +2,15 @@ import React from "react";
 
 
 const HeaderAlumni = () => {
+
+
+  const HandleLogout = ()=>{
+    const items = ["usertoken", "emailId", "userName", "userId"]
+
+    items.forEach((item)=>{
+      sessionStorage.removeItem(item)
+    })
+  }
   
   return (
 
@@ -17,7 +26,7 @@ const HeaderAlumni = () => {
     
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active "  aria-current="page" href="/"  onClick={()=>{sessionStorage.removeItem ("userId")}}>  Logout</a>
+        <a class="nav-link active "  aria-current="page" href="/"  onClick={HandleLogout}>  Logout</a>
       
         
       </div>

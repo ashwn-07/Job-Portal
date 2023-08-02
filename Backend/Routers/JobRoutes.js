@@ -30,7 +30,7 @@ router.get("/viewjobs",async(req,res)=>{
         const data = await JobModel.find({}, {responses:0});
         res.json(data)
     } catch (error) {
-       res.json({Message:"error",error}) 
+       res.status(404).json({Message:"error",error}) 
     }
 })
 

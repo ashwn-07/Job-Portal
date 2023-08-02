@@ -29,6 +29,7 @@ const RegisterEmp = () => {
             else
             {
                 alert(response.data.message)
+                window.location.reload(false)
             }
            
 

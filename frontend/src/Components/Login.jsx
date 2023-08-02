@@ -17,7 +17,7 @@ const Login = () => {
     }
 
     const shareData = (e) => {
-        if (input.username==null || input.password==null) {
+        if (input.username=='' || input.password=='') {
             setTimeout(() => {
             const messageFromBackend = 'Please fill in all the fields.';
             setMessage(messageFromBackend);

@@ -9,6 +9,7 @@ import Alumniview from "./Components/Alumniview";
 import Aboutus from "./Components/Aboutus";
 import Footer from "./Components/Footer";
 import SignUP from "./Components/SignUP";
+import Pagenotfound404 from "./Components/Pagenotfound404";
 
 
 
@@ -48,7 +49,8 @@ function App() {
                 <Route path="/responsetab" element={<ResponseTable />} />
                 <Route path="/Alumniview" element={<Alumniview />} />
                 <Route path="/empresview" element={<ResponseTable />} />
-                <Route path="/about-us" element={<Aboutus />} />
+                <Route path="/about-us" element={<Aboutus/>} />
+                <Route path="*" element={<Pagenotfound404/>} />
             </Routes>
             <Footer />
         </>
