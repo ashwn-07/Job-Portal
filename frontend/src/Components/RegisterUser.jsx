@@ -83,7 +83,7 @@ const RegisterUser = () => {
             console.log(response)
             if(response.data.message==="user saved successfully"){
                 // alert(response.data.message);
-                 setmessageFromBackend = response.data.message;
+                const setmessageFromBackend = response.data.message;
                 setmessageFromBackend(messageFromBackend);
                 setTimeout(() => {
                     navigate('/');
@@ -102,6 +102,7 @@ const RegisterUser = () => {
             else {
                 alert(response.data.message);
                 window.location.reload(false);
+                
             }
            
         })
