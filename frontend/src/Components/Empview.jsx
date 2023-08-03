@@ -3,6 +3,8 @@ import axios from 'axios';
 import HeaderEmp from './HeaderEmp';
 import Addposts from './Addposts';
 import AdminNav from './AdminNav';
+import AccessDenied from './AccessDenied';
+import Forbidden from './Forbidden';
 
 
 const Empview = () => {
@@ -68,7 +70,7 @@ const Empview = () => {
             
         
     },[])
-   let finaljsx=<div className="container" style={{minHeight:"76vh"}}>
+   let finaljsx=<div className="container mb-5 pb-5" style={{minHeight:"76vh"}}>
    <div className="row">
        <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
            <div className="row g-3">
@@ -101,7 +103,7 @@ const Empview = () => {
 if(update) finaljsx =<Addposts method='put' data={singlevalue}/>
   return (
    <div>
-    {finaljsx} 
+      {(!token)?<AccessDenied/>:((adid||userID)?finaljsx:<Forbidden/>)}
       
    </div>
   )

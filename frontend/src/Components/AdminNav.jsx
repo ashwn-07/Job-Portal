@@ -82,7 +82,7 @@ const AdminNav = () => {
                           
                             <Homelinks href="/">
                                 
-                                <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}} onClick={()=>{sessionStorage.removeItem ("ad.id")}}>Log out</Button>
+                                <Button variant="contained" sx={{backgroundColor:"#2B5189", borderRadius:"2.5em"}} onClick={()=>{sessionStorage.removeItem ("ad.id");sessionStorage.removeItem("usertoken")}}>Log out</Button>
                             </Homelinks>
                         </Box>
                     </Toolbar>

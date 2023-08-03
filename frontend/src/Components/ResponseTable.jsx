@@ -20,6 +20,8 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import { Button, Container, TableHead } from "@mui/material";
 import ResponseView from "./ResponseView";
 import HeaderEmp from "./HeaderEmp";
+import Forbidden from "./Forbidden";
+import AccessDenied from "./AccessDenied";
 
 const ResponseTable = () => {
     const [Data, setData] = useState([]);
@@ -227,7 +229,7 @@ const ResponseTable = () => {
 </>)
 if(getres) finaljsx = <ResponseView jobid={currid}/>
     return (
-        <Box sx={{minHeight:"100vh"}}>{finaljsx}</Box>
+        <Box sx={{minHeight:"100vh"}}>{(token)?(adid||empID)?finaljsx:<Forbidden/>:<AccessDenied/>}</Box>
      
     );
 };

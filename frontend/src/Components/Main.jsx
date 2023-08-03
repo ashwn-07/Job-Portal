@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import HeaderEmp from './HeaderEmp'
 import AdminNav from './AdminNav'
+import AccessDenied from './AccessDenied'
 
 const Main = (props) => {
   const [admin, setAdmin]= useState(false)
   const [adid] = useState(sessionStorage.getItem("ad.id"))
+  const [token] = useState(sessionStorage.getItem("usertoken"))
+  const [userID] = useState(sessionStorage.getItem("LogId"))
   
 useEffect(()=>{
   if(adid)
@@ -15,7 +18,7 @@ useEffect(()=>{
   
   return (
     <div>
-        {(admin)?<AdminNav/>:<HeaderEmp/>}
+        {(token)?((adid||userID)?((adid)?<AdminNav/>:<HeaderEmp/>):null):null}
 
         {props.child}
     </div>

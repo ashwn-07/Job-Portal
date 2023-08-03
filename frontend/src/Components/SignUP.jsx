@@ -8,8 +8,7 @@ const SignUP = () => {
 const [Selected, setSelected] = useState("alum");
 
 const Handlechange = (e)=>{
-    console.log(e)
-console.log(e.target.value)
+ 
 setSelected(e.target.value)
 }
 
@@ -17,7 +16,7 @@ setSelected(e.target.value)
     return (
         <div style={{ minHeight: "100vh" }}>
             <div >
-                <div className="row">
+                <div className="row mx-0">
                     <div className="col col-lg-6 col-md-6 col-sm-12 col-xs-12 d-none d-md-block">
                         <div className="Signup-image">
                             <img
