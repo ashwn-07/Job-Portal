@@ -10,6 +10,7 @@ import Aboutus from "./Components/Aboutus";
 import Footer from "./Components/Footer";
 import SignUP from "./Components/SignUP";
 import Pagenotfound404 from "./Components/Pagenotfound404";
+import LoginPage from "./Components/LoginPage";
 
 
 
@@ -20,7 +21,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<SignUP />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/empview" element={<Main child={<Empview />} />} />
                 <Route path="/adminview" element={<Main child={<Empview />} />} />
                 <Route
