@@ -2,6 +2,11 @@ import React from 'react'
 import '../'
 
 const HeaderEmp = () => {
+const handlelogout = ()=>{
+sessionStorage.removeItem("LogId")
+sessionStorage.removeItem("usertoken")
+}
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
@@ -12,7 +17,7 @@ const HeaderEmp = () => {
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/"  onClick={()=>{sessionStorage.removeItem ("LogId")}}>  Logout</a>
+        <a class="nav-link active" aria-current="page" href="/"  onClick={handlelogout}>  Logout</a>
         <a class="nav-link" href="/addpost">  Addposts</a>
         <a class="nav-link" href="/empresview">  ViewResponses</a>
         

@@ -70,7 +70,7 @@ const Empview = () => {
             
         
     },[])
-   let finaljsx=<div className="container" style={{minHeight:"76vh"}}>
+   let finaljsx=<div className="container mb-5 pb-5" style={{minHeight:"76vh"}}>
    <div className="row">
        <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
            <div className="row g-3">
