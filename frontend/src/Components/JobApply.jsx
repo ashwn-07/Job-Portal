@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import axios from 'axios';
 const JobApply = (props) => {
     const [file, setFile] = useState(null);
@@ -7,8 +7,12 @@ const JobApply = (props) => {
     const [userName]= useState(sessionStorage.getItem("userName"));
     const [emailId]= useState(sessionStorage.getItem("emailId"));
     const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
-
+    const uploadref = useRef(null)
+    const [selectedfilename, setSelectedfilename] = useState("null")
+    const [showname, setShowname]= useState("")
     const handleFileChange = (e) => {
+          const filename = e.target.files[0].name;
+        setShowname(filename)  
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
       };
@@ -79,20 +83,30 @@ const JobApply = (props) => {
            
          }
        }
+        //styles applied to upload button
+       const customstyle = {
+        fontWeight:600,
+        color:"white",
+        padding:"6px",
+        backgroundColor:"#8A5CD6",
+        borderRadius:"0.3rem"
+       }
       
   return (
-    <> <form onSubmit={(e)=>handlefileSubmit(e, props.val)} >
+    <> <form onSubmit={(e)=>handlefileSubmit(e, props.val)}>
     <div>
       <label>PDF:</label>
-      <input type='file' name="resume" onChange={handleFileChange}    />
-     
-    </div>
+     <label className='ms-2' style={customstyle}><input type='file' ref={uploadref} hidden name="resume" onChange={handleFileChange}/>Select Resume</label>
+     <span className='ms-3'>{showname}</span>
+     </div>
     <div>
       <label>Link:</label>
-      <input
+      <div className="col-md-3">
+      <input className='form-control'
         type="text" value={link} onChange={handleLinkChange} placeholder="Enter a link to a PDF" />
+        </div>
      </div>
-     <button className='btn btn-dark btn-me-md-2' >Submit</button>
+     <button className='btn btn-dark btn-me-md-2 mt-3' style={{backgroundColor:"#1AC25D", fontWeight:600, border:"none"}} >Submit</button>
 </form>  </>
   )
 }
