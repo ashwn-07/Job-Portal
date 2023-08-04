@@ -99,15 +99,16 @@ useEffect(()=>{
 
   let renderjsx =  <div style={{ backgroundColor:"rgba(95, 115, 154, 0.20)"}}>
   <>
-    <div >
+    <div style={{position:"relative",}} >
       <HeaderAlumni/>
-      <Button variant="outline-info" onClick={handleShow} className=' mt-5' >
+      <div style={{position:"absolute", top:-40, right:120, margin:0}}>
+      <Button variant="success" onClick={handleShow} className=' mt-5' >
         Create  Profile
       </Button>
-
+      </div>
       <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title  >Create Your Profile  </Offcanvas.Title>
+          <Offcanvas.Title  >Create Your Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
