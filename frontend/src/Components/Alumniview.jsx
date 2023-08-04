@@ -101,7 +101,7 @@ useEffect(()=>{
   <>
     <div >
       <HeaderAlumni/>
-      <Button variant="outline-info" onClick={handleShow} className=' mt-5' >
+      <Button variant="success" onClick={handleShow} className=' mt-5' >
         Create  Profile
       </Button>
 
@@ -191,7 +191,7 @@ useEffect(()=>{
             <Col key={index} className='m-5 ps-5 mx-0'>
               <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem"}} >
 
-                <Card.Header> <h5> {value.companyname} </h5></Card.Header>
+                <Card.Header className='m-3  bg-success text-white' > <h5> {value.companyname} </h5></Card.Header>
                 <Card.Body>
 
                   <Card.Title>  {value.jobtitle}</Card.Title>
