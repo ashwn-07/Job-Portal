@@ -25,7 +25,14 @@ const Alumniview = () => {
   const [emailId]= useState(sessionStorage.getItem("emailId"));
   const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
 
-  
+   // FRONTEND FORM VALIDATION
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   const indianPhoneRegex = /^(\+91)?[6-9]\d{9}$/;
+
+   const [emailError, setEmailError] = useState('');
+   const [phoneNoError, setphoneNoError] = useState('');
+   const [message, setMessage] = useState('');
+
   
   const [currentDate, setCurrentDate]   = useState(new Date())
   const [load, setLoad] = useState(false)
@@ -83,16 +90,43 @@ useEffect(()=>{
       "emailId":emailId,
       "userName":userName
     }
-    console.log(newdata);
+    // email check
+    console.log(newdata.data.emailid)
+    if (!emailRegex.test(newdata.data.emailid)) {
+      setEmailError('Please enter a valid email address.');
+      setTimeout(() => {
+      setEmailError("");
+    }, 5000);
+   }
+    //  Phone number Checkin
+    else if(!indianPhoneRegex.test(newdata.data.phone)){
+      setphoneNoError('Please enter a valid phone number.');
+      setTimeout(() => {
+      setphoneNoError("");
+    }, 5000);
+
+ }   
+ else  if(newdata.data.name==null ||newdata.data.Qualification==null || newdata.data.course==null || newdata.data.batch==null || newdata.data.placement==null ){
+  setTimeout(() => {
+      const messageDisplay = 'Please fill in all the fields.';
+      setMessage(messageDisplay);
+  }, 1000);
+  setTimeout(() => {
+      const messageDisplay = '';
+      setMessage(messageDisplay);
+  }, 5000);
+      
+}
     
-    axios.post('http://localhost:7000/api/studendProfile', newdata )
+    else{
+         axios.post('http://localhost:7000/api/studendProfile', newdata )
     
       .then(response => {
         
         alert(response.data.message);
         // window.location.reload(false);
       })
-
+    }
   }
 
 //"#214144" 
@@ -125,7 +159,7 @@ useEffect(()=>{
               className="mb-3"
             >
               <Form.Control type="email" size="sm" name='emailid' onChange={inputholder} placeholder="name@example.com" />
-
+              <div style={{color:'red'}}>{emailError}</div>
             </FloatingLabel>
 
             <FloatingLabel
@@ -134,7 +168,7 @@ useEffect(()=>{
               className="mb-3"
             >
               <Form.Control type="text" name='phone' onChange={inputholder} placeholder="Phone Number" />
-
+              <div style={{color:'red'}}>{phoneNoError}</div>
             </FloatingLabel> <FloatingLabel
               controlId="floatingInput"
               label="Highest Qualification"
@@ -174,6 +208,7 @@ useEffect(()=>{
             <FloatingLabel controlId="floatingPassword" label="Company Name (If placed)">
               <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name" />
             </FloatingLabel><br />
+            <div style={{color:'red'}}>{message}</div><br></br>
             <Button variant="outline-success" onClick={shareData} >Submit</Button>{' '}
           </>
         </Offcanvas.Body>
