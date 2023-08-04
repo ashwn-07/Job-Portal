@@ -95,9 +95,9 @@ useEffect(()=>{
 
   }
 
+//"#214144" 
 
-
-  let renderjsx =  <div style={{ backgroundColor: "#214144" }} >
+  let renderjsx =  <div style={{ backgroundColor:"rgba(95, 115, 154, 0.20)"}}>
   <>
     <div >
       <HeaderAlumni/>
@@ -188,8 +188,8 @@ useEffect(()=>{
           <br />
           <Row xs={1} md={1} lg={1} className="g-4  mr-5" >
 
-            <Col key={index} className='m-5'>
-              <Card style={{ backgroundColor: "lightgrey", marginRight: "5rem" }} >
+            <Col key={index} className='m-5 ps-5 mx-0'>
+              <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem"}} >
 
                 <Card.Header> <h5> {value.companyname} </h5></Card.Header>
                 <Card.Body>

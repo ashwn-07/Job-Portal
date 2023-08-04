@@ -111,12 +111,16 @@ const Home = () => {
                                 raised
                                 elevation={10}
                                 sx={{
+                                    position:"relative",
                                     minWidth: 40,
                                     minHeight: { sm: 400, md: 265, lg: 265 },
                                     height: "100%",
                                     borderRadius: "15px",
+                                    '&:hover':{transition:"transform 0.45s", transform:"scale(1.08) translateY(-35px)", zIndex:1,}
+                                   
                                 }}
-                            >
+                            >   
+                                 
                                 <CardContent>
                                     <Typography
                                         fontSize="28px"
@@ -153,7 +157,8 @@ const Home = () => {
                                         {value.location}
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
+                                <Box sx={{ marginTop:"50px"}}>
+                                <CardActions sx={{ position:"absolute", right:0, bottom:10}}>
                                     <Button
                                         variant="contained"
                                         size="large"
@@ -176,6 +181,7 @@ const Home = () => {
                                         </Link>
                                     </Button>
                                 </CardActions>
+                                </Box>
                             </Card>
                         </Grid>
                     ))}
