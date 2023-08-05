@@ -101,14 +101,13 @@ useEffect(()=>{
   <>
     <div style={{position:"relative",}} >
       <HeaderAlumni/>
-      <div style={{position:"absolute", top:-40, right:120, margin:0}}>
-      <Button variant="success" onClick={handleShow} className=' mt-5' >
+      <Button variant="success" onClick={handleShow} className=' mt-5' style={{marginLeft:"52px"}}>
         Create  Profile
       </Button>
-      </div>
-      <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" >
+      {/*  #15B468 */}
+      <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" style={{backgroundColor:"#58B99C", borderRadius:"0.5rem"}}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title  >Create Your Profile</Offcanvas.Title>
+          <Offcanvas.Title  className='text-white' >Create Your Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
@@ -117,7 +116,7 @@ useEffect(()=>{
               label="Name"
               className="mb-3"
             >
-              <Form.Control size="sm" type="text" name='name' onChange={inputholder} placeholder="Name" />
+              <Form.Control size="sm" type="text" name='name' onChange={inputholder} placeholder="Name"  style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
             <FloatingLabel
@@ -125,7 +124,7 @@ useEffect(()=>{
               label="Email address"
               className="mb-3"
             >
-              <Form.Control type="email" size="sm" name='emailid' onChange={inputholder} placeholder="name@example.com" />
+              <Form.Control type="email" size="sm" name='emailid' onChange={inputholder} placeholder="name@example.com" style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
 
@@ -134,19 +133,19 @@ useEffect(()=>{
               label="Phone Number"
               className="mb-3"
             >
-              <Form.Control type="text" name='phone' onChange={inputholder} placeholder="Phone Number" />
+              <Form.Control type="text" name='phone' onChange={inputholder} placeholder="Phone Number" style={{backgroundColor:"white"}} />
 
             </FloatingLabel> <FloatingLabel
               controlId="floatingInput"
               label="Highest Qualification"
               className="mb-3"
             >
-              <Form.Control type="text" name='Qualification' onChange={inputholder} placeholder="Highest Qualification" />
+              <Form.Control type="text" name='Qualification' onChange={inputholder} placeholder="Highest Qualification" style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
 
 
-            <Form.Select name='course' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='course' onChange={inputholder} aria-label="Default select example" style={{backgroundColor:"white"}}>
 
 
               <option value=''>Course studied at ICTAK</option>
@@ -159,23 +158,23 @@ useEffect(()=>{
               <option value="CSA">CSA</option>
             </Form.Select> <br />
 
-            <Form.Select name='batch' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='batch' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Batch Details</option>
               <option value="KKEM">KKEM</option>
               <option value="NORKA">NORKA</option>
               <option value="KDISC">KDISC</option>
             </Form.Select> <br />
 
-            <Form.Select name='placement' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='placement' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Placement Status</option>
               <option value="Placed">Placed</option>
               <option value="Job Seeking">Job Seeking</option>
 
             </Form.Select> <br />
             <FloatingLabel controlId="floatingPassword" label="Company Name (If placed)">
-              <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name" />
+              <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name"  style={{backgroundColor:"white"}} />
             </FloatingLabel><br />
-            <Button variant="outline-success" onClick={shareData} >Submit</Button>{' '}
+            <Button variant="success" onClick={shareData} >Submit</Button>{' '}
           </>
         </Offcanvas.Body>
       </Offcanvas>
@@ -183,16 +182,16 @@ useEffect(()=>{
 
     {/* cards */}
     <div className='m-3 pr-3'>
-
+    
       {jobs.map((value, index) => (
         <div className='' id={value._id} >
           <br />
           <Row xs={1} md={1} lg={1} className="g-4  mr-5" >
 
-            <Col key={index} className='m-5 ps-5 mx-0'>
-              <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem"}} >
+            <Col key={index} className='m-5 ps-5 mx-0' >
+              <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem", }} >
 
-                <Card.Header> <h5> {value.companyname} </h5></Card.Header>
+                <Card.Header className='m-3  bg-success text-white' > <h5> {value.companyname} </h5></Card.Header>
                 <Card.Body>
 
                   <Card.Title>  {value.jobtitle}</Card.Title>
@@ -215,7 +214,7 @@ useEffect(()=>{
                   <h6>Location:</h6> {value.location}
                   </Card.Text>
                   <Card.Text>
-                  <h6>LastDate:</h6> {value.ExpiresAt}
+                  <h6>LastDate:</h6> {new Date(value.ExpiresAt).getDate()}-{new Date(value.ExpiresAt).getMonth()}-{new Date(value.ExpiresAt).getFullYear()}
                   </Card.Text>
                   <br />
                    <Card.Text> <h5>Apply Here</h5>

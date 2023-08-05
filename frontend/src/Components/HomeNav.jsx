@@ -80,7 +80,7 @@ const HomeNav = () => {
             <React.Fragment>
                 <CssBaseline />
                 <ElevationScroll>
-                    <AppBar sx={{ backgroundColor: "#15B468", height: "67px" }}>
+                    <AppBar sx={{ backgroundColor: "#15B468", height: "67px", fontFamily:'Poppins' }}>
                         <Toolbar>
                             <IconButton
                                 color="inherit"

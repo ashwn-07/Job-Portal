@@ -159,19 +159,19 @@ const ResponseView = (props) => {
     };
     //mui
     return (
-        <>
+        <Box sx={{height:"100vh", bgcolor:"rgba(95, 115, 154, 0.20)"}}>
             {adid ? <AdminNav /> : <HeaderEmp />}
 
          
 
             <Container maxWidth="lg" sx={{ marginTop: "5%" }}>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+                    <Table sx={{ minWidth: 500, backgroundImage:"linear-gradient(180deg, #BCEDC7, #B2A3DB)" }} aria-label="custom pagination table">
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#4F709C" }}>
                                 <TableCell sx={{ color: "white" }}>Applicant Name</TableCell>
                                 <TableCell sx={{ color: "white" }}>Email ID</TableCell>
-                                <TableCell sx={{ color: "white" }}>Response Type</TableCell>
+                                <TableCell sx={{ color: "white"}} align="center">Response Type</TableCell>
                                 
                                 <TableCell sx={{ color: "white" }} align="center">
                                     Action
@@ -196,7 +196,7 @@ const ResponseView = (props) => {
                                     <TableCell sx={{ fontWeight: "500" }} scope="">
                                         {row.emailid}
                                     </TableCell>
-                                    <TableCell sx={{ fontWeight: "500" }} align="left">
+                                    <TableCell sx={{ fontWeight: "500", textTransform:"uppercase"}} align="center">
                                         {row.responsetype}
                                     </TableCell>
                                     <TableCell align="center">
@@ -250,7 +250,7 @@ const ResponseView = (props) => {
                     </Table>
                 </TableContainer>
             </Container>
-        </>
+        </Box>
     );
 };
 

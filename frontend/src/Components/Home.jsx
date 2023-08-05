@@ -70,7 +70,7 @@ const Home = () => {
                         paddingLeft="5px"
                         fontSize={{ xs: "20px", sm: "28px", md: "32px" }}
                     >
-                        Find and land your dream job in here
+                        Go confidently in the direction of your dreams!
                     </Typography>
                     <Box
                         display="flex"
@@ -111,6 +111,7 @@ const Home = () => {
                                 raised
                                 elevation={10}
                                 sx={{
+                                    
                                     position:"relative",
                                     minWidth: 40,
                                     minHeight: { sm: 400, md: 265, lg: 265 },
@@ -138,6 +139,7 @@ const Home = () => {
                                         {value.companyname}
                                     </Typography>
                                     <Typography
+                                        fontFamily="Poppins"
                                         overflow=""
                                         fontSize="15px"
                                         paddingTop={2}
