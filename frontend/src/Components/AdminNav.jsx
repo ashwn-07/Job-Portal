@@ -26,6 +26,7 @@ const AdminNav = () => {
 
     const Homelinks = styled(Link)({
         fontSize: "24px",
+        fontFamily:'Poppins',
         color: "white",
         textDecoration: "none",
         paddingRight: "20px",

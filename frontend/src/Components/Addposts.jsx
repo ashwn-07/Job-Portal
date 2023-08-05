@@ -66,53 +66,54 @@ if(props.method==="put"){
 }
 }
 
-let renderjsx =  <div>
-<div className="container">
+let renderjsx =  <div> 
+<div className="container mt-5 mb-5">
  <div className="row">
      <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
-         <div className="row g-3">
+         <div className="row g-3 position-relative">
             
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">CompanyName</label>
-             <input type="text" className="form-control" name='companyname' value={inputs.companyname} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col-lg-6">
+             <label htmlFor="" className="form-label fs-5 fw-medium" >Company Name</label>
+             <input type="text" className="form-control" name='companyname' style={{backgroundColor:"#E7EAE7"}} value={inputs.companyname} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">JobTitle</label>
-             <input type="text" className="form-control" name='jobtitle' value={inputs.jobtitle} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col-lg-6">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Job Title</label>
+             <input type="text" className="form-control" name='jobtitle' style={{backgroundColor:"#E7EAE7"}} value={inputs.jobtitle} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">JobDescription</label>
-             <textarea  id="" cols="20" rows="5" className="form-control" name='jobdesc' value={inputs.jobdesc} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col lg-12">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Job Description</label>
+             <textarea  id="" cols="20" rows="5" className="form-control" name='jobdesc' style={{backgroundColor:"#E7EAE7"}} value={inputs.jobdesc} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">JobRequirements</label>
-             <textarea  id="" cols="20" rows="5" className="form-control" name='jobrequirements' value={inputs.jobrequirements} onChange={inputHandler}/>  
+             <div className="col col-12 col-sm-12 col-md-12 col lg-12">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Job Requirements</label>
+             <textarea  id="" cols="20" rows="5" className="form-control" name='jobrequirements'  style={{backgroundColor:"#E7EAE7"}} value={inputs.jobrequirements} onChange={inputHandler}/>  
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">Eligibility</label>
-             <input type="text" className="form-control" name='eligibility' value={inputs.eligibility} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col col-lg-4">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Eligibility</label>
+             <input type="text" className="form-control" name='eligibility'  style={{backgroundColor:"#E7EAE7"}} value={inputs.eligibility} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">Experience</label>
-             <input type="text" className="form-control" name='experience' value={inputs.experience} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col col-lg-4">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Experience</label>
+             <input type="text" className="form-control" name='experience'  style={{backgroundColor:"#E7EAE7"}} value={inputs.experience} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">SalaryOffered</label>
-             <input type="text" className="form-control" name='salary'value={inputs.salary} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col col-lg-4">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Salary Offered</label>
+             <input type="text" className="form-control" name='salary'  style={{backgroundColor:"#E7EAE7"}} value={inputs.salary} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">Location</label>
-             <input type="text" className="form-control" name='location' value={inputs.location} onChange={inputHandler}/>
+             <div className="col co-12 col-sm-12 col-md-12 col col-lg-6">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Location</label>
+             <input type="text" className="form-control" name='location'  style={{backgroundColor:"#E7EAE7"}} value={inputs.location} onChange={inputHandler}/>
              </div>
              
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-             <label htmlFor="" className="form-label">LastDate</label>
-             <input type="date" className="form-control" name='ExpiresAt' value={inputs.ExpiresAt} onChange={inputHandler}/>
+             <div className="col col-12 col-sm-12 col-md-12 col col-lg-6 mb-4">
+             <label htmlFor="" className="form-label  fs-5 fw-medium">Last Date</label>
+             <input type="date" className="form-control" name='ExpiresAt'  style={{backgroundColor:"#E7EAE7"}} value={inputs.ExpiresAt} onChange={inputHandler}/>
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12">
-                <button className="btn btn-success"onClick={submitHandler}>Submit</button> 
+             <div className="col col-12 col-sm-12 col-md-4 col-lg-12 bg-primary mt-5 mb-5">
+                <button className="btn btn-lg position-absolute start-50 w-25  translate-middle btn-success"onClick={submitHandler} style={{maxWidth:170, fontSize:"20px"}}>Submit</button> 
+                
              </div>
-             <div className="col co-12 col-sm-12 col-md-12 col lg-12"></div>
+             
          </div>
      </div>
  </div>

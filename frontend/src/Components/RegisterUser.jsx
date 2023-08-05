@@ -139,7 +139,7 @@ const RegisterUser = () => {
                         </div>
                         
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">UserName</label>
+                        <label htmlFor="" className="form-label">Username</label>
                             <input type="text" className="form-control" name="username"  onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
@@ -148,13 +148,13 @@ const RegisterUser = () => {
                              <div style={{color:'red'}}>{passwordError}</div>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">Conform Password</label>
+                        <label htmlFor="" className="form-label">Confirm Password</label>
                             <input type="password" className="form-control" name="conformpassword" onChange={inputHandler}/>
                              <div style={{color:'red'}}>{conformpasswordError}</div>
                         </div>
                         
                         <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
-                            <button className="btn btn-danger" onClick={submitHandler}>Register</button>
+                            <button className="btn btn-dark" style={{backgroundColor:"#1AC25D", border:"none"}} onClick={submitHandler}>Register</button>
                         </div>
                         <div style={{color:'green'}}>{messageFromBackend}</div>
                         <div style={{color:'red'}}>{message}</div>

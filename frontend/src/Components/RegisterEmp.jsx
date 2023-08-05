@@ -117,12 +117,12 @@ const RegisterEmp = () => {
                             <input type="text" className="form-control"name="name" onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">EmailId</label>
+                        <label htmlFor="" className="form-label">Email Id</label>
                             <input type="text" className="form-control" name="emailid" onChange={inputHandler} />
                             <div style={{color:'red'}}>{emailError}</div>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">EmployerCode</label>
+                        <label htmlFor="" className="form-label">Employer Code</label>
                             <input type="text" className="form-control" name="empregnum" onChange={inputHandler} />
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
@@ -131,7 +131,7 @@ const RegisterEmp = () => {
                             <div style={{color:'red'}}>{phoneNoError}</div>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">CompanyName</label>
+                        <label htmlFor="" className="form-label">Company Name</label>
                             <input type="text" className="form-control" name="CompanyName" onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
@@ -144,7 +144,7 @@ const RegisterEmp = () => {
                             <input type="text" className="form-control" name="location" onChange={inputHandler} />
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">UserName</label>
+                        <label htmlFor="" className="form-label">Username</label>
                             <input type="text" className="form-control" name="username" onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
@@ -153,18 +153,18 @@ const RegisterEmp = () => {
                             <div style={{color:'red'}}>{passwordError}</div>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                        <label htmlFor="" className="form-label">Conform Password</label>
+                        <label htmlFor="" className="form-label">Confirm Password</label>
                             <input type="password" className="form-control" name="conformpassword" onChange={inputHandler}/>
                              <div style={{color:'red'}}>{conformpasswordError}</div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
                        
                         <div style={{color:'red'}}>{message}</div>
-                            <button className="btn btn-danger" onClick={submitHandler}>Register</button>
+                            <button className="btn btn-danger" style={{backgroundColor:"#1AC25D", borderColor:"#1AC25D"}} onClick={submitHandler}>Register</button>
                             
                             
                         </div>
-                        <div className="col col-12 col-sm-6 col-md-6 col-lg-6"></div>
+                       
                     </div>
                 </div>
             </div>

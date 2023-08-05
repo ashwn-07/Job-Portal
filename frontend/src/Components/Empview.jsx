@@ -70,24 +70,24 @@ const Empview = () => {
             
         
     },[])
-   let finaljsx=<div className="container mb-5 pb-5" style={{minHeight:"76vh"}}>
+   let finaljsx=<div className=" px-5 pt-3 mb-3 pb-5" style={{minHeight:"76vh", backgroundColor:"#E7E7E7",  fontFamily:'Poppins' }}>
    <div className="row">
        <div className="col col-12 col-sm-12 col-md-12 col-lg-12">
            <div className="row g-3">
                {post.map((value,index)=>{
-                 return <div className="col col-12 col-sm-6 col-md-6 col-lg-6">
-                 <div class="card mb-3 h-100 mt-5">
+                 return <div key={index} className="col col-12 col-sm-6 col-md-6 col-lg-6">
+                 <div class="card mb-5 h-100 mt-5 shadow" style={{borderRadius:"1.5rem"}}>
                           <div class="row g-0">
                               
-                              <div class="col-md-8">
+                              <div class="col-md-12">
                                   <div class="card-body">
-                                      <h5 class="card-title">{value.companyname}</h5>
-                                      <p class="card-text">{value.jobtitle}</p>
-                                      <p class="card-text"><small class="text-body-secondary"><b>JobDescription:{value.jobdesc}  </b></small></p>
-                                      <p class="card-text"><small class="text-body-secondary"><b> JobRequirements:{value.jobrequirements} </b></small></p>
-                                      <p class="card-text"><small class="text-body-secondary"><b>Experience:{value.experience}, Salry:{value.salary},  Location:{value.location}  </b></small></p>
-                                      <p class="card-text"><small class="text-body-secondary"><b>PostingDate:{value.CreatedAt},LastDate:{value.ExpiresAt}  </b></small></p>
-                                      <p class="card-text"><small class="text-body-secondary"><button className='btn btn-danger' onClick={()=>deletePost(value._id)}>Delete</button></small> &nbsp;
+                                      <h5 class="card-title text-success fw-bold">{value.companyname}</h5>
+                                      <p class="card-text fw-bold" style={{color:'#252E27'}} >{value.jobtitle}</p>
+                                      <p class="card-text"><small class="text-body-dark fs-6"><b>Job Description: </b>{value.jobdesc}  </small></p>
+                                      <p class="card-text"><small class="text-body-dark fs-6"><b> Job Requirements: </b>{value.jobrequirements} </small></p>
+                                      <p class="card-text"><small class="text-body-dark fs-6"><b>Experience: </b>{value.experience} Year  <b>&nbsp;&nbsp;&nbsp;&nbsp;Salary:</b> {value.salary} <b>&nbsp;&nbsp;&nbsp;&nbsp;Location: </b>{value.location}  </small></p>
+                                      <p class="card-text"><small class="text-body-dark fs-6"><b>Posting Date: </b> {new Date(value.CreatedAt).getDate()}-{new Date(value.CreatedAt).getMonth()}-{new Date(value.CreatedAt).getFullYear()} <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Date: </b>{new Date(value.ExpiresAt).getDate()}-{new Date(value.ExpiresAt).getMonth()}-{new Date(value.ExpiresAt).getFullYear()}  </small></p>
+                                      <p class="card-text"><small class="text-body-dark fs-6"><button className='btn btn-danger' onClick={()=>deletePost(value._id)}>Delete</button></small> &nbsp;
                                        <small class="text-body-secondary"><button className='btn btn-primary'onClick={()=>updatePost(value)}>Update</button></small></p>
                                   </div>
                               </div>

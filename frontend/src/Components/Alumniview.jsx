@@ -133,15 +133,15 @@ useEffect(()=>{
 
   let renderjsx =  <div style={{ backgroundColor:"rgba(95, 115, 154, 0.20)"}}>
   <>
-    <div >
+    <div style={{position:"relative",}} >
       <HeaderAlumni/>
-      <Button variant="success" onClick={handleShow} className=' mt-5' >
+      <Button variant="success" onClick={handleShow} className=' mt-5' style={{marginLeft:"52px"}}>
         Create  Profile
       </Button>
-
-      <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" >
+      {/*  #15B468 */}
+      <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" style={{backgroundColor:"#58B99C", borderRadius:"0.5rem"}}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title  >Create Your Profile  </Offcanvas.Title>
+          <Offcanvas.Title  className='text-white' >Create Your Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
@@ -150,7 +150,7 @@ useEffect(()=>{
               label="Name"
               className="mb-3"
             >
-              <Form.Control size="sm" type="text" name='name' onChange={inputholder} placeholder="Name" />
+              <Form.Control size="sm" type="text" name='name' onChange={inputholder} placeholder="Name"  style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
             <FloatingLabel
@@ -174,12 +174,12 @@ useEffect(()=>{
               label="Highest Qualification"
               className="mb-3"
             >
-              <Form.Control type="text" name='Qualification' onChange={inputholder} placeholder="Highest Qualification" />
+              <Form.Control type="text" name='Qualification' onChange={inputholder} placeholder="Highest Qualification" style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
 
 
-            <Form.Select name='course' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='course' onChange={inputholder} aria-label="Default select example" style={{backgroundColor:"white"}}>
 
 
               <option value=''>Course studied at ICTAK</option>
@@ -192,21 +192,21 @@ useEffect(()=>{
               <option value="CSA">CSA</option>
             </Form.Select> <br />
 
-            <Form.Select name='batch' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='batch' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Batch Details</option>
               <option value="KKEM">KKEM</option>
               <option value="NORKA">NORKA</option>
               <option value="KDISC">KDISC</option>
             </Form.Select> <br />
 
-            <Form.Select name='placement' onChange={inputholder} aria-label="Default select example">
+            <Form.Select name='placement' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Placement Status</option>
               <option value="Placed">Placed</option>
               <option value="Job Seeking">Job Seeking</option>
 
             </Form.Select> <br />
             <FloatingLabel controlId="floatingPassword" label="Company Name (If placed)">
-              <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name" />
+              <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name"  style={{backgroundColor:"white"}} />
             </FloatingLabel><br />
             <div style={{color:'red'}}>{message}</div><br></br>
             <Button variant="outline-success" onClick={shareData} >Submit</Button>{' '}
@@ -217,14 +217,14 @@ useEffect(()=>{
 
     {/* cards */}
     <div className='m-3 pr-3'>
-
+    
       {jobs.map((value, index) => (
         <div className='' id={value._id} >
           <br />
           <Row xs={1} md={1} lg={1} className="g-4  mr-5" >
 
-            <Col key={index} className='m-5 ps-5 mx-0'>
-              <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem"}} >
+            <Col key={index} className='m-5 ps-5 mx-0' >
+              <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem", }} >
 
                 <Card.Header className='m-3  bg-success text-white' > <h5> {value.companyname} </h5></Card.Header>
                 <Card.Body>
@@ -249,7 +249,7 @@ useEffect(()=>{
                   <h6>Location:</h6> {value.location}
                   </Card.Text>
                   <Card.Text>
-                  <h6>LastDate:</h6> {value.ExpiresAt}
+                  <h6>LastDate:</h6> {new Date(value.ExpiresAt).getDate()}-{new Date(value.ExpiresAt).getMonth()}-{new Date(value.ExpiresAt).getFullYear()}
                   </Card.Text>
                   <br />
                    <Card.Text> <h5>Apply Here</h5>

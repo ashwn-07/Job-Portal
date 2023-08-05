@@ -1,11 +1,12 @@
 .nav-link{
     margin-right :9px;
-    font-weight:bolder;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
 }
 
 .navbar{
     background-color: #15B468;
+    font-family: 'Poppins',  sans-serif;
 }
 /* .navbar-brand{
     padding-right:600px;
@@ -16,4 +17,8 @@
  display: flex;
  justify-content: end;
  padding-right: 20px;
+}
+
+.resume:hover{
+    cursor: pointer;
 }

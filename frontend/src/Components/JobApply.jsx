@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react'
 import axios from 'axios';
+import  './HeaderEmp.css'
 const JobApply = (props) => {
     const [file, setFile] = useState(null);
     const [link, setLink] = useState('');
@@ -88,15 +89,18 @@ const JobApply = (props) => {
         fontWeight:600,
         color:"white",
         padding:"6px",
-        backgroundColor:"#8A5CD6",
-        borderRadius:"0.3rem"
+        backgroundColor:"#4B8673",
+        borderRadius:"0.3rem",
+     
        }
       
   return (
     <> <form onSubmit={(e)=>handlefileSubmit(e, props.val)}>
+
+
     <div>
       <label>PDF:</label>
-     <label className='ms-2' style={customstyle}><input type='file' ref={uploadref} hidden name="resume" onChange={handleFileChange}/>Select Resume</label>
+     <label className='ms-2 resume' style={customstyle}><input type='file' ref={uploadref} hidden name="resume" onChange={handleFileChange}/>Upload Resume</label>
      <span className='ms-3'>{showname}</span>
      </div>
     <div>
