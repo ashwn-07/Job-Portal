@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AccessDenied from './AccessDenied';
 import Forbidden from './Forbidden';
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
+
+
 
 const Addposts = (props) => {
   const[inputs,setInputs]=useState(props.data);
@@ -41,10 +45,11 @@ const Addposts = (props) => {
     if(props.method==="post"){
    
     console.log("clicked",inputs)
-    axios.post("http://localhost:7000/api/addjob",data)
+    axios.post(`${API_URL}/addjob/`,data)
     .then((response)=>{
       if(response.data.message==="Job added sucessfully!!"){
         alert(response.data.message)
+       
         navigate('/empview')
       }
       else{
@@ -54,7 +59,7 @@ const Addposts = (props) => {
     .catch(err=>console.log(err));
   }
 if(props.method==="put"){
-    axios.put("http://localhost:7000/api/update/"+inputs._id+"/"+token,inputs)
+    axios.put(API_URL+"/update/"+inputs._id+"/"+token,inputs)
     .then((response)=>{
         if(response.data.message==="Job Details Updated Successfully"){
             alert(response.data.message)

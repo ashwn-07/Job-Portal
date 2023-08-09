@@ -22,6 +22,8 @@ import { Button, Container, TableHead } from "@mui/material";
 import DownloadButton from "./DownloadButton";
 import LinkViewButton from "./LinkViewButton";
 
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
+
 const ResponseView = (props) => {
     const [responses, setResponses] = useState([]);
     const [adid] = useState(sessionStorage.getItem("ad.id"));
@@ -37,7 +39,7 @@ const ResponseView = (props) => {
                 //gets all the added responses
                 const id =  props.jobid;
 
-                axios.get(`http://localhost:7000/api/viewresponses/${id}/${token}`)
+                axios.get(`${API_URL}/viewresponses/${id}/${token}`)
                     .then((response) => {
                         console.log(response.data.data[0].responses);
                         setResponses(response.data.data[0].responses);
@@ -48,7 +50,7 @@ const ResponseView = (props) => {
                 else{
                     //gets only the verified responses
                     setDisplay("none")
-                    axios.get(`http://localhost:7000/api/verifiedres/${props.jobid}/${token}`)
+                    axios.get(`${API_URL}/verifiedres/${props.jobid}/${token}`)
 
                     .then((response)=>setResponses(response.data.data[0].responses))
                     
@@ -72,7 +74,7 @@ const ResponseView = (props) => {
     //fucntion to verify the response
     const HandleVerify = (resid) => {
         console.log(resid);
-        axios.put(`http://localhost:7000/api/verifyres/${resid}/${token}`)
+        axios.put(`${API_URL}/verifyres/${resid}/${token}`)
             .then((response) => {
                 
                 setVerify(true);

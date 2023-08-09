@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV;
+
 const RegisterEmp = () => {
     const[inputs,setInputs]=useState({});
     const navigate = useNavigate()
@@ -57,6 +60,7 @@ const RegisterEmp = () => {
             setpasswordError('Password should  be atleast 6 characters with an uppercase, a lower case, a letter and a special character  ');
             setTimeout(() => {
             setpasswordError("");
+            
            }, 5000);
     
        }
@@ -70,7 +74,7 @@ const RegisterEmp = () => {
 
         }
         else {
-        axios.post("http://localhost:7000/api/empsignup",inputs)
+        axios.post(API_URL+"/empsignup",inputs)
         .then((response)=>{
             console.log(response)
             if(response.data.message==="Added Emp details Successfully"){

@@ -2,12 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV;
+
 const RegisterUser = () => {
     const navigate= useNavigate();
 
     const[inputs,setInputs]=useState({});
     // FRONTEND FORM VALIDATION
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;                        ///^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const indianPhoneRegex = /^(\+91)?[6-9]\d{9}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
@@ -78,18 +81,27 @@ const RegisterUser = () => {
             }
         else {
         //  Action after Front End Validation
-        axios.post("http://localhost:7000/api/userSignUp",inputs)
+        axios.post( API_URL+"/userSignUp",inputs)
         .then((response)=>{
             console.log(response)
             if(response.data.message==="user saved successfully"){
                 // alert(response.data.message);
-                const setmessageFromBackend = response.data.message;
+                const messageFromBackend = response.data.message;
                 setmessageFromBackend(messageFromBackend);
                 setTimeout(() => {
                     navigate('/');
                     }, 2000);
                
             }
+            else if(response.data.message==="Username already taken, choose another username"){
+
+                const messageFromBackend = response.data.message;
+                setMessage(messageFromBackend);
+                setTimeout(() => {
+                    setMessage('');
+                    }, 5000);
+            }
+
             else if(response.data.message==="Already registered") {
                 // alert(response.data.message);
                 const messageFromBackend = response.data.message;
@@ -99,13 +111,19 @@ const RegisterUser = () => {
                     }, 2000);
                
             } 
-            else {
-                alert(response.data.message);
-                window.location.reload(false);
+             
+            
+
+            else if(response.data.message==="Sorry!!! Not a Student of ICTAK, Kerala") {
+                const messageFromBackend = response.data.message;
+                setmessageFromBackend(messageFromBackend);
+               
                 
             }
+            
            
         })
+        .catch(error=>console.log(error))
     } 
 }        
 
