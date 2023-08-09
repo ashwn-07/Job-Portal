@@ -31,8 +31,8 @@ const HomeNav = () => {
     }
 
     const drawerWidth = 240;
-    const navItems = ["Home", "About", "Contact", "Employer Sign up", "Alumni Sign up"]; //empsignup //usersignup
-
+    const navItems = ["Home", "About", "Contact", "Sign up"]; //empsignup //usersignup
+    
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -54,13 +54,28 @@ const HomeNav = () => {
             </Box>
             <Divider />
             <List sx={{ color: "white" }}>
-                {navItems.map((item) => (
-                    <Link href="/usersignup"> <ListItem key={item} disablePadding>
+                
+                    <Link href="/" sx={{color:"white", textDecoration:"none"}}> <ListItem  disablePadding>
                        <ListItemButton sx={{ textAlign: "center" }}>
-                            <ListItemText primary={item} />
+                            <ListItemText primary="Home" />
                         </ListItemButton>
                     </ListItem></Link>
-                ))}
+                    <Link href="/about-us" sx={{color:"white", textDecoration:"none"}}> <ListItem  disablePadding>
+                       <ListItemButton sx={{ textAlign: "center" }}>
+                            <ListItemText primary="About Us" />
+                        </ListItemButton>
+                    </ListItem></Link>
+                    <Link href="#contactus" sx={{color:"white", textDecoration:"none"}}> <ListItem  disablePadding>
+                       <ListItemButton sx={{ textAlign: "center" }}>
+                            <ListItemText primary="Contact Us" />
+                        </ListItemButton>
+                    </ListItem></Link>
+                    <Link href="/signup" sx={{color:"white", textDecoration:"none"}}> <ListItem  disablePadding>
+                       <ListItemButton sx={{ textAlign: "center" }}>
+                            <ListItemText primary="Sign Up" />
+                        </ListItemButton>
+                    </ListItem></Link>
+               
             </List>
         </Box>
     );

@@ -6,13 +6,18 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
-import Footer from "./Footer";
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
 
 const Home = () => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:7000/api/viewjobs")
+
+        console.log(API_URL)
+        console.log(process.env.NODE_ENV)
+       console.log("hi", process.env.REACT_APP_API_URL_DEV) 
+        axios.get(`${API_URL}/viewjobs`)
             .then((response) => {
                 setJobs(response.data);
             })

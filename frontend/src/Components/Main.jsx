@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HeaderEmp from './HeaderEmp'
 import AdminNav from './AdminNav'
-import AccessDenied from './AccessDenied'
+
 
 const Main = (props) => {
   const [admin, setAdmin]= useState(false)

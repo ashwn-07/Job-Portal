@@ -1,7 +1,11 @@
 import React, {useRef, useState} from 'react'
 import axios from 'axios';
 import  './HeaderEmp.css'
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
+
 const JobApply = (props) => {
+
     const [file, setFile] = useState(null);
     const [link, setLink] = useState('');
     const [userId] = useState(sessionStorage.getItem("userId"));
@@ -33,7 +37,7 @@ const JobApply = (props) => {
            formData.append('username', userName);
            formData.append('emailid', emailId);
            
-           axios.post("http://localhost:7000/upload/"+token, formData)
+           axios.post(API_URL+"/upload/"+token, formData)
            .then((response)=>{
             if(response.data.message==="File Uploaded")
             //  console.log(currentDate)
@@ -68,7 +72,7 @@ const JobApply = (props) => {
        
              }
            console.log(respdata);
-             axios.put("http://localhost:7000/api/apply/"+token, respdata)
+             axios.put(API_URL+"/apply/"+token, respdata)
                .then(response => {
                 if(response.data.message==="Response Submitted Successfully!")
                  {console.log(response);

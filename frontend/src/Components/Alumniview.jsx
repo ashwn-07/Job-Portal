@@ -15,6 +15,8 @@ import { useLocation } from "react-router-dom";
 import HeaderAlumni from './HeaderAlumni';
 import AccessDenied from './AccessDenied'
 
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
+
 const Alumniview = () => {
   const [jobs, setJobs] = useState([]);
   const [data, setData] = useState();
@@ -24,9 +26,13 @@ const Alumniview = () => {
   const [userName]= useState(sessionStorage.getItem("userName"));
   const [emailId]= useState(sessionStorage.getItem("emailId"));
   const[token,setToken]=useState(sessionStorage.getItem("usertoken"));
+  const [profiledata, setProfiledata] = useState([])
+  const [profbutton, setProfbutton] = useState('Create Profile')
+  const [profheading, setProfheading] = useState('Create Profile')
+  const [btndisplay, setBtndisplay] = useState('block')
 
    // FRONTEND FORM VALIDATION
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
    const indianPhoneRegex = /^(\+91)?[6-9]\d{9}$/;
 
    const [emailError, setEmailError] = useState('');
@@ -50,7 +56,22 @@ const Alumniview = () => {
   //getting the jobs 
   useEffect( () => {
     console.log(token)
-     axios.get("http://localhost:7000/api/viewjobs").then((response) => {
+    axios.post(`${API_URL}/checkprofile/${userId}`)
+    .then((response)=>{
+      if(response.data.message==="profile already created")
+      {
+              setProfiledata(response.data.data.prof)
+              setProfbutton('View Profile')
+              setProfheading('My Profile')
+              setBtndisplay('none')
+              // console.log("the data is", profiledata)
+
+      }
+    })
+    .catch((error)=>console.log(error))
+
+
+     axios.get(`${API_URL}/viewjobs`).then((response) => {
       setCurrentDate(new Date())
       setJobs(response.data);
       setLoad(true)
@@ -119,29 +140,30 @@ useEffect(()=>{
 }
     
     else{
-         axios.post('http://localhost:7000/api/studendProfile', newdata )
+         axios.post(`${API_URL}/studendProfile`, newdata )
     
       .then(response => {
         
         alert(response.data.message);
-        // window.location.reload(false);
+        window.location.reload(false);
       })
     }
   }
 
 //"#214144" 
 
-  let renderjsx =  <div style={{ backgroundColor:"rgba(95, 115, 154, 0.20)"}}>
+  let renderjsx =  <div style={{ backgroundColor:"rgba(95, 115, 154, 0.20)" , fontFamily:"Roboto"}}>
   <>
     <div style={{position:"relative",}} >
       <HeaderAlumni/>
+      {/* profile */}
       <Button variant="success" onClick={handleShow} className=' mt-5' style={{marginLeft:"52px"}}>
-        Create  Profile
+        {profbutton}
       </Button>
       {/*  #15B468 */}
       <Offcanvas show={show} placement={"end"} onHide={handleClose} className="mt-5" style={{backgroundColor:"#58B99C", borderRadius:"0.5rem"}}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title  className='text-white' >Create Your Profile</Offcanvas.Title>
+          <Offcanvas.Title  className='text-white' >{profheading}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
@@ -150,7 +172,7 @@ useEffect(()=>{
               label="Name"
               className="mb-3"
             >
-              <Form.Control size="sm" type="text" name='name' onChange={inputholder} placeholder="Name"  style={{backgroundColor:"white"}} />
+              <Form.Control size="sm" type="text" name='name' value={profiledata.name} onChange={inputholder} placeholder="Name"  style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
             <FloatingLabel
@@ -158,7 +180,7 @@ useEffect(()=>{
               label="Email address"
               className="mb-3"
             >
-              <Form.Control type="email" size="sm" name='emailid' onChange={inputholder} placeholder="name@example.com" />
+              <Form.Control type="email" size="sm" name='emailid' value={profiledata.emailid} onChange={inputholder} placeholder="name@example.com" />
               <div style={{color:'red'}}>{emailError}</div>
             </FloatingLabel>
 
@@ -167,19 +189,19 @@ useEffect(()=>{
               label="Phone Number"
               className="mb-3"
             >
-              <Form.Control type="text" name='phone' onChange={inputholder} placeholder="Phone Number" />
+              <Form.Control type="text" name='phone' onChange={inputholder} value={profiledata.phone} placeholder="Phone Number" />
               <div style={{color:'red'}}>{phoneNoError}</div>
             </FloatingLabel> <FloatingLabel
               controlId="floatingInput"
               label="Highest Qualification"
               className="mb-3"
             >
-              <Form.Control type="text" name='Qualification' onChange={inputholder} placeholder="Highest Qualification" style={{backgroundColor:"white"}} />
+              <Form.Control type="text" name='Qualification' value={profiledata.Qualification} onChange={inputholder} placeholder="Highest Qualification"  style={{backgroundColor:"white"}} />
 
             </FloatingLabel>
 
 
-            <Form.Select name='course' onChange={inputholder} aria-label="Default select example" style={{backgroundColor:"white"}}>
+            <Form.Select name='course' value={profiledata.course} onChange={inputholder} aria-label="Default select example" style={{backgroundColor:"white"}}>
 
 
               <option value=''>Course studied at ICTAK</option>
@@ -192,14 +214,14 @@ useEffect(()=>{
               <option value="CSA">CSA</option>
             </Form.Select> <br />
 
-            <Form.Select name='batch' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
+            <Form.Select name='batch' onChange={inputholder}  value={profiledata.batch} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Batch Details</option>
               <option value="KKEM">KKEM</option>
               <option value="NORKA">NORKA</option>
               <option value="KDISC">KDISC</option>
             </Form.Select> <br />
 
-            <Form.Select name='placement' onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
+            <Form.Select name='placement'  value={profiledata.placement} onChange={inputholder} aria-label="Default select example"  style={{backgroundColor:"white"}}>
               <option value="">Placement Status</option>
               <option value="Placed">Placed</option>
               <option value="Job Seeking">Job Seeking</option>
@@ -209,7 +231,7 @@ useEffect(()=>{
               <Form.Control type="text" name='company' onChange={inputholder} placeholder="Company Name"  style={{backgroundColor:"white"}} />
             </FloatingLabel><br />
             <div style={{color:'red'}}>{message}</div><br></br>
-            <Button variant="outline-success" onClick={shareData} >Submit</Button>{' '}
+            <Button variant="outline-success" style={{display:btndisplay}}  onClick={shareData} >Submit</Button>{' '}
           </>
         </Offcanvas.Body>
       </Offcanvas>
@@ -227,14 +249,14 @@ useEffect(()=>{
               <Card className="shadow" style={{ backgroundColor: "white", marginRight: "5rem", }} >
 
                 <Card.Header className='m-3  bg-success text-white' > <h5> {value.companyname} </h5></Card.Header>
-                <Card.Body>
+                <Card.Body className='pe-5'>
 
                   <Card.Title>  {value.jobtitle}</Card.Title>
                   <Card.Text>
                    <h6>Job Description:</h6> {value.jobdesc}
                   </Card.Text>
                   <Card.Text>
-                  <h6>Requirements:</h6> {value.jobrequirements}
+                  <h6>Requirements:</h6> <p align="justify"> {value.jobrequirements}</p>
                   </Card.Text>
                   <Card.Text>
                   <h6>Eligibility:</h6>{value.eligibility}

@@ -1,6 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+
+
+const API_URL = process.env.NODE_ENV === "production"?process.env.REACT_APP_API_URL_PROD:process.env.REACT_APP_API_URL_DEV
+
 const Login = () => {
     const navigate = useNavigate()
     const [input, setInputs] = useState({});
@@ -30,7 +34,7 @@ const Login = () => {
 
 
 
-            axios.post('http://localhost:7000/api/login', input)
+            axios.post(`${API_URL}/login`, input)
                 .then((response) => {
 
 
@@ -58,12 +62,14 @@ const Login = () => {
                     else {
                         if (response.data.message == ("Employer Login successful")) {
                             const LogId = response.data.data._id;
-
+                            const userName = response.data.data.name;
+                             console.log(userName)
                             const token = response.data.token;
                             sessionStorage.setItem("usertoken", token);
 
-                            console.log(LogId);
+                            console.log("id is" ,LogId);
                             sessionStorage.setItem("LogId", LogId);
+                            sessionStorage.setItem("userName", userName);
                             // alert("employer");
                             navigate('/empview');
 
@@ -98,23 +104,21 @@ const Login = () => {
                         }
                     }
                 })
+                .catch(error=>console.log(error))
+
         }
     }
 
       
         
            
-           
-   const handle = ()=>{      
-            
    
-   }
  
     return (
         <div className="App-login" style={{ minHeight: "100vh" }}>
             
             <div className="container App-login">
-                <div className="container ">
+                <div className="container">
                     <br />
                     <br />
 
@@ -126,9 +130,13 @@ const Login = () => {
                                         <h1 className=""> LOGIN </h1>
                                         <br />
                                     </div>
+                                       
                                     <br />
                                 </div>
+                                     
 
+
+                                        
                                 <div className="row g-3 h-100 App-login">
                                     <div className="col-12 ">
                                         <div style={{ position: "relative" }}>
