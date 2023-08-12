@@ -9,7 +9,7 @@ const DownloadButton = (props) => {
     const Handledownload = ()=>{
     const encodedpath = encodeURIComponent(props.path);
     axios.get(`${API_URL}/download/${encodedpath}`, {responseType:'blob'})
-    .then(res=>FileDownload(res.data, "resume.pdf"))
+    .then(res=>FileDownload(res.data, `${props.name}_Resume`))
     .catch(error=>console.log(error))
     
     }

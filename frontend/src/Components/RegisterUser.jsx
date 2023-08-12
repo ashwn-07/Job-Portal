@@ -65,7 +65,7 @@ const RegisterUser = () => {
             }   
         //   Password Checking
           else if (!passwordRegex.test(inputs.password)) {
-                 setpasswordError('Password should  be atleast 6 characters with an uppercase, a lower case, a letter and a special character  ');
+                 setpasswordError('Password should  be atleast 6 characters with an uppercase, a lower case, a letter, a digit and a special character  ');
                  setTimeout(() => {
                  setpasswordError("");
                 }, 5000);
@@ -73,7 +73,7 @@ const RegisterUser = () => {
             }
         // Conform Password
             else if(inputs.password!=inputs.conformpassword){
-                setconformpasswordErrorr('Password doesnt match');
+                setconformpasswordErrorr("Password doesn't match");
                 setTimeout(() => {
                     setconformpasswordErrorr("");
                 }, 5000);

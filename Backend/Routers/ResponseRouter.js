@@ -7,6 +7,10 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 const JobModel = require("../Models/JoblistingModel");
+<<<<<<< HEAD
+=======
+const AdminModel = require("../Models/Adminmodel")
+>>>>>>> ceadb05 (final deploy)
 const { ObjectId } = require("bson");
 
 //api to add responses to joblistings
@@ -94,6 +98,7 @@ router.get("/viewresponses/:jobid/:token", async (req, res) => {
 
 
 //api for admin to verify the  responses
+<<<<<<< HEAD
 router.put("/verifyres/:resid/:token", async (req,res)=>{
     try {
         resid= req.params.resid;
@@ -109,6 +114,33 @@ router.put("/verifyres/:resid/:token", async (req,res)=>{
             }
             else{res.status(200).json({message:'Unauthorised User'}) }
         })
+=======
+router.put("/verifyres/:adminid/:resid/:token",  async (req,res)=>{
+    try {
+       const  resid= req.params.resid;
+       const adminid= req.params.adminid;
+        const admin = await AdminModel.findOne({_id:adminid});
+        console.log( "hii", admin)
+        if(admin)
+        {
+            jwt.verify(req.params.token,"ictjp",(error,decoded)=>{
+                if (decoded && decoded.email) {
+                    JobModel.findOneAndUpdate(
+                        { "responses._id": resid },
+                        { $set: { "responses.$.Verified": true }},
+                        { new: true } // to return the updated document
+                      ).exec();
+                
+                     res.status(200).json({message:'Verified'}) 
+                }
+                else{res.status(200).json({message:'Unauthorised User'}) }
+            })
+        }
+        else{
+            res.status(200).json({message:'Unauthorised User'})
+        }
+        
+>>>>>>> ceadb05 (final deploy)
          
     } catch (error) {
         console.log(error)
@@ -117,7 +149,11 @@ router.put("/verifyres/:resid/:token", async (req,res)=>{
 })
 
 //api for employers to fetch verified responses for the job,
+<<<<<<< HEAD
 router.get("/verifiedres/:jobid/:token", async (req, res) => {
+=======
+router.get("/verifiedres/:jobid/:token",  async (req, res) => {
+>>>>>>> ceadb05 (final deploy)
     try {
         console.log(req.params.jobid)
         const jobid = req.params.jobid;

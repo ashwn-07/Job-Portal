@@ -74,7 +74,7 @@ const ResponseView = (props) => {
     //fucntion to verify the response
     const HandleVerify = (resid) => {
         console.log(resid);
-        axios.put(`${API_URL}/verifyres/${resid}/${token}`)
+        axios.put(`${API_URL}/verifyres/${adid}/${resid}/${token}`)
             .then((response) => {
                 
                 setVerify(true);
@@ -203,7 +203,7 @@ const ResponseView = (props) => {
                                     </TableCell>
                                     <TableCell align="center">
                                         
-                                           {(row.responsetype==="pdf")?<DownloadButton  path={row.path} resid={row._id}/>:<LinkViewButton path={row.path}/>}
+                                           {(row.responsetype==="pdf")?<DownloadButton  path={row.path} name={row.username} resid={row._id}/>:<LinkViewButton path={row.path}/>}
                                         
                                     </TableCell>
                                     {/* verifictaion table cell */}
